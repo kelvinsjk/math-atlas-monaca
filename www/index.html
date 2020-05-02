@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+	<meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+	<script src="components/loader.js"></script>
+	<script src="lib/onsenui/js/onsenui.min.js"></script>
+	 <link rel="stylesheet" href="components/loader.css">
+	<link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
+	<link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+	 <link rel="stylesheet" href="css/style.css">
+	 <link rel="stylesheet" href="css/loading-bar.css">
+
+	<script src="onsenuijs.js"></script>
+	<script src="mathjs.js"></script>
+	<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
+	<script type="text/x-mathjax-config"> 
+		MathJax.Hub.Config({
+			tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+		});
+		console.log('We are at index'); 
+	</script> <!-- TODO: Remove console.log-->
+	<title> Main </title>
+</head>
+
+<body> <!-- Menu-->
+	<ons-splitter>
+		<ons-splitter-side id="menu" side="left" width="220px" swipeable collapse>
+			<ons-page>
+				<ons-list>
+					<ons-list-item onclick="window.location='index.html'" tappable>
+						Home
+					</ons-list-item>
+					<ons-list-item onclick="window.location='topic-two-fns/qn0201.html'" tappable> <!-- TODO: menu items-->
+						Question 0201
+					</ons-list-item>
+					<ons-list-item onclick="window.location='topic-two-fns/ans0201.html'" tappable>
+						Answer 0201
+					</ons-list-item>
+					<ons-list-item onclick="window.location='soln0201.html' ">
+						Solution 0201
+					</ons-list-item>
+				</ons-list>
+			</ons-page>
+		</ons-splitter-side>
+		<ons-splitter-content id="content" page="home.html">
+		</ons-splitter-content>
+	</ons-splitter>
+
+	<ons-template id="home.html"> <!-- Actual Page-->
+		<ons-page>
+			<!-- Toolbar-->
+			<ons-toolbar> <!-- Menu icon-->
+				<div class="left">
+					<ons-toolbar-button onclick="fn.open()">
+						<ons-icon icon="ion-ios-menu, material:md-menu"></ons-icon>
+					</ons-toolbar-button>
+				</div>
+				<div class="center"> <!-- Center of toolbar-->
+					Main
+				</div>
+				<div class="right"> <!-- Settings icon TODO: settings-->
+					<ons-toolbar-button onclick="fn.opentwo()">
+						<ons-icon icon="fa-cog"> </ons-icon>
+					</ons-toolbar-button>
+				</div>
+			</ons-toolbar>
+			<!-- Content-->
+			<p style="text-align: center; opacity: 0.6; padding-top: 20px;">
+				Swipe right to open the menu! 
+			</p>
+			<div style="text-align: center; margin:10px"> 
+				<ons-button onclick="window.location='topic-one-eqns/qn0101.html'"> Question 0101 </ons-button>
+			</div>
+			<div style="text-align: center; margin:10px"> 
+				<ons-button onclick="window.location='topic-two-fns/qn0201.html'"> Question 0201 </ons-button>
+			</div>			
+		</ons-page>
+	</ons-template>
+</body>
+</html>

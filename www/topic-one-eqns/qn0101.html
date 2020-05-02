@@ -1,0 +1,139 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <link rel="stylesheet" href="../components/loader.css">
+    <script src="../components/loader.js"></script>
+
+	<!-- Onsen UI -->
+		<script src="../lib/onsenui/js/onsenui.min.js"></script>
+		<link rel="stylesheet" href="../lib/onsenui/css/onsenui.css">
+		<link rel="stylesheet" href="../lib/onsenui/css/onsen-css-components.css">
+		<link rel="stylesheet" href="../css/style.css">
+		
+		<script src="../onsenuijs.js"></script>
+		<script src="../mathjs.js"></script>
+		<script src="qn0101.js"></script>
+		<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+				tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+			});
+		</script>
+		<title> Question 0101 </title>
+</head>
+
+<body>
+	<!-- Loading Screen -->
+	<ons-modal direction="up">
+  		<div style="text-align: center">
+  			<p> <ons-icon icon="md-spinner" size="28px" spin></ons-icon> Loading... </p>
+ 		 </div>
+	</ons-modal>
+
+	<!-- Left menu -->
+	<ons-splitter>
+		<ons-splitter-side id="menu" side="left" width="120px" collapse swipeable>
+			<ons-page>
+				<ons-list>
+					<ons-list-item onclick="returnHome()" tappable>
+						Home
+					</ons-list-item>
+				</ons-list>
+			</ons-page>
+		</ons-splitter-side>
+		<ons-splitter-content id="content" page="qn001.html">	</ons-splitter-content>
+	</ons-splitter>
+
+	<!-- Actual page -->
+	<template id="qn001.html">
+		<ons-page>
+			<ons-toolbar>
+				<div class="left">
+				<ons-toolbar-button onclick="fn.open()">
+					<ons-icon icon="ion-ios-menu, material:md-menu"></ons-icon>
+				</ons-toolbar-button>
+				</div>
+				<div class="center">
+				Question 0101 <!-- TODO: CHANGE THIS -->
+				</div>
+			</ons-toolbar>
+			<div style="text-align: left; opacity: 0.6; padding-top: 20px; padding-left: 10px;"> 
+				(a) Show that  <span id='qntext1'> </span> 
+			</div>
+			<div id="qna">
+				<div  style="text-align: left; opacity: 0.6; padding-top: 20px; padding-left: 10px;">
+					 What is the value of $k$? $k = $ 
+					 <ons-input id='inputk' type='number'> </ons-input> 
+					  <label class="left">
+      					  <ons-checkbox input-id="negativeK" id = "negativeK"></ons-checkbox>
+     				 </label>
+      				<label for="negativeK" class="center"> Make negative </label>
+				</div> 
+				<div style="text-align:center; margin:10px">  <ons-button onclick="checkStudentInput('k')"> Submit answer </ons-button> </div> 
+			</div>
+			<div style="text-align: left; opacity: 0.6; padding-top: 20px; padding-left: 10px; display: none" id="partb"> 
+				(b) Hence, without using a calculator, solve the inequality <span id='qntext2'> </span>
+			</div>
+			<div style="text-align:left; opacity: 0.6; padding-top: 20px; padding-left: 10px;"> 
+				This <span id = "questionOrPart"> part </span> is worth <span id="marksOnDisplay"> 1 </span> marks.
+			</div>
+			<hr>
+			<div style="text-align:left; opacity: 0.6; padding-left: 10px;" id="samsungWarning">  
+				<p> Some Samsung devices may be unable to key in negative values. A check box is provided to modify the sign of your input. </p>
+				<p>  You can ignore the checkbox if you are able to key in negative values. </p>
+			</div>
+			<div style="text-align:center; margin:20px; display:none"  id="answerButton">
+				<ons-button onclick="answerQuestion()">Proceed to answer the question</ons-button>
+			</div>			
+		</ons-page>
+	</template>
+
+	<!-- Transition from part a to b using an Alert dialog -->
+	<template id="alert-dialog.html">
+	<ons-alert-dialog id="my-alert-dialog" modifier="rowfooter">
+		<div class="alert-dialog-title" id="alertTitle"> Submit answer </div>
+		<div class="alert-dialog-content" id ="confirmationK"> </div>
+		<div class="alert-dialog-footer">
+		<ons-alert-dialog-button onclick="hideAlertDialog('my-alert-dialog')">Cancel</ons-alert-dialog-button>
+		<span id="okButton"> <ons-alert-dialog-button onclick="var partAMark = checkK()"> OK</ons-alert-dialog-button> </span>
+		</div>
+	</ons-alert-dialog>
+	</template>
+
+	<!-- Confirmation of part a answer using a dialog -->
+	<template id="dialog.html">
+		<ons-dialog id="my-dialog" cancelable>
+			<div style="text-align: center; padding: 10px;">
+				<div>
+					<span id="rightOrWrong"> Well done! </span> The answer is <span id="kAnswer"> </span>. <br>
+				</div>
+				<p id="marksReceived">  You have earned 1 mark. </p>
+				<p> Let us proceed to part (b) of the question. </p>
+				<div class="alert-dialog-footer">
+					<ons-alert-dialog-button button onclick="proceedTob()"> OK </ons-alert-dialog-button>
+				</div>
+			</div>
+		</ons-dialog>
+	</template>
+
+	<!-- Return to home alert -->
+	<template id="home-alert-dialog.html">
+	<ons-alert-dialog id="home-alert-dialog" modifier="rowfooter">
+		<div class="alert-dialog-title" id="homeAlertTitle"> Warning </div>
+		<div class="alert-dialog-content"> 
+			<p> You leaving this question to return to the home page. </p>
+			<p>  No progress will be saved. </p>
+			<p> A new question will be generated the  next time to access this page. </p>
+		</div>
+		<div class="alert-dialog-footer">
+		<ons-alert-dialog-button onclick="hideAlertDialog('home-alert-dialog')">Cancel</ons-alert-dialog-button>
+		<span> <ons-alert-dialog-button onclick="window.location = '../index.html'"> OK</ons-alert-dialog-button> </span>
+		</div>
+	</ons-alert-dialog>
+	</template>
+
+</body>
+</html>
