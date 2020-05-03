@@ -13,11 +13,6 @@ window.fn.open = function() {
 var menu = document.getElementById('menu');
 menu.open();  
 };
-// custom right menu TODO
-window.fn.opentwo = function() {
-var menu = document.getElementById('rightmenu');
-menu.open();  
-};
 
 // Section B --- IphoneX
 if (ons.platform.isIPhoneX()) {
@@ -25,18 +20,18 @@ document.documentElement.setAttribute('onsflag-iphonex-portrait', '');
 document.documentElement.setAttribute('onsflag-iphonex-landscape', '');
 }
 
-//Section C --- Dialog
+// Section C -- Drop down menus, radio buttons
+
+//Section D1 --- Close Dialog
 var hideDialog = function(id) {
   document.getElementById(id).hide();
 };
-
-// Section D1 - Alert Dialog
+// Section D2 - Close Alert Dialog
 // Show screen is custom on each page. Hide screen is generalized
 var hideAlertDialog = function(dialogId) {
   document.getElementById(dialogId).hide();
  };
-
-// Section D2 - Return Home Alert Dialog
+// Section D3 - Return Home Alert Dialog
 // Show screen is custom on each page. Hide screen is generalized
 var returnHome = function() {
   	var dialog = document.getElementById('home-alert-dialog');
@@ -49,7 +44,6 @@ var returnHome = function() {
     	});
  	};
  };
-
 
 // Section E -- Modal/loading screens
 var showModal = function() {

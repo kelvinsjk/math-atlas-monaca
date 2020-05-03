@@ -43,18 +43,13 @@ if (sign == 1) {
 var mathqn1 = fraction  + '-' +G+ '=' + fractionBuilder(numerator, denominator) + '.';
 var mathqn2 = fraction + signstr + G + '.';
 
-// onload insert math
-window.onload = function() {
-	var qntext = document.getElementById('qntext1');
-	qntext.innerHTML = latexifyDstyle(mathqn1);
-	var qntext = document.getElementById('qntext2');
-	qntext.innerHTML = latexifyDenv(mathqn2);
-
-	// Loading screen
-	showModal();
-	// Load Math
-	MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
-};
+//Initialize Math
+document.addEventListener('init', function(event) {
+	if (event.target.matches('#questionPage')) {
+		katex.render(katexifyDstyle(mathqn1), document.getElementById('qntext1'), {throwOnError: false});
+		katex.render("k? \\; k= ", document.getElementById('typeK'),{throwOnError:false,});
+	}
+}, false);
 
 // check answer to part a
 var checkK = function() {
@@ -65,13 +60,13 @@ var checkK = function() {
 	ons.createElement('dialog.html', { append: true })
       .then(function(dialog) {
 			dialog.show();
-			document.getElementById('kAnswer').innerHTML = '$ k = ' + actualK + ' $ ';
 			if (k != actualK) {
 				partAMark = 0;
-				document.getElementById('rightOrWrong').innerHTML = 'Unfortunately, $ k = ' + k +  ' $ is incorrect <br>';
+				document.getElementById('rightOrWrong').innerHTML = "Unfortunately, <span id='studentK'> </span> is incorrect <br>";
 				document.getElementById('marksReceived').innerHTML = 'Do check your answer to see if you can spot any mistakes.'
+				katex.render("k="+k, document.getElementById('studentK'), {throwOnError:false});
 			}
-			MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+			katex.render("k="+actualK, document.getElementById('kAnswer'), {throwOnError: false});
       });
 };
 
@@ -84,17 +79,14 @@ var proceedTob = function() {
 	var numerator = polyBuilder([d, -c*d-e, e*c]);
 	var mathqn1 = fraction  + '-' +G+ '=' + fractionBuilder(numerator, denominator) + '.';
 	// show and update items
-	document.getElementById('qntext1').innerHTML = latexifyDstyle(mathqn1);
+	// document.getElementById('qntext1').innerHTML = latexifyDstyle(mathqn1);
+	katex.render(katexifyDstyle(mathqn1), document.getElementById('qntext1'), {throwOnError: false});
+	katex.render(mathqn2, document.getElementById('qntext2'), {throwOnError: false,	displayMode: true});
 	document.getElementById('partb').style.display = 'block';
 	document.getElementById('answerButton').style.display = 'block';
 	document.getElementById('questionOrPart').innerHTML = 'question';
-	document.getElementById('marksOnDisplay').innerHTML = '1+4'
-	// loading screen + typeset Math
-	document.querySelector('ons-modal').show();
-	MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
-	MathJax.Hub.Register.StartupHook("End",function () {  document.querySelector('ons-modal').hide() });
+	document.getElementById('marksOnDisplay').innerHTML = '1+4';
 };
-
 
 // passesOptionselected to answer page
 var answerQuestion = function() {

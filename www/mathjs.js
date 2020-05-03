@@ -44,7 +44,7 @@ var checkStudentInput = function(varName) {
 		var showText =  'It appears that the  input is   blank or invalid (not a number). Try again!', titleText = 'Error', visiText = 'hidden';
 	} else {
 		if (document.getElementById('negativeK').checked) {k = -k};
-		var showText = 'You have keyed in $' +varName+ ' =' + k +' $. Submit this answer?', titleText = 'Confirmation', visiText = 'visible';
+		var showText = "You have keyed in <span id='kConfirm'> </span>. Submit this answer?", titleText = 'Confirmation', visiText = 'visible';
 	};
   	var dialog = document.getElementById('my-alert-dialog');
   	if (dialog) { // it's already present
@@ -52,7 +52,7 @@ var checkStudentInput = function(varName) {
 		document.getElementById('alertTitle').innerHTML = titleText;
 		document.getElementById('okButton').style.visibility = visiText;
     	dialog.show();
-		MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+		if (k) { katex.render(varName+"="+k,document.getElementById('kConfirm'),{throwOnError: false});};
   	} else {
     ons.createElement('alert-dialog.html', { append: true })
       .then(function(dialog) {
@@ -60,7 +60,7 @@ var checkStudentInput = function(varName) {
 		document.getElementById('alertTitle').innerHTML = titleText;
 		document.getElementById('okButton').style.visibility = visiText;
         dialog.show();
-		MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+		if (k) { katex.render(varName+"="+k,document.getElementById('kConfirm'),{throwOnError: false});};
       });
   };	
 };
@@ -83,10 +83,12 @@ var mcqPicker = function(array, requiredOptions, correctIndex) {
 function latexifyInline(str) {return '$'+str+'$';}
 // D2) Inline Latex (displaystyle)
 function latexifyDstyle(str) {return '$\\displaystyle '+str+'$';}
+function katexifyDstyle(str) {return '\\displaystyle ' +str;}
 // D3) Displayed Latex
 function latexifyDenv(str) {return '$$'+str+'$$';}
 // D4) Align
 function latexAlign(str) {return '\\begin{align}' + str + '\\end{align}'}
+
 //D5) Polynomial builder: Given coefficientArray [a_n, a_(n-1), ... a_0], form a_n x^n + a_(n-1) x^(n-1) + ... + a_0
 function polyBuilder(coefficientArray) { // WARNING: Must have at least 2 elements!
 	if (coefficientArray[0] == 0) {return 'ERROR: Leading coefficient cannot be 0'};

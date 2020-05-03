@@ -16,6 +16,8 @@
 		<script type="text/javascript" src="../mathjs.js"></script>
 		<script type="text/javascript" src="soln0101.js"></script>
 		<script type="text/javascript" src="../progress-bar.js"></script> <!-- progressbar: put before mathjax config-->
+		<link rel="stylesheet" href="../lib/katex/katex.min.css">
+		<script defer src="../lib/katex/katex.min.js"> </script>
 	<!-- MathJax -->
 		<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
 		<script type="text/x-mathjax-config">
@@ -63,9 +65,9 @@
 
 	<!-- Tabbar -->
 	<ons-tabbar swipeable position="top">
-		<ons-tab page="qn001a.html" label="Question" icon="ion-home, material:md-home" active> <!-- badge="7"-->
+		<ons-tab page="qn001a.html" label="Question" icon="fa-question-circle" active> <!-- badge="7"-->
 		</ons-tab>
-		<ons-tab page="soln001b.html" label="Input Answer" icon="md-settings" active-icon="md-face">
+		<ons-tab page="soln001b.html" label="Answer" icon="fa-lightbulb">
 		</ons-tab>
 	</ons-tabbar>
 </ons-page>
@@ -84,7 +86,7 @@
 		This question is worth 1+4 marks
 	</div>
 	<hr>
-	<div style="text-align:center; margin:10px">  <ons-button onclick="document.querySelector('ons-tabbar').setActiveTab(1)"> Key in your answer  </ons-button> </div> 
+	<div style="text-align:center; margin:10px">  <ons-button onclick="document.querySelector('ons-tabbar').setActiveTab(1)"> Go at the answer  </ons-button> </div> 
   </ons-page>
 </template>
 

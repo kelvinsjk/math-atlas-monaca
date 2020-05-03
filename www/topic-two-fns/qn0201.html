@@ -62,9 +62,9 @@
 			</ons-toolbar>
 			<!-- Tabbar -->
 			<ons-tabbar position="bottom" hide-tabs>
-				<ons-tab page="qn001a.html" label="Question" icon="ion-home, material:md-home" active> <!-- badge="7"-->
+				<ons-tab page="qn001a.html" label="Question" icon="fa-question-circle" active> <!-- badge="7"-->
 				</ons-tab>
-				<ons-tab page="ans001.html" label="Input Answer" icon="md-settings" active-icon="md-face">
+				<ons-tab page="ans001.html" label="Input Answer" icon="fa-keyboard" active-icon="fa-calculator">
 				</ons-tab>
 			</ons-tabbar>
 		</ons-page>
@@ -99,47 +99,89 @@
 	<!-- Answer Tab-->
 	<template id="ans001.html">
 	<ons-page id="ans001tab">
-		<ons-list>
-			<!-- Instructions -->
-			<ons-list-header>
-				Instructions: <br>
-				Use the toggles on the right to select the relevant inequalities that make up the answer. Then key in your numerical answer(s).  
-				For fractions like $-\frac{5}{2}$, key in $-2.5$ 
-			</ons-list-header>
-			<!-- Answer switches-->
-			<ons-list-item>
-				<div class="center" id="ineq1">
-					$x < a$ <span id="spana" style="padding-left: 55px"> </span>
-				</div>
-				<div class="right">
-					<ons-switch id="switch1"</ons-switch>
-				</div>
-			</ons-list-item>
-			<ons-list-item>
-				<div class="center" id="ineq2">
-					$x > b$ <span id="spanb" style="padding-left: 55px"> </span>
-				</div>
-				<div class="right">
-					<ons-switch id="switch2"></ons-switch>
-				</div>
-			</ons-list-item>
-			<ons-list-item>
-				<div class="center" id ="ineq3">
-					$c < x < d$ <span id="spancd" style="padding-left: 20px"> </span>
-				</div>
-				<div class="right">
-					<ons-switch id="switch3"></ons-switch>
-				</div>
-			</ons-list-item>
-			<ons-list-item>
-				<div class="center" id ="ineq4">
-					$e < x < f$ <span id="spanef" style="padding-left: 20px"> </span>
-				</div>
-				<div class="right">
-					<ons-switch id="switch4"></ons-switch>
-				</div>
-			</ons-list-item>
-		</ons-list>
+			<!-- (ai) Question -->
+			<ons-list> 
+				<ons-list-item> Answer to (ai): </ons-list-item> 
+				<ons-list-item> 
+					<div> (ai) Explain whether the composite function  <span id="notCompositeOne"> </span>  exists. </div>
+				</ons-list-item> 
+			</ons-list>
+			<!-- (ai) answer part one-->
+			<div class="center">
+				<!-- dropdown: choose exists or not, shows radio buttons for picking reasons-->
+				<span id="notCompositeTwo" style="padding-left:10px;padding-right:10px"> </span> 
+				<ons-select id="chooseOne" onchange= "document.getElementById('aiPartTwo').style.display='block'">
+					<option value="none" selected disabled hidden>Select an option</option>
+					<option value="choiceExist">exists</option>
+					<option value="choiceDoNotExist">does not exist</option>
+				</ons-select>
+				<span style="padding:10px"> because </span>
+			</div>
+		<!-- (ai) answer part two: Radio button to pick reason-->
+		<div id="aiPartTwo" style="display:none;">
+			<ons-list>
+				<div id="radioZero"> <ons-list-item tappable style="background: rgb(0,0,0,0.07);">
+					<label class="left"> <ons-radio name="reason" input-id="radio-0" value="0" onclick="radioClick(this.value)"></ons-radio> </label>
+					<label for="radio-0" class="center"> 
+						<span id="reasonZero"> $f$ </span> 
+						<span id="caretZero" style="padding-left:10px; display:none"> <ons-icon icon="fa-caret-down"> </ons-icon>
+					</label>
+				</ons-list-item> </div>
+				<div id="radioOne"> <ons-list-item tappable style="background: rgb(0,0,0,0.07);">
+					<label class="left"> <ons-radio name="reason" input-id="radio-1" value="1" onclick="radioClick(this.value)"></ons-radio> </label>
+					<label for="radio-1" class="center"> 
+						<span id="reasonOne"> One </span> 
+						<span id="caretOne" style="padding-left:10px; display:none"> <ons-icon icon="fa-caret-down"> </ons-icon>
+					</label>
+				</ons-list-item> </div>
+				<div id="radioTwo"> <ons-list-item tappable style="background: rgb(0,0,0,0.07);">
+					<label class="left"> <ons-radio name="reason" input-id="radio-2" value="2" onclick="radioClick(this.value)"></ons-radio> </label>
+					<label for="radio-2" class="center"> 
+						<span id="reasonTwo"> One </span> 
+						<span id="caretTwo" style="padding-left:10px; display:none"> <ons-icon icon="fa-caret-down"> </ons-icon>
+					</label>
+				</ons-list-item> </div>
+				<div id="radioThree"> <ons-list-item tappable style="background: rgb(0,0,0,0.07);">
+					<label class="left"> <ons-radio name="reason" input-id="radio-3" value="3" onclick="radioClick(this.value)"></ons-radio> </label>
+					<label for="radio-3" class="center">
+						<span id="reasonThree"> One </span> 
+						<span id="caretThree" style="padding-left:10px; display:none"> <ons-icon icon="fa-caret-down"> </ons-icon>
+					</label>
+				</ons-list-item> </div>
+				<div id="radioFour"> <ons-list-item tappable style="background: rgb(0,0,0,0.07);">
+					<label class="left"> <ons-radio name="reason" input-id="radio-4" value="4" onclick="radioClick(this.value)"></ons-radio> </label>
+					<label for="radio-4" class="center">
+						<span id="reasonFour"> One </span> 
+						<span id="caretFour" style="padding-left:10px; display:none"> <ons-icon icon="fa-caret-down"> </ons-icon>	
+					</label>
+				</ons-list-item> </div>
+				<div id="radioFive"> <ons-list-item tappable style="background: rgb(0,0,0,0.07);">
+					<label class="left"> <ons-radio name="reason" input-id="radio-5" value="5" onclick="radioClick(this.value)"></ons-radio> </label>
+					<label for="radio-5" class="center">
+						<span id="reasonFive"> One </span> 
+						<span id="caretFive" style="padding-left:10px; display:none"> <ons-icon icon="fa-caret-down"> </ons-icon>
+					</label>
+				</ons-list-item> </div>
+			</ons-list>
+		</div>
+		<!-- (aii) find fg(c) -->
+		<div  style="display:none" id="aii">
+			<!-- (aii) Question -->
+			<ons-list> 
+				<ons-list-item> Answer to (aii): </ons-list-item> 
+				<ons-list-item> 
+					<div> (aii) Find  <span id="compositeEval"> </span>. </div>
+				</ons-list-item> 
+			</ons-list>
+			<div>
+				<span id="compositeEvalTwo" style="padding-left:10px"> </span> 
+				<ons-input id='inputk' type='number'> </ons-input> 
+				<label>
+					<ons-checkbox input-id="negativeK" id = "negativeK"></ons-checkbox>
+					<label for="negativeK" class="center"> Make negative </label>
+				</label>
+			</div>
+		</div> 	
 		<div id="mathans"> </div>
 		<!-- Preview answer: button plus actual preview plus button to submit-->
 		<div style="text-align:center; padding:10px"> <ons-button onclick="previewAnswer()"> Preview  your answer </ons-button> </div>

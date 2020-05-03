@@ -76,7 +76,7 @@ if (sign==1){
 	if (componentAll && componentsHit == 3 ) { // full marks
 		if (rootsHitpercentage == 1) {var partBMark = 4; console.log(1)} else{ var partBMark =3; console.log(2)};
 	} else if (componentAll) { // all components structure
-		if (rootsHit > 1 || componentsHit > 0) {var partBMark = 3;console.log(3)} else if (rootsHit > 1) {var partBMark = 2; console.log(4)} else {partBMark = 1; console.log(5)};
+		if (rootsHit > 1 || componentsHit > 0) {var partBMark = 3;console.log(3)}  else {partBMark = 1; console.log(5)};
 	} else if (componentsHit > 0) {
 		if (rootsHit > 1) {var partBMark = 3; console.log(6)} else{var partBMark = 2; console.log(7)};
 	} else{ // no components hit, no componentAll
@@ -129,9 +129,11 @@ if (finalMarks == 5) {
 };
 
 // things that need id
-window.onload = function() {
+document.addEventListener('init', function(event) {if (event.target.matches('#qn001atab')) {
 	// loading screen: show modal screen upon load // function showModal() {}
-	document.querySelector('ons-modal').show(); 	//setTimeout(function() { modal.hide();}, 400);
+	var modal = document.querySelector('ons-modal');
+	modal.show(); 
+	setTimeout(function() { modal.hide();}, 1000);
 	document.querySelector('ons-tabbar').setActiveTab(1) // Loads both pages
 	.then( // After pages loaded
 		function (){
@@ -142,21 +144,13 @@ window.onload = function() {
 					duration: 1000, // milliseconds
 					easing: 'easeInOut'
 				});
-  progressBar.animate(finalMarks/5); // percent
+  setTimeout(function() {progressBar.animate(finalMarks/5);}, 1000);
   document.getElementById('progressBarText').innerHTML = finalMarks + '/5';
 			// Insert Math
-			 document.getElementById('qntext1').innerHTML = latexifyDstyle(mathqn1);
-			document.getElementById('qntext2').innerHTML = latexifyDenv(mathqn2);
-			document.getElementById('mathans').innerHTML = latexifyDenv('\\boxed{ ' + finalans+ '}');
-			document.getElementById('studentSolution').innerHTML =  latexifyDenv( answerPreviewFinal);
+			katex.render("\\displaystyle "+mathqn1, document.getElementById('qntext1'), {throwOnError: false});
+			katex.render(mathqn2, document.getElementById('qntext2'), {throwOnError: false, displayMode:true});
+			katex.render("\\boxed{ " + finalans + "}", document.getElementById('mathans'), {throwOnError: false, displayMode:true});
+			katex.render("\\displaystyle "+ answerPreviewFinal, document.getElementById('studentSolution'), {throwOnError:false, displayMode:true});
 			document.getElementById('answerComments').innerHTML = comments;
 	})
-	.then( // Typeset Math
-			function() {
-				MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
-	})
-	.then( // Remove loading screen
-		function(){
-			MathJax.Hub.Register.StartupHook("End",function () {  document.querySelector('ons-modal').hide() });
-	});	
-}; // End of window.onload
+}},false); // End of window.onload

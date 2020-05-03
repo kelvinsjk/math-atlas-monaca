@@ -6,6 +6,10 @@
 // we will compute fg(c)/gf(c)
 // Nerdy facts: more than 5000 unique questions
 
+// Hides and shows radio options for (ai)
+var radioFlag = false, radioProceed = false;
+const radioIds = ['radioZero' , 'radioOne', 'radioTwo', 'radioThree', 'radioFour', 'radioFive'];
+const caretIds = ['caretZero' , 'caretOne', 'caretTwo', 'caretThree', 'caretFour', 'caretFive']; 
 // Generate random Integers
 var a =  getRandomNonZero(1,9), b = getRandomNonZero(1,9), c = getRandomInt(-9,9), e ='';
 var fnExists = 'gf', fnDoesNotExist = 'fg', domainAdd = '';
@@ -36,8 +40,6 @@ window.onload = function() {
 	document.getElementById('qntext2').innerHTML =  latexifyInline(fnDoesNotExist);
 	document.getElementById('qntext3').innerHTML =  latexifyInline(fnExists+'(' + c + ')');
 	document.getElementById('qntext4').innerHTML =  latexifyInline(fnExists);
-	// Loading screen
-	//showModal();
 	// Load Math
 	MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 	MathJax.Hub.Register.MessageHook("End Math",function () {  document.querySelector('ons-modal').hide() });
@@ -50,7 +52,37 @@ var startAnswering = function(){
 	tabBar.setAttribute('position', 'top');
 	tabBar.setAttribute('swipeable', 'true');
 	tabBar.setActiveTab(1);
+	document.getElementById('notCompositeOne').innerHTML = latexifyInline(fnDoesNotExist);
+	document.getElementById('notCompositeTwo').innerHTML = latexifyInline(fnDoesNotExist);
+	document.getElementById('answerButton').style.display = 'none';
+	document.getElementById('goToAnswerButton').style.display = 'block';
+	MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 };
+
+// radio button control. Shows part (aii) first time an option is chosen
+var radioClick = function(indexStr) {
+	var n = Number(indexStr);
+	if (radioFlag){ // radio buttons hidden: show all. Hide caret
+		radioIds.forEach( function(radioString,i) {
+			document.getElementById(radioString).style.display = 'block';
+		});
+		document.getElementById(caretIds[n]).style.display = 'none'
+		radioFlag = false;
+	} else { // radio buttons shown: hide all but actual answer. Show caret
+		radioIds.forEach( function(radioString, i) {
+			if (i != n) {document.getElementById(radioString).style.display = 'none'};
+		});
+		document.getElementById(caretIds[n]).style.display = 'inline';
+		radioFlag = true;
+	};
+	if (!radioProceed) {
+		document.getElementById('aii').style.display = 'block';
+		radioProceed = true;
+	};
+	document.getElementById('compositeEval').innerHTML = latexifyInline(fnExists+'(' + c + ')');
+	document.getElementById('compositeEvalTwo').innerHTML = latexifyInline(fnExists+'(' + c + ')= ');
+	MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+}
 
 
 // passesOptionselected to answer page

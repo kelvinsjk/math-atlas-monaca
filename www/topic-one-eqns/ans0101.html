@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../components/loader.css">
     <script src="../components/loader.js"></script>
 	<!-- Onsen UI -->
-		<script src="../lib/onsenui/js/onsenui.min.js"></script>
+		<script src="../lib/onsenui/js/onsenui.js"></script>
 		<link rel="stylesheet" href="../lib/onsenui/css/onsenui.css">
 		<link rel="stylesheet" href="../lib/onsenui/css/onsen-css-components.css">
 		<link rel="stylesheet" href="../css/style.css">
@@ -15,13 +15,8 @@
 		<script src="../onsenuijs.js"></script>
 		<script src="../mathjs.js"></script>
 		<script src="ans0101.js"></script>
-	<!-- MathJax -->
-		<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
-		<script type="text/x-mathjax-config">
-			MathJax.Hub.Config({
-				tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
-			});
-		</script>
+		<link rel="stylesheet" href="../lib/katex/katex.min.css">
+		<script defer src="../lib/katex/katex.min.js"> </script>
 	<title> Key in your answer </title>
 </head>
 <body>
@@ -63,9 +58,9 @@
 
 		<!-- Tabbar -->
 		<ons-tabbar swipeable position="top">
-			<ons-tab page="qn001a.html" label="Question" icon="ion-home, material:md-home" active> <!-- badge="7"-->
+			<ons-tab page="qn001a.html" label="Question" icon="fa-question-circle" active> <!-- badge="7"-->
 			</ons-tab>
-			<ons-tab page="ans001.html" label="Input Answer" icon="md-settings" active-icon="md-face">
+			<ons-tab page="ans001.html" label="Input Answer" icon="fa-keyboard" active-icon="fa-calculator">
 			</ons-tab>
 		</ons-tabbar>
 	</ons-page>
@@ -96,12 +91,12 @@
 			<ons-list-header>
 				Instructions: <br>
 				Use the toggles on the right to select the relevant inequalities that make up the answer. Then key in your numerical answer(s).  
-				For fractions like $-\frac{5}{2}$, key in $-2.5$ 
+				For fractions like <span id="fractionExample"> </span>, key in <span id="decimalExample"> </span>
 			</ons-list-header>
 			<!-- Answer switches-->
 			<ons-list-item>
 				<div class="center" id="ineq1">
-					$x < a$ <span id="spana" style="padding-left: 55px"> </span>
+					<span id="xLess"> </span> <span id="spana" style="padding-left: 55px"> </span>
 				</div>
 				<div class="right">
 					<ons-switch id="switch1"</ons-switch>
@@ -109,7 +104,7 @@
 			</ons-list-item>
 			<ons-list-item>
 				<div class="center" id="ineq2">
-					$x > b$ <span id="spanb" style="padding-left: 55px"> </span>
+					<span id="xMore"> </span> <span id="spanb" style="padding-left: 55px"> </span>
 				</div>
 				<div class="right">
 					<ons-switch id="switch2"></ons-switch>
@@ -117,7 +112,7 @@
 			</ons-list-item>
 			<ons-list-item>
 				<div class="center" id ="ineq3">
-					$c < x < d$ <span id="spancd" style="padding-left: 20px"> </span>
+					<span id="betweenOne"> </span> <span id="spancd" style="padding-left: 20px"> </span>
 				</div>
 				<div class="right">
 					<ons-switch id="switch3"></ons-switch>
@@ -125,7 +120,7 @@
 			</ons-list-item>
 			<ons-list-item>
 				<div class="center" id ="ineq4">
-					$e < x < f$ <span id="spanef" style="padding-left: 20px"> </span>
+					<span id="betweenTwo"> </span> <span id="spanef" style="padding-left: 20px"> </span>
 				</div>
 				<div class="right">
 					<ons-switch id="switch4"></ons-switch>
@@ -137,7 +132,7 @@
 		<div style="text-align:center; padding:10px"> <ons-button onclick="previewAnswer()"> Preview  your answer </ons-button> </div>
 		<div id="mathans2" style="text-align:left;  padding: 10px; display:none;"> </div>
 		<div id="mathans3" style="text-align:left;  padding: 10px; display: none;"> </div>
-		<div id="finalSubmission" style="text-align:center; padding:10px; display:none"><ons-button onclick="submitAnswer()"> Submit  your answer </ons-button></div>
+		<div id="finalSubmission" style="text-align:center; padding:10px; display:none"><ons-button onclick="submitAnswer()" style="background-color:#0076ff; color: white"> Submit  your answer </ons-button></div>
 		<hr> 
 		<div style="text-align:left; opacity: 0.6; padding-left: 10px;" id="samsungWarning"> 
 			<p> Some Samsung devices may be unable to key in negative values. A check box is provided to modify the sign of your input. </p>

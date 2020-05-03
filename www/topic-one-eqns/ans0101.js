@@ -34,73 +34,81 @@ var mathqn1 = fraction  + '-' +G+ '=' + fractionBuilder(numerator, denominator) 
 var mathqn2 = fraction + signstr + G + '.';
 
 // things that need id
-window.onload = function() {
+document.addEventListener('init', function(event) {if (event.target.matches('#qn001atab')) {
 	// loading screen: show modal screen upon load // function showModal() {}
-	document.querySelector('ons-modal').show(); 	//setTimeout(function() { modal.hide();}, 400);
+	var modal = document.querySelector('ons-modal');
+	modal.show(); 
+	setTimeout(function() { modal.hide();}, 500);
 	document.querySelector('ons-tabbar').setActiveTab(1) // Loads both pages
 	.then( // After pages loaded
 		function (){
 			// Listen to switch changing
 			document.getElementById('switch1').addEventListener('change', function(e) { 
 				if(e.target.checked) {
-						document.getElementById('spana').innerHTML = "$a$ = <ons-input id='inputa' type='number'> </ons-input>, \
+						document.getElementById('spana').innerHTML = "<span id='aKatex'></span> <ons-input id='inputa' type='number'> </ons-input>, \
 							<label class='left'>   <ons-checkbox input-id='negativeA' id = 'negativeA'></ons-checkbox> 	 </label> \
-							<label for='negativeA' class='center'> Make $a$ negative </label>";
-						MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+							<label for='negativeA' class='center'> Make <span id='aKatexTwo'></span> negative </label>";
+						katex.render('a= ', document.getElementById('aKatex'),{throwOnError: false});
+						katex.render('a ', document.getElementById('aKatexTwo'),{throwOnError: false});
 				} else{
 					document.getElementById('spana').innerHTML = '';
 				};
 			});
 			document.getElementById('switch2').addEventListener('change', function(e) { 
 				if(e.target.checked) {
-						document.getElementById('spanb').innerHTML = "$b$ = <ons-input id='inputb' type='number'> </ons-input>, \
+						document.getElementById('spanb').innerHTML = "<span id='bKatex'></span> <ons-input id='inputb' type='number'> </ons-input>, \
 							<label class='left'>   <ons-checkbox input-id='negativeB' id = 'negativeB'></ons-checkbox> 	 </label> \
-							<label for='negativeB' class='center'> Make $b$ negative </label>";
-						MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+							<label for='negativeB' class='center'> Make <span id='bKatexTwo'></span> negative </label>";
+						katex.render('b= ', document.getElementById('bKatex'),{throwOnError: false});
+						katex.render('b ', document.getElementById('bKatexTwo'),{throwOnError: false});
 				} else{
 					document.getElementById('spanb').innerHTML = '';
 				};
 			});
 			document.getElementById('switch3').addEventListener('change', function(e) { 
 				if(e.target.checked) {
-						document.getElementById('spancd').innerHTML = "$c$ = <ons-input id='inputc' type='number'> </ons-input>, \
+						document.getElementById('spancd').innerHTML = "<span id='cKatex'></span> <ons-input id='inputc' type='number'> </ons-input>, \
 							<label class='left'>   <ons-checkbox input-id='negativeC' id = 'negativeC'></ons-checkbox> 	 </label> \
-							<label for='negativeC' class='center'> Make $c$ negative </label> \
-							 <br>  $d$ = <ons-input id='inputd'  type='number'> </ons-input>. \
+							<label for='negativeC' class='center'> Make <span id='cKatexTwo'></span> negative </label> \
+							 <br>  <span id='dKatex'></span> <ons-input id='inputd'  type='number'> </ons-input>. \
 							<label class='left'>   <ons-checkbox input-id='negativeD' id = 'negativeD'></ons-checkbox> 	 </label> \
-							<label for='negativeD' class='center'> Make $d$ negative </label>";
-						MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+							<label for='negativeD' class='center'> Make <span id='dKatexTwo'> </span> negative </label>";
+						katex.render('c= ', document.getElementById('cKatex'),{throwOnError: false});
+						katex.render('c ', document.getElementById('cKatexTwo'),{throwOnError: false});
+						katex.render('d= ', document.getElementById('dKatex'),{throwOnError: false});
+						katex.render('d ', document.getElementById('dKatexTwo'),{throwOnError: false});
 				} else{
 					document.getElementById('spancd').innerHTML = '';
 				};
 			});
 			document.getElementById('switch4').addEventListener('change', function(e) { 
 				if(e.target.checked) {
-						document.getElementById('spanef').innerHTML = "$e$ = <ons-input id='inpute' type='number'> </ons-input>, \
+						document.getElementById('spanef').innerHTML = "<span id='eKatex'></span> <ons-input id='inpute' type='number'> </ons-input>, \
 							<label class='left'>   <ons-checkbox input-id='negativeE' id = 'negativeE'></ons-checkbox> 	 </label> \
-							<label for='negativeE' class='center'> Make $e$ negative </label> \
-							 <br>  $f$ = <ons-input id='inputf'  type='number'> </ons-input>. \
+							<label for='negativeE' class='center'> Make <span id='eKatexTwo'></span> negative </label> \
+							 <br>  <span id='fKatex'></span> = <ons-input id='inputf'  type='number'> </ons-input>. \
 							<label class='left'>   <ons-checkbox input-id='negativeF' id = 'negativeF'></ons-checkbox> 	 </label> \
-							<label for='negativeF' class='center'> Make $f$ negative </label>";
-						MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+							<label for='negativeF' class='center'> Make <span id='fKatexTwo'></span> negative </label>";
+						katex.render('e= ', document.getElementById('eKatex'),{throwOnError: false});
+						katex.render('e ', document.getElementById('eKatexTwo'),{throwOnError: false});
+						katex.render('f= ', document.getElementById('fKatex'),{throwOnError: false});
+						katex.render('f ', document.getElementById('fKatexTwo'),{throwOnError: false});
 				} else{
 					document.getElementById('spanef').innerHTML = '';
 				};
 			}); 
 			// End of switch code
 			// Insert Math
-			 document.getElementById('qntext1').innerHTML = latexifyDstyle(mathqn1);
-			document.getElementById('qntext2').innerHTML = latexifyDenv(mathqn2);
+			katex.render(katexifyDstyle(mathqn1),document.getElementById('qntext1'), {throwOnError: false});
+			katex.render(mathqn2,document.getElementById('qntext2'), {throwOnError: false,displayMode:true});
+			katex.render("-\\frac{5}{2}",document.getElementById('fractionExample'), {throwOnError: false});
+			katex.render("-2.5", document.getElementById('decimalExample'),{throwOnError: false});
+			katex.render("x < a", document.getElementById('xLess'),{throwOnError: false});
+			katex.render("x > b", document.getElementById('xMore'),{throwOnError: false});
+			katex.render("c < x < d", document.getElementById('betweenOne'),{throwOnError: false});
+			katex.render("e < x < f", document.getElementById('betweenTwo'),{throwOnError: false});
 	})
-	.then( // Typeset Math
-			function() {
-				MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
-	})
-	.then( // Remove loading screen
-		function(){
-			MathJax.Hub.Register.StartupHook("End",function () {  document.querySelector('ons-modal').hide() });
-	});	
-}; // End of window.onload
+}},false); // End of window.onload
 
 // preview Answer
 var previewAnswer = function () {
@@ -162,12 +170,11 @@ var previewAnswer = function () {
 		};
 	};
 	// show answer preview + submit button if valid
-	previewSpace.innerHTML = 'Your answer:' + latexifyDenv('\\boxed{ ' + answerPreviewFinal + ' } ');
+	previewSpace.innerHTML = "Your answer: <div id='answerPreviewKatex'> </div>";
+	katex.render('\\boxed{ ' +answerPreviewFinal + '}', answerPreviewKatex, {throwOnError:false, displayMode:true});
 	previewSpace.style.display = 'block';
 	if (proceedFlag) {document.getElementById('finalSubmission').style.display = 'block' 
 	} else {document.getElementById('finalSubmission').style.display = 'none'};
-	// typeset math
-	MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 };
 
 // submit answer: pass our required options to soln page
