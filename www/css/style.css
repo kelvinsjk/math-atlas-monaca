@@ -1,29 +1,38 @@
 /**/
 
 input[type=number]{
-    width: 30px;
-} 
+	width: 30px;
+}
+
+input:invalid {
+	border: red solid 3px;
+}
+
+input[class=fraction]{
+	width: 70px;
+}
+
 
 .box {
-  display: inline-block;
+	display: inline-block;
 }
 
 .progress {
-  width: 40px;
-  height: 40px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	width: 40px;
+	height: 40px;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .progress > .inner {
-  position: absolute;
-  color: black; 
-  font-weight: bold;
+	 position: absolute;
+	color: black; 
+	font-weight: bold;
 }
 
 .progress > svg {
-  height: 100%;
-  display: block;
+	height: 100%;
+	display: block;
 }

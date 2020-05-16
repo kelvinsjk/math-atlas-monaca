@@ -7,7 +7,6 @@ var a = Number(queriesObject.a), b = Number(queriesObject.b), c=Number(queriesOb
 	dThree = queriesObject.dthree, eFour = queriesObject.efour, fFour = queriesObject.ffour, sOne = queriesObject.sone == "true", 
 	sTwo = 	queriesObject.stwo == "true", 	sThree = queriesObject.sthree == "true", sFour = 	queriesObject.sfour == "true", 
 	partAMark = queriesObject.partAMark;
-
 // Math calculations and building latex
 var A = d+G, B=-c*d-e-G*a-G*b, C=G*a*b+e*c, d2 = e/d;
 var rootsArray = [a, b, c, d2];
@@ -34,7 +33,6 @@ if (sign == 1) {
 };
 var mathqn1 = fraction  + '-' +G+ '=' + fractionBuilder(numerator, denominator) + '.';
 var mathqn2 = fraction + signstr + G + '.';
-
 // build student's answer
 // set up necessary arrays
 var switchStatusArray = [sOne , sTwo, sThree, sFour];
@@ -74,13 +72,13 @@ if (sign==1){
 	if ( sFour && studentAnswerArray[5] === rootsArray[1] && studentAnswerArray[3] === rootsArray[2]) {componentsHit += 1};
 	// allocate marks
 	if (componentAll && componentsHit == 3 ) { // full marks
-		if (rootsHitpercentage == 1) {var partBMark = 4; console.log(1)} else{ var partBMark =3; console.log(2)};
+		if (rootsHitpercentage == 1) {var partBMark = 4;} else{ var partBMark =3;};
 	} else if (componentAll) { // all components structure
-		if (rootsHit > 1 || componentsHit > 0) {var partBMark = 3;console.log(3)}  else {partBMark = 1; console.log(5)};
+		if (rootsHit > 1 || componentsHit > 0) {var partBMark = 3;}  else {partBMark = 1; };
 	} else if (componentsHit > 0) {
-		if (rootsHit > 1) {var partBMark = 3; console.log(6)} else{var partBMark = 2; console.log(7)};
+		if (rootsHit > 1) {var partBMark = 3; } else{var partBMark = 2; };
 	} else{ // no components hit, no componentAll
-		if (rootsHit > 0) {var partBMark = 1; console.log(8)} else{ var partBMark = 0; console.log(9)};
+		if (rootsHit > 0) {var partBMark = 1; } else{ var partBMark = 0; };
 	};
 } else{ // sign == 2
 	if ( !sOne && !sTwo && sThree && sFour) {componentAll = true;};
@@ -91,13 +89,13 @@ if (sign==1){
 	if ( sFour && studentAnswerArray[5] === rootsArray[2] && studentAnswerArray[3] === rootsArray[3]) {componentsHit += 1; avoidDuplicate += 2};
 	// allocate marks
 	if (componentAll && componentsHit == 2 && avoidDuplicate == 3 ) { // full marks
-		if (rootsHitpercentage == 1) {var partBMark = 4; console.log(10)} else{ var partBMark =3; console.log(11)};
+		if (rootsHitpercentage == 1) {var partBMark = 4;} else{ var partBMark =3;};
 	} else if (componentAll) { // all components structure
-		if (componentsHit > 0) {var partBMark = 3; console.log(12)} else if (rootsHit > 1) {var partBMark = 2;console.log(13)} else {partBMark = 1;console.log(14)};
+		if (componentsHit > 0) {var partBMark = 3;} else if (rootsHit > 1) {var partBMark = 2;} else {partBMark = 1;};
 	} else if (componentsHit > 0) {
-		var partBMark = 3; console.log(15)
+		var partBMark = 3; 
 	} else{ // no components hit, no componentAll
-		if (rootsHit > 0) {var partBMark = 1; console.log(16)} else{ var partBMark = 0;console.log(17)};
+		if (rootsHit > 0) {var partBMark = 1;} else{ var partBMark = 0;};
 	};	
 };
 // preview answer
@@ -127,7 +125,6 @@ if (finalMarks == 5) {
 	comments += finalMarks + "/5 for this question. Let's try to figure out how we can get the answer and try again! \
 		 Consult your teachers and friends if necessary and I'm sure you'd be able to master the techniques in no time."
 };
-
 // things that need id
 document.addEventListener('init', function(event) {if (event.target.matches('#qn001atab')) {
 	// loading screen: show modal screen upon load // function showModal() {}

@@ -5,8 +5,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 	<meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
 	<script src="components/loader.js"></script>
-	<script src="lib/onsenui/js/onsenui.min.js"></script>
 	 <link rel="stylesheet" href="components/loader.css">
+	<script src="lib/onsenui/js/onsenui.min.js"></script>
 	<link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
 	<link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
 	 <link rel="stylesheet" href="css/style.css">
@@ -31,10 +31,10 @@
 					<ons-list-item onclick="window.location='topic-two-fns/qn0201.html'" tappable> <!-- TODO: menu items-->
 						Question 0201
 					</ons-list-item>
-					<ons-list-item onclick="window.location='topic-two-fns/ans0201.html'" tappable>
-						Answer 0201
+					<ons-list-item onclick="window.location='topic-three-graphs/soln0301.html'" tappable>
+						Solution 0301
 					</ons-list-item>
-					<ons-list-item onclick="window.location='soln0201.html' ">
+					<ons-list-item onclick="window.location='topic-two-fns/soln0201.html?a=-2&b=4&c=-3&d=-7&e=7&h=5&p=3&aiExist=0&aiReason=10&aiiSign=&aiiNum=50653&aiiDen=343&sOne=true&sTwo=false&sThree=true&sFour=false&sA=3&sC=3&biSign=&biNum=4.166666667&biDen=1&tOne=true&tTwo=false&tThree=true&tFour=false&tA=4&tC=4'" tappable>
 						Solution 0201
 					</ons-list-item>
 				</ons-list>
@@ -45,7 +45,7 @@
 	</ons-splitter>
 
 	<ons-template id="home.html"> <!-- Actual Page-->
-		<ons-page>
+		<ons-page id="indexMain">
 			<!-- Toolbar-->
 			<ons-toolbar> <!-- Menu icon-->
 				<div class="left">
@@ -63,15 +63,24 @@
 				</div>
 			</ons-toolbar>
 			<!-- Content-->
-			<p style="text-align: center; opacity: 0.6; padding-top: 20px;">
-				Swipe right to open the menu!
-			</p>
-			<span id="katextest"> </span>
-			<div style="text-align: center; margin:10px"> 
-				<ons-button onclick="window.location='topic-one-eqns/qn0101.html'"> Question 0101 </ons-button>
+			<div id="clone-master">
+				<p style="text-align: center; opacity: 0.6; padding-top: 20px;">
+					Swipe right to open the menu!
+				</p>
+				<span id="katextest"> </span>
+				<div style="text-align: center; margin:10px"> 
+					<ons-button onclick="window.location='topic-one-eqns/qn0101.html'"> Question 0101 </ons-button>
+				</div>
+				<div style="text-align: center; margin:10px"> 
+					<ons-button onclick="window.location='topic-two-fns/qn0201.html'"> Question 0201 </ons-button>
+				</div>
+				<div style="text-align: center; margin:10px"> 
+					<ons-button onclick="window.location='topic-three-graphs/qn0301.html'"> Question 0301 </ons-button>
+				</div>
+				<input id="hello"> </input>
+				<button onclick="document.getElementById('katextest').innerHTML = document.getElementById('hello').value === '1'"> Try it! </button>
 			</div>
-			<div style="text-align: center; margin:10px"> 
-				<ons-button onclick="window.location='topic-two-fns/qn0201.html'"> Question 0201 </ons-button>
+			<div id="clone-dest">
 			</div>
 		</ons-page>
 	</ons-template>

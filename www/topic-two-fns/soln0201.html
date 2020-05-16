@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+	<link rel="stylesheet" href="../components/loader.css">
+	<script src="../components/loader.js"></script>
+	<!-- Onsen UI -->
+	<script src="../lib/onsenui/js/onsenui.min.js"></script>
+	<link rel="stylesheet" href="../lib/onsenui/css/onsenui.css">
+	<link rel="stylesheet" href="../lib/onsenui/css/onsen-css-components.css">
+	<link rel="stylesheet" href="../css/style.css">
+	<!-- My own scripts -->
+	<script type="text/javascript" src="../onsenuijs.js"></script>
+	<script type="text/javascript" src="../mathjs.js"></script>
+	<script type="text/javascript" src="soln0201.js"></script>
+	<script type="text/javascript" src="../progress-bar.js"></script>
+	<link rel="stylesheet" href="../lib/katex/katex.min.css">
+	<script defer src="../lib/katex/katex.min.js"> </script>
+</head>
+<body>
+	<!-- Loading screen -->
+	<ons-modal direction="up">
+ 		<div style="text-align: center">
+			<p>	<ons-icon icon="md-spinner" size="28px" spin></ons-icon> Loading...	</p>
+  		</div>
+	</ons-modal>
+	<!-- Left menu-->
+	<ons-splitter>
+		<ons-splitter-side id="menu" side="left" width="120px" collapse>
+			<ons-page>
+				<ons-list>
+					<ons-list-item onclick="window.location='../index.html' " tappable>
+						Home
+					</ons-list-item>
+				</ons-list>
+			</ons-page>
+		</ons-splitter-side>
+		<ons-splitter-content id="content" page="soln001.html">	</ons-splitter-content>
+	</ons-splitter>
+<!-- Actual Page -->
+<template id="soln001.html">
+<ons-page>
+	<!-- Title -->
+	<ons-toolbar>
+		<div class="left">
+		<ons-toolbar-button onclick="fn.open()">
+			<ons-icon icon="ion-ios-menu, material:md-menu"></ons-icon>
+		</ons-toolbar-button>
+		</div>
+		<div class="center">
+			Solution
+		</div>
+	</ons-toolbar>
+	<!-- Tabbar -->
+	<ons-tabbar swipeable position="top">
+		<ons-tab page="qn001a.html" label="Question" icon="fa-question-circle" active> <!-- badge="7"-->
+		</ons-tab>
+		<ons-tab page="soln001b.html" label="Answer" icon="fa-lightbulb">
+		</ons-tab>
+	</ons-tabbar>
+</ons-page>
+</template>
+<!-- Question Tab-->
+<template id="qn001a.html">
+  <ons-page id="qn001atab">
+			<div style="text-align:left;opacity:0.6;padding-left: 10px;"> 
+				<p> Functions <span id="functionF"> </span>  and <span id="functionG"> are defined by </p>
+				<div id="qntext1"> </div> 
+			</div>
+			<div style="text-align:left;opacity:0.6;padding-left:10px;"> 
+				(ai) Explain whether the composite function <span id='qntext2'> </span> exists.
+			</div>
+			<div style="text-align:left;opacity:0.6;padding-left: 10px;"> 
+				(aii) Find the exact value of <span id = "qntext3"> </span>.
+			</div>
+			<div style="text-align:left;opacity:0.6;padding-left:10px;"> 
+				(aiii) What is the domain of the composite function <span id = "qntext4"> </span>?
+			</div>
+			<div style="text-align:left;opacity:0.6;padding-top:10px;padding-left:10px;"> 
+				(bi) Find the exact value of <span id='qntext5'> </span>.
+			</div>
+			<div style="text-align:left;opacity:0.6;padding-left:10px;"> 
+				(bii) State the domain of <span id = "qntext6"> </span>.
+			</div>
+			<div style="text-align:left;opacity:0.6;padding-top:20px;padding-left:10px;">
+				This question is worth 3+3 marks.
+			</div>
+			<hr>
+			<div style="text-align:center; margin:20px;"  id="answerButton">
+				<ons-button onclick="document.querySelector('ons-tabbar').setActiveTab(1)">Go to solution </ons-button>
+			</div>
+  </ons-page>
+</template>
+<!-- Answer Tab-->
+<template id="soln001b.html">
+	<ons-page id="soln001tab">
+	<!-- Student's solution -->
+	<div style="text-align:left;opacity:0.6;padding:10px;">
+		Your attempt:
+		<div>
+			(ai) The composite function <span id="notCompositeThree">  </span> 
+			<span id="existsOrNot"> </span> because <span id="reasonGiven">. </span> 
+			<span id="checkMarkOne" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+		</div>
+		<div>
+			(aii) <span id="studentAii"> </span>. 
+			<span id="checkMarkTwo" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+		</div>
+		<div>
+			(aiii) <span id="domainSwitchPreview"> </span>.
+			<span id="checkMarkThree" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+		</div>
+		<div>
+			(bi) <span id="fInverseDStudent">.  </span> 
+			<span id="checkMarkFour" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+			<span id="checkMarkFive" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+		</div>
+		<div>
+			(bii) <span id="domainSwitchPreviewTwo">. </span> 
+			<span id="checkMarkSix" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+		</div>
+	</div> <hr>
+	<!-- Actual Solution -->
+	<div style="text-align:left;padding:10px;">
+		The answer:
+		<div>
+			(ai) The composite function <span id="notCompositeFour">  </span> 
+			does not exist because <span id="trueReason"> </span> <br>
+		</div>
+		<div>
+			(aii) <span id="trueAii"> </span>. <br>
+		</div>
+		<div>
+			(aiii) <span id="trueDomainOne"> </span>. 
+		</div>
+		<div>
+			(bi) <span id="trueBi">.  </span> 
+		</div>
+		<div>
+			(bii) <span id="trueDomainTwo"> </span>
+		</div>
+	</div>
+
+	<hr>
+	<!-- Comments -->
+	<div style="text-align:center;">
+		<div class="box">
+  			<div class="progress" id="progress">
+    			<div class="inner" id = "progressBarText"> 6 </div>
+ 			 </div>
+		</div>
+	</div>
+	<div style="text-align:left; opacity: 0.6; padding: 10px;">
+		<div id="answerComments"> </div>
+	</div>
+	<hr>
+	<div  style="text-align:center; margin:10px">
+		<span class="left">  <ons-button onclick="document.querySelector('ons-tabbar').setActiveTab(0)"> Go to question </ons-button> </span>
+		<span class="center" style="margin:10px">  <ons-button onclick="window.location='qn0201.html'"> Try again </ons-button> </span>
+		<span class="right"> <ons-button onclick="window.location = '../index.html'"> Return Home </ons-button> </span>
+	</div> 
+  </ons-page>
+</template>
+</body>
+</html>

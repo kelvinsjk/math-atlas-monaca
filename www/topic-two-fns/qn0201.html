@@ -16,12 +16,8 @@
 		<script src="../onsenuijs.js"></script>
 		<script src="../mathjs.js"></script>
 		<script src="qn0201.js"></script>
-		<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
-		<script type="text/x-mathjax-config">
-			MathJax.Hub.Config({
-				tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
-			});
-		</script>
+		<link rel="stylesheet" href="../lib/katex/katex.min.css">
+		<script defer src="../lib/katex/katex.min.js"> </script>
 		<title> Question 0201 </title>
 </head>
 
@@ -57,7 +53,7 @@
 				</ons-toolbar-button>
 				</div>
 				<div class="center">
-				Question 0201 <!-- TODO: CHANGE THIS -->
+				Question 0201 
 				</div>
 			</ons-toolbar>
 			<!-- Tabbar -->
@@ -74,25 +70,28 @@
 	<template id="qn001a.html">
 	<ons-page id="qn001atab">
 			<div style="text-align: left; opacity: 0.6; padding-top: 20px; padding-left: 10px;"> 
-				<p> Functions $f$ and $g$ are defined by </p>
+				<p> Functions <span id="functionF"> </span>  and <span id="functionG"> </span> are defined by </p>
 				<div id="qntext1"> </div> 
 			</div>
 			<div style="text-align: left; opacity: 0.6; padding-top: 20px; padding-left: 10px;"> 
 				(ai) Explain whether the composite function <span id='qntext2'> </span> exists.
 			</div>
 			<div style="text-align:left; opacity: 0.6; padding-top: 20px; padding-left: 10px;"> 
-				(aii) Find <span id = "qntext3"> </span>.
+				(aii) Find the exact value of <span id = "qntext3"> </span>.
 			</div>
 			<div style="text-align:left; opacity: 0.6; padding-top: 20px; padding-left: 10px;"> 
 				(aiii) What is the domain of the composite function <span id = "qntext4"> </span>?
+			</div>
+			<div style="text-align:left; opacity: 0.6; padding-top: 20px; padding-left: 10px;">
+				Part (a) of this question is  worth 3 marks.
 			</div>
 			<hr>
 			<div style="text-align:center; margin:20px;"  id="answerButton">
 				<ons-button onclick="startAnswering()">Proceed to answer part (a) </ons-button>
 			</div>
 			<div style="text-align:center; margin:20px;display:none"  id="goToAnswerButton">
-				<ons-button onclick="startAnswering()"> Key in your answer </ons-button>
-			</div>			
+				<ons-button onclick="document.querySelector('ons-tabbar').setActiveTab(1)"> Key in your answer </ons-button>
+			</div>
 	</ons-page>
 	</template>
 
@@ -109,11 +108,11 @@
 			<!-- (ai) answer part one-->
 			<div class="center">
 				<!-- dropdown: choose exists or not, shows radio buttons for picking reasons-->
-				<span id="notCompositeTwo" style="padding-left:10px;padding-right:10px"> </span> 
+				<span id="notCompositeTwo" style="padding-left:10px;padding-right:5px"> </span> 
 				<ons-select id="chooseOne" onchange= "document.getElementById('aiPartTwo').style.display='block'">
 					<option value="none" selected disabled hidden>Select an option</option>
-					<option value="choiceExist">exists</option>
-					<option value="choiceDoNotExist">does not exist</option>
+					<option value="1">exists</option>
+					<option value="0">does not exist</option>
 				</ons-select>
 				<span style="padding:10px"> because </span>
 			</div>
@@ -123,42 +122,42 @@
 				<div id="radioZero"> <ons-list-item tappable style="background: rgb(0,0,0,0.07);">
 					<label class="left"> <ons-radio name="reason" input-id="radio-0" value="0" onclick="radioClick(this.value)"></ons-radio> </label>
 					<label for="radio-0" class="center"> 
-						<span id="reasonZero"> $f$ </span> 
+						<span id="reasonZero"> </span> 
 						<span id="caretZero" style="padding-left:10px; display:none"> <ons-icon icon="fa-caret-down"> </ons-icon>
 					</label>
 				</ons-list-item> </div>
 				<div id="radioOne"> <ons-list-item tappable style="background: rgb(0,0,0,0.07);">
 					<label class="left"> <ons-radio name="reason" input-id="radio-1" value="1" onclick="radioClick(this.value)"></ons-radio> </label>
 					<label for="radio-1" class="center"> 
-						<span id="reasonOne"> One </span> 
+						<span id="reasonOne"></span> 
 						<span id="caretOne" style="padding-left:10px; display:none"> <ons-icon icon="fa-caret-down"> </ons-icon>
 					</label>
 				</ons-list-item> </div>
 				<div id="radioTwo"> <ons-list-item tappable style="background: rgb(0,0,0,0.07);">
 					<label class="left"> <ons-radio name="reason" input-id="radio-2" value="2" onclick="radioClick(this.value)"></ons-radio> </label>
 					<label for="radio-2" class="center"> 
-						<span id="reasonTwo"> One </span> 
+						<span id="reasonTwo"></span> 
 						<span id="caretTwo" style="padding-left:10px; display:none"> <ons-icon icon="fa-caret-down"> </ons-icon>
 					</label>
 				</ons-list-item> </div>
 				<div id="radioThree"> <ons-list-item tappable style="background: rgb(0,0,0,0.07);">
 					<label class="left"> <ons-radio name="reason" input-id="radio-3" value="3" onclick="radioClick(this.value)"></ons-radio> </label>
 					<label for="radio-3" class="center">
-						<span id="reasonThree"> One </span> 
+						<span id="reasonThree"> </span> 
 						<span id="caretThree" style="padding-left:10px; display:none"> <ons-icon icon="fa-caret-down"> </ons-icon>
 					</label>
 				</ons-list-item> </div>
 				<div id="radioFour"> <ons-list-item tappable style="background: rgb(0,0,0,0.07);">
 					<label class="left"> <ons-radio name="reason" input-id="radio-4" value="4" onclick="radioClick(this.value)"></ons-radio> </label>
 					<label for="radio-4" class="center">
-						<span id="reasonFour"> One </span> 
+						<span id="reasonFour"> </span> 
 						<span id="caretFour" style="padding-left:10px; display:none"> <ons-icon icon="fa-caret-down"> </ons-icon>	
 					</label>
 				</ons-list-item> </div>
 				<div id="radioFive"> <ons-list-item tappable style="background: rgb(0,0,0,0.07);">
 					<label class="left"> <ons-radio name="reason" input-id="radio-5" value="5" onclick="radioClick(this.value)"></ons-radio> </label>
 					<label for="radio-5" class="center">
-						<span id="reasonFive"> One </span> 
+						<span id="reasonFive">  </span> 
 						<span id="caretFive" style="padding-left:10px; display:none"> <ons-icon icon="fa-caret-down"> </ons-icon>
 					</label>
 				</ons-list-item> </div>
@@ -170,32 +169,119 @@
 			<ons-list> 
 				<ons-list-item> Answer to (aii): </ons-list-item> 
 				<ons-list-item> 
-					<div> (aii) Find  <span id="compositeEval"> </span>. </div>
+					<div> (aii) Find  the exact value of <span id="compositeEval"> </span>. </div>
 				</ons-list-item> 
+				<div id="aiiInstructions">
+					<ons-list-header>
+						Instructions: <br>
+						Key in your numerical answer(s). <br>
+						For fractions like <span id="fractionExample"> </span>, key in <span id="decimalExample"> </span> <hr>
+					</ons-list-header>
+				</div>
 			</ons-list>
-			<div>
+			<div id="aiiSubmitter" style="padding:10px">
 				<span id="compositeEvalTwo" style="padding-left:10px"> </span> 
-				<ons-input id='inputk' type='number'> </ons-input> 
-				<label>
-					<ons-checkbox input-id="negativeK" id = "negativeK"></ons-checkbox>
-					<label for="negativeK" class="center"> Make negative </label>
-				</label>
+				<!-- Case 1: Number, Case 2: x.abcde, Case 3: .abcde, Case 4: abc/xyz Cases 5-8: Negative of Cases 1-3-->
+				<input id="inputk" pattern="(\d+|(?=.+\.)\d+\.\d{1,5}|(?=\.)\.\d+|(?=.+/)\d+/\d{1,5})|[\-](\d+|(?=.+\.)\d+\.\d{1,5}|(?=\.)\.\d{1,5}|(?=.+/)\d+/\d+)" class="fraction"> </input> 
+				<span id="submitButton" style="padding:10px"> </span>
 			</div>
+			<div id="aiiSubmitted" style="padding:10px; display:none" onclick="changeAii()">
+				<span id="aiiLockedin"> </span> <ons-icon icon="fa-caret-down"> </ons-icon> 
+			</div> 
 		</div> 	
-		<div id="mathans"> </div>
-		<!-- Preview answer: button plus actual preview plus button to submit-->
-		<div style="text-align:center; padding:10px"> <ons-button onclick="previewAnswer()"> Preview  your answer </ons-button> </div>
-		<div id="mathans2" style="text-align:left;  padding: 10px; display:none;"> </div>
-		<div id="mathans3" style="text-align:left;  padding: 10px; display: none;"> </div>
-		<div id="finalSubmission" style="text-align:center; padding:10px; display:none"><ons-button onclick="submitAnswer()"> Submit  your answer </ons-button></div>
-		<hr> 
-		<div style="text-align:left; opacity: 0.6; padding-left: 10px;" id="samsungWarning"> 
+		<!-- (aiii) D_fg/D_gf -->
+		<div  style="display:none" id="aiii">
+			<!-- (aii) Question -->
+			<ons-list> 
+				<ons-list-item> Answer to (aiii): </ons-list-item> 
+				<ons-list-item> 
+					<div> (aiii) What is the domain of the composite function <span id = "fnAiii"> </span>? </div>
+				</ons-list-item> 
+				<!-- Switches  Start -->
+				<ons-list-header> <!-- Instructions -->
+					Instructions: <br>
+					Use the toggles on the right to select the relevant sets that make up the answer. If more than one option is chosen, the sets will be combined with a union, <span id="union"> </span>.
+					Then key in your numerical answer(s). <hr>
+				</ons-list-header>
+				<!-- Answer switches-->
+				<ons-list-item style="background: rgb(0,0,0,0.07);">
+					<div class="center" id="ineq1">
+						<span id="lessExclusive"> </span> <span id="spana" style="padding-left: 10px"> </span>
+					</div>
+					<div class="right">
+						<ons-switch id="switch1"></ons-switch>
+					</div>
+				</ons-list-item>
+				<ons-list-item style="background: rgb(0,0,0,0.07);">
+					<div class="center" id="ineq2">
+						<span id="lessInclusive"> </span> <span id="spanb" style="padding-left: 12px"> </span>
+					</div>
+					<div class="right">
+						<ons-switch id="switch2"></ons-switch>
+					</div>
+				</ons-list-item>
+				<ons-list-item style="background: rgb(0,0,0,0.07);">
+					<div class="center" id ="ineq3">
+						<span id="moreExclusive"> </span> <span id="spanc" style="padding-left:25px"> </span>
+					</div>
+					<div class="right">
+						<ons-switch id="switch3"></ons-switch>
+					</div>
+				</ons-list-item>
+				<ons-list-item style="background: rgb(0,0,0,0.07);" >
+					<div class="center" id ="ineq4">
+						<span id="moreInclusive"> </span> <span id="spand" style="padding-left: 25px"> </span>
+					</div>
+					<div class="right">
+						<ons-switch id="switch4"></ons-switch>
+					</div>
+				</ons-list-item>
+			</ons-list>
+			<div id="mathans"> </div>
+			<!-- Preview answer: button plus actual preview plus button to submit-->
+			<div style="text-align:center; padding:10px"> 
+				<ons-button onclick="previewAnswer()" style="background-color:#0076ff;color: white" > Preview  your answer </ons-button> 
+			</div>
+			<hr>
+		</div>
+		<div style="text-align:left; opacity: 0.6; padding-left: 10px;display:none" id="samsungWarning"> 
 			<p> Some Samsung devices may be unable to key in negative values. A check box is provided to modify the sign of your input. </p>
 			<p>  You can ignore the checkbox if you are able to key in negative values. </p>
-		</div>	
+		</div>
 		<hr>
 		<div style="text-align:center; margin:10px">  <ons-button onclick="document.querySelector('ons-tabbar').setActiveTab(0)"> Go to question  </ons-button> </div> 
 	</ons-page>
+	</template>
+
+	<!-- Confirmation of part a answer using a dialog -->
+	<template id="dialog.html">
+		<ons-dialog id="my-dialog" cancelable>
+			<div style="text-align: left; padding: 10px;">
+				<div> 
+					These are your submitted answers: <br>
+				</div>
+				<div>
+					(ai) The composite function <span id="notCompositeThree">  </span> 
+					<span id="existsOrNot"> </span> because <div id="reasonGiven"> </div>
+				</div>
+				<div>
+					(aii) <span id="studentAii"> </span>. <br>
+				</div>
+				<div>
+					(aiii)  <span id="domainSwitchPreview"> </span>. <hr>
+				</div>
+				<div id="aiiiConfirmationInstructions" style="display:none;"> 
+					Click "OK" to confirm these answers and move on to question part (b), or "Cancel" to change some of your answers.
+				</div>
+				<div id = "invalidInput" style="display:none">
+					Some of your answers appear to be empty or invalid (not an acceptable expression). Please check your (aiii) answers and remove any unwanted sets by using the toggles.
+				</div>
+				<div class="alert-dialog-footer">
+					<ons-alert-dialog-button onclick="hideDialog('my-dialog')">Cancel</ons-alert-dialog-button>
+					<ons-alert-dialog-button onclick="proceedTob()" id="moveOnButton" style="display:none"> OK </ons-alert-dialog-button>
+				</div>
+			</div>
+		</ons-dialog>
 	</template>
 
 	<!-- Return to home alert -->

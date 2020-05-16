@@ -1,0 +1,224 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+	<link rel="stylesheet" href="../components/loader.css">
+	<script src="../components/loader.js"></script>
+	<!-- Onsen UI -->
+	<script src="../lib/onsenui/js/onsenui.js"></script>
+	<link rel="stylesheet" href="../lib/onsenui/css/onsenui.css">
+	<link rel="stylesheet" href="../lib/onsenui/css/onsen-css-components.css">
+	<link rel="stylesheet" href="../css/style.css">
+	<!-- My own scripts -->
+	<script src="../onsenuijs.js"></script>
+	<script src="../mathjs.js"></script>
+	<script src="ans0201.js"></script>
+	<link rel="stylesheet" href="../lib/katex/katex.min.css">
+	<script defer src="../lib/katex/katex.min.js"> </script>
+	<title> Question part b </title>
+</head>
+<body>
+	<!-- Loading screen -->
+	<ons-modal direction="up">
+ 		<div style="text-align: center">
+			<p>	<ons-icon icon="md-spinner" size="28px" spin></ons-icon> Loading...	</p>
+  		</div>
+	</ons-modal>
+	<!-- Left menu-->
+	<ons-splitter>
+		<ons-splitter-side id="menu" side="left" width="120px" collapse>
+			<ons-page>
+				<ons-list>
+					<ons-list-item onclick="returnHome()" tappable>
+						Home
+					</ons-list-item>
+				</ons-list>
+			</ons-page>
+		</ons-splitter-side>
+		<ons-splitter-content id="content" page="answer001.html">	</ons-splitter-content>
+	</ons-splitter>
+	<!-- Actual Page -->
+	<template id="answer001.html">
+	<ons-page>
+		<!-- Title -->
+		<ons-toolbar>
+			<div class="left">
+			<ons-toolbar-button onclick="fn.open()">
+				<ons-icon icon="ion-ios-menu, material:md-menu"></ons-icon>
+			</ons-toolbar-button>
+			</div>
+			<div class="center">
+			Question part b
+			</div>
+		</ons-toolbar>
+		<!-- Tabbar -->
+		<ons-tabbar swipeable position="bottom" hide-tabs>
+			<ons-tab page="qn001a.html" label="Question" icon="fa-question-circle" active> <!-- badge="7"-->
+			</ons-tab>
+			<ons-tab page="ans001.html" label="Input Answer" icon="fa-keyboard" active-icon="fa-calculator">
+			</ons-tab>
+		</ons-tabbar>
+	</ons-page>
+	</template>
+	<!-- Question Tab-->
+	<template id="qn001a.html">
+	<ons-page id="qn001atab">
+		<div style="text-align: left; opacity: 0.6; padding-top: 20px; padding-left: 10px;"> 
+			<p> The function <span id="functionF"> </span>  is defined by </p>
+			<div id="qntext1"> </div> 
+		</div>
+		<div style="text-align: left; opacity: 0.6; padding-top: 20px; padding-left: 10px;"> 
+			(bi) Find the exact value of <span id='qntext2'> </span>.
+		</div>
+		<div style="text-align:left; opacity: 0.6; padding-top: 20px; padding-left: 10px;"> 
+			(bii) State the domain of <span id = "qntext3"> </span>.
+		</div>
+		<div style="text-align:left; opacity: 0.6; padding-top: 20px; padding-left: 10px;">
+			Part (b) of this question is worth 3 marks.
+		</div>
+		<hr>
+		<div style="text-align:center; margin:20px;"  id="answerButton">
+			<ons-button onclick="startAnswering()">Proceed to answer part (b) </ons-button>
+		</div>
+		<div style="text-align:center; margin:20px;display:none"  id="goToAnswerButton">
+			<ons-button onclick="document.querySelector('ons-tabbar').setActiveTab(1)"> Key in your answer </ons-button>
+		</div>
+	</ons-page>
+	</template>
+	<!-- Answer Tab-->
+	<template id="ans001.html">
+	<ons-page id="ans001tab">
+			<!-- (bi) Question -->
+			<ons-list> 
+				<ons-list-item> Answer to (bi): </ons-list-item> 
+				<ons-list-item> 
+					<div> (bi) Find  <span id="fInverseD"> </span>. </div>
+				</ons-list-item> 
+				<div id="biInstructions">
+					<ons-list-header>
+						Instructions: <br>
+						Key in your numerical answer(s). <br>
+						For fractions like <span id="fractionExample"> </span>, key in <span id="decimalExample"> </span> <hr>
+					</ons-list-header>
+				</div>
+			</ons-list>
+			<!-- (bi) Key in answer-->
+			<div id="biSubmitter" style="padding:10px">
+				<span id="fInverseDTwo" style="padding-left:10px"> </span> 
+				<!-- Case 1: Number, Case 2: x.abcde, Case 3: .abcde, Case 4: abc/xyz Cases 5-8: Negative of Cases 1-3-->
+				<input id="inputk" pattern="(\d+|(?=.+\.)\d+\.\d{1,5}|(?=\.)\.\d+|(?=.+/)\d+/\d{1,5})|[\-](\d+|(?=.+\.)\d+\.\d{1,5}|(?=\.)\.\d{1,5}|(?=.+/)\d+/\d+)" class="fraction"> </input> 
+				<span id="submitButton" style="padding:10px"> </span>
+			</div>
+			<div id="biSubmitted" style="padding:10px; display:none" onclick="changeBi()">
+				<span id="biLockedin"> </span> <ons-icon icon="fa-caret-down"> </ons-icon> 
+			</div> 
+		<!-- (bii) D_{f^{-1}} -->
+		<div  style="display:none" id="bii">
+			<!-- (aii) Question -->
+			<ons-list> 
+				<ons-list-item> Answer to (bii): </ons-list-item> 
+				<ons-list-item> 
+					<div> (bii) State the domain of <span id = "fInverse"> </span>. </div>
+				</ons-list-item> 
+				<!-- Switches  Start -->
+				<ons-list-header> <!-- Instructions -->
+					Instructions: <br>
+					Use the toggles on the right to select the relevant sets that make up the answer. If more than one option is chosen, the sets will be combined with a union, <span id="union"> </span>.
+					Then key in your numerical answer(s). <hr>
+				</ons-list-header>
+				<!-- Answer switches-->
+				<ons-list-item style="background: rgb(0,0,0,0.07);">
+					<div class="center" id="ineq1">
+						<span id="lessExclusive"> </span> <span id="spana" style="padding-left: 10px"> </span>
+					</div>
+					<div class="right">
+						<ons-switch id="switch1"</ons-switch>
+					</div>
+				</ons-list-item>
+				<ons-list-item style="background: rgb(0,0,0,0.07);">
+					<div class="center" id="ineq2">
+						<span id="lessInclusive"> </span> <span id="spanb" style="padding-left: 12px"> </span>
+					</div>
+					<div class="right">
+						<ons-switch id="switch2"></ons-switch>
+					</div>
+				</ons-list-item>
+				<ons-list-item style="background: rgb(0,0,0,0.07);">
+					<div class="center" id ="ineq3">
+						<span id="moreExclusive"> </span> <span id="spanc" style="padding-left:25px"> </span>
+					</div>
+					<div class="right">
+						<ons-switch id="switch3"></ons-switch>
+					</div>
+				</ons-list-item>
+				<ons-list-item style="background: rgb(0,0,0,0.07);" >
+					<div class="center" id ="ineq4">
+						<span id="moreInclusive"> </span> <span id="spand" style="padding-left: 25px"> </span>
+					</div>
+					<div class="right">
+						<ons-switch id="switch4"></ons-switch>
+					</div>
+				</ons-list-item>
+			</ons-list>
+			<div id="mathans"> </div>
+			<!-- Preview answer: button plus actual preview plus button to submit-->
+			<div style="text-align:center; padding:10px"> 
+				<ons-button onclick="previewAnswer()" style="background-color:#0076ff;color: white" > Preview  your answer </ons-button> 
+			</div>
+		</div>
+		<hr>
+		<div style="text-align:left; opacity: 0.6; padding-left: 10px;display:none" id="samsungWarning"> 
+			<p> Some Samsung devices may be unable to key in negative values. A check box is provided to modify the sign of your input. </p>
+			<p>  You can ignore the checkbox if you are able to key in negative values. </p> <hr>
+		</div>
+		<div style="text-align:center; margin:10px">  <ons-button onclick="document.querySelector('ons-tabbar').setActiveTab(0)"> Go to question  </ons-button> </div> 
+	</ons-page>
+	</template>
+
+	<!-- Confirmation of part b answers using a dialog-->
+	<!-- Confirmation of part a answer using a dialog -->
+	<template id="dialog.html">
+		<ons-dialog id="my-dialog" cancelable>
+			<div style="text-align: left; padding: 10px;">
+				<div> 
+					These are your submitted answers: <br>
+				</div>
+				<div>
+					(bi) <span id="fInverseDStudent"> </span>.
+				</div>
+				<div>
+					(bii) <span id="domainSwitchPreview"> </span>. <hr>
+				</div>
+				<div id="biiConfirmationInstructions" style="display:none;"> 
+					Click "OK" to confirm these answers and see the solution, or "Cancel" to change some of your answers.
+				</div>
+				<div id = "invalidInput" style="display:none">
+					Some of your answers appear to be empty or invalid (not an acceptable expression). Please check your (bii) answers and remove any unwanted sets by using the toggles.
+				</div>
+				<div class="alert-dialog-footer">
+					<ons-alert-dialog-button onclick="hideDialog('my-dialog')">Cancel</ons-alert-dialog-button>
+					<ons-alert-dialog-button onclick="proceedToSoln()" id="moveOnButton" style="display:none"> OK </ons-alert-dialog-button>
+				</div>
+			</div>
+		</ons-dialog>
+	</template>
+
+	<!-- Return to home alert -->
+	<template id="home-alert-dialog.html">
+	<ons-alert-dialog id="home-alert-dialog" modifier="rowfooter">
+		<div class="alert-dialog-title" id="homeAlertTitle"> Warning </div>
+		<div class="alert-dialog-content"> 
+			<p> You leaving this question to return to the home page. </p>
+			<p>  No progress will be saved. </p>
+			<p> A new question will be generated the  next time to access this page. </p>
+		</div>
+		<div class="alert-dialog-footer">
+		<ons-alert-dialog-button onclick="hideAlertDialog('home-alert-dialog')">Cancel</ons-alert-dialog-button>
+		<span> <ons-alert-dialog-button onclick="window.location = '../index.html'"> OK</ons-alert-dialog-button> </span>
+		</div>
+	</ons-alert-dialog>
+	</template>
+</body>
+</html>

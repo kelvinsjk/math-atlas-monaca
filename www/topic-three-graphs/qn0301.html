@@ -1,0 +1,273 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <link rel="stylesheet" href="../components/loader.css">
+    <script src="../components/loader.js"></script>
+	<!-- Onsen UI -->
+		<script src="../lib/onsenui/js/onsenui.min.js"></script>
+		<link rel="stylesheet" href="../lib/onsenui/css/onsenui.css">
+		<link rel="stylesheet" href="../lib/onsenui/css/onsen-css-components.css">
+		<link rel="stylesheet" href="../css/style.css">
+		
+		<script src="../onsenuijs.js"></script>
+		<script src="../mathjs.js"></script>
+		<script src="qn0301.js"></script> <!-- change for each qn-->
+		<link rel="stylesheet" href="../lib/katex/katex.min.css">
+		<script defer src="../lib/katex/katex.min.js"> </script>
+		<title> Question 0301 </title>
+</head>
+
+<body>
+	<!-- Loading Screen -->
+	<ons-modal direction="up">
+  		<div style="text-align: center">
+  			<p> <ons-icon icon="md-spinner" size="28px" spin></ons-icon> Loading... </p>
+ 		 </div>
+	</ons-modal>
+
+	<!-- Left menu -->
+	<ons-splitter>
+		<ons-splitter-side id="menu" side="left" width="120px" collapse swipeable>
+			<ons-page>
+				<ons-list>
+					<ons-list-item onclick="returnHome()" tappable>
+						Home
+					</ons-list-item>
+				</ons-list>
+			</ons-page>
+		</ons-splitter-side>
+		<ons-splitter-content id="content" page="qn001.html">	</ons-splitter-content>
+	</ons-splitter>
+
+	<!-- Actual page -->
+	<template id="qn001.html">
+		<ons-page>
+			<ons-toolbar>
+				<div class="left">
+				<ons-toolbar-button onclick="fn.open()">
+					<ons-icon icon="ion-ios-menu, material:md-menu"></ons-icon>
+				</ons-toolbar-button>
+				</div>
+				<div class="center">
+				Question 0301 
+				</div>
+			</ons-toolbar>
+			<!-- Tabbar -->
+			<ons-tabbar position="bottom" hide-tabs>
+				<ons-tab page="qn001a.html" label="Question" icon="fa-question-circle" active> <!-- badge="7"-->
+				</ons-tab>
+				<ons-tab page="ans001.html" label="Input Answer" icon="fa-keyboard" active-icon="fa-calculator">
+				</ons-tab>
+			</ons-tabbar>
+		</ons-page>
+	</template>
+
+	<!-- Question Tab-->
+	<template id="qn001a.html">
+	<ons-page id="qn001atab">
+			<div style="text-align: left; opacity: 0.6; padding-top: 20px; padding-left: 10px;"> 
+				<p> (ai) Show that the equation <span id="improperFractionOne"> </span> can be written as <span id="properFractionOne"> </span>
+					, where <span id="bigA"></span> and <span id="bigB"></span> are constants to be found.
+				</p>
+				<p> (aii) Hence state a sequence of transformations which transform the graph of <span id="oneOverX"></span> to the graph of <span id="improperFractionTwo"></span>.
+				</p>
+			</div>
+			<div style="text-align:left; opacity: 0.6; padding-top: 20px; padding-left: 10px;">
+				Part (a) of this question is  worth 4 marks.
+			</div>
+			<hr>
+			<div style="text-align:center; margin:20px;"  id="answerButton">
+				<ons-button onclick="startAnswering()">Proceed to answer part (a) </ons-button>
+			</div>
+			<div style="text-align:center; margin:20px;display:none"  id="goToAnswerButton">
+				<ons-button onclick="document.querySelector('ons-tabbar').setActiveTab(1)"> Key in your answer </ons-button>
+			</div>
+	</ons-page>
+	</template>
+
+	<!-- Answer Tab-->
+	<template id="ans001.html"> <ons-page id="ans001tab">
+		<!-- (ai) Question -->
+		<ons-list> 
+			<ons-list-item> Answer to (ai): </ons-list-item> 
+			<ons-list-item> 
+				<div> (ai) <span id="properFractionTwo"></span>. <br> What is <span id="bigATwo"></span> and <span id="bigBTwo"></span>? </div>
+			</ons-list-item> 
+		</ons-list>
+		<!-- (ai) Answer: what is A and B -->
+		<div id="aiSubmitter" style="padding:10px">
+			<div>
+				<span id="aiA" style="padding-left:10px"></span> <input id="inputk" type="number"></input>
+				<label class='left'> <ons-checkbox input-id='negativeA'></ons-checkbox></label>
+				<label for='negativeA' class='center'> Make <span id='aiATwo'></span> negative </label>;
+			</div>
+			<div><span id="aiB" style="padding-left:10px"></span> 
+				<input id="inputkTwo" type="number"></input>
+			</div>
+			<div id="aiErrorText" style="padding:10;display:none"></div>
+			<div id="submitButton" style="padding:10px"></div>
+			<div style="text-align:left; opacity: 0.6; padding-left: 10px;" id="samsungWarning"> 
+				<hr> <p> Some Samsung devices may be unable to key in negative values. A check box is provided to modify the sign of your input. </p>
+				<p> You can ignore the checkbox if you are able to key in negative values. </p>
+			</div>
+		</div>
+		<!-- (ai) Locked in answer: allow change-->
+		<div id="aiSubmitted" style="padding:10px; display:none" onclick="changeAi()">
+			<span id="aiLockedin"> </span> <ons-icon icon="fa-caret-down"> </ons-icon> 
+		</div>
+		<!-- (aii) Question -->
+		<div id="aiiQuestion" style="display:none">
+			<ons-list> 
+				<ons-list-item> Answer to (aii): </ons-list-item> 
+				<ons-list-item> 
+					<div> (aii) State a sequence of transformations which transform <span id="oneOverXTwo"></span> to <span id="improperFractionThree"></span>. </div>
+				</ons-list-item> 
+			</ons-list>
+			<!-- Transformation dropdown list-->
+			<div class="center" style="padding:10px">
+				<!-- dropdown: choose number of transformations shows guidance for picking transformations-->
+				<label for="transformNumber">Number of transformations required: </label>
+				<ons-select id="transformNumber" onchange="transformGuide(this.value)">
+					<option value="none" selected disabled hidden>Select a number</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				</ons-select>
+			</div>
+			<div id="transformList" style="display:none">
+				<ons-list>
+					<ons-list-header>
+						Instructions: <br>
+						Select transformation type(s), key in your numerical answer(s) if applicable, and select a direction. <br>
+						For fractions like <span id="fractionExample"> </span>, key in <span id="decimalExample"> </span> <hr>
+					</ons-list-header>
+					<div id="transformOne"> 
+						<ons-list-header>First transformation: </ons-list-header>
+						<ons-list-item style="background: rgb(0,0,0,0.07);">
+							<div class="left">
+								<ons-select id="transformTypeOne" onchange="transformTypeHandler(this)">
+									<option value="none" selected disabled hidden>Select transformation</option>
+									<option value="1">Translate</option>
+									<option value="2">Scale</option>
+									<option value="3">Reflect</option>
+								</ons-select> 
+							</div>
+							<div class="center" id="transformNumberOne" style="display:none"></div>
+							<div class="right" id="transformDirectionOne" style="display:none">
+								<ons-select id='studentDirectionOne'><option value='none' selected disabled hidden>Select direction</option></ons-select> <span id='directionTextOne'></span>
+							</div>
+						</ons-list-item> 
+					</div>
+					<div id="transformTwo" style="display:none">
+						<ons-list-header>Second transformation: </ons-list-header>
+						<ons-list-item style="background: rgb(0,0,0,0.07)"> 
+							<div class="left">
+								<ons-select id="transformTypeTwo" onchange="transformTypeHandler(this)">
+									<option value="none" selected disabled hidden>Select transformation</option>
+									<option value="1">Translate</option>
+									<option value="2">Scale</option>
+									<option value="3">Reflect</option>
+								</ons-select>
+							</div>
+							<div class="center" id="transformNumberTwo" style="display:none"></div>
+							<div class="right" id="transformDirectionTwo" style="display:none">
+								<ons-select id='studentDirectionTwo'><option value='none' selected disabled hidden>Select direction</option> </ons-select> <span id='directionTextTwo'></span>
+							</div>
+						</ons-list-item> 
+					</div>
+					<div id="transformThree" style="display:none"> 
+						<ons-list-header>Third transformation: </ons-list-header>
+						<ons-list-item style="background: rgb(0,0,0,0.07)">
+							<div class="left">
+								<ons-select id="transformTypeThree" onchange="transformTypeHandler(this)">
+									<option value="none" selected disabled hidden>Select transformation</option>
+									<option value="1">Translate</option>
+									<option value="2">Scale</option>
+									<option value="3">Reflect</option>
+								</ons-select>
+							</div>
+							<div class="center" id="transformNumberThree" style="display:none"></div>
+							<div class="right" id="transformDirectionThree" style="display:none">
+								<ons-select id='studentDirectionThree'><option value='none' selected disabled hidden>Select direction</option> </ons-select> <span id='directionTextThree'></span>
+							</div>
+						</ons-list-item> 
+					</div>
+					<div id="transformFour" style="display:none">
+						<ons-list-header>Fourth transformation: </ons-list-header>
+						<ons-list-item style="background: rgb(0,0,0,0.07)">
+							<div class="left">
+								<ons-select id="transformTypeFour" onchange="transformTypeHandler(this)">
+									<option value="none" selected disabled hidden>Select transformation</option>
+									<option value="1">Translate</option>
+									<option value="2">Scale</option>
+									<option value="3">Reflect</option>
+								</ons-select>
+							</div>
+							<div class="center" id="transformNumberFour" style="display:none"></div>
+							<div class="right" id="transformDirectionFour" style="display:none">
+								<ons-select id='studentDirectionFour'><option value='none' selected disabled hidden>Select direction</option> </ons-select> <span id='directionTextFour'></span>
+							</div>
+						</ons-list-item> 
+					</div>
+				</ons-list>
+			</div>
+		</div> <!-- End of aii Question-->
+		<div style="text-align:center;margin:10px;display:none" id="submitPartA">
+			<ons-button onclick="moveOn()" style="background-color:#0076ff;color: white"> Submit Answer </ons-button> </div> 
+		<!--<hr>-->
+		<div style="text-align:center;margin:10px"><hr><ons-button onclick="document.querySelector('ons-tabbar').setActiveTab(0)"> Go to question  </ons-button> </div> 
+	</ons-page>
+	</template>
+
+	<!-- Confirmation of part a answer using a dialog -->
+	<template id="dialog.html">
+		<ons-dialog id="my-dialog" cancelable>
+			<div style="text-align: left; padding: 10px;">
+				<div> 
+					These are your submitted answers:
+				</div>
+				<div>
+					(ai) <span id="answerAi"></span>
+				</div>
+				<div>
+					(aii) <span id="studentTransformOne"></span>
+					<div id="studentTransformTwo" style="display:none"></div>
+					<div id="studentTransformThree" style="display:none"></div>
+					<div id="studentTransformFour" style="display:none"></div>
+				</div>
+				<div id="aConfirmationInstructions" style="display:none;padding-bottom:10px"> 
+					<hr> Click "OK" to confirm these answers and move on to question part (b), or "Cancel" to change some of your answers.
+				</div>
+				<div id = "invalidInput" style="display:none;padding-bottom:10px">
+					<hr> Some of your answers appear to be empty or invalid (perhaps an option has not been selected). Please check your (aii) answers and try again.
+				</div>
+				<div class="alert-dialog-footer">
+					<ons-alert-dialog-button onclick="hideDialog('my-dialog')">Cancel</ons-alert-dialog-button>
+					<ons-alert-dialog-button onclick="proceedTob()" id="moveOnButton" style="display:none"> OK </ons-alert-dialog-button>
+				</div>
+			</div>
+		</ons-dialog>
+	</template>
+
+	<!-- Return to home alert -->
+	<template id="home-alert-dialog.html">
+	<ons-alert-dialog id="home-alert-dialog" modifier="rowfooter">
+		<div class="alert-dialog-title" id="homeAlertTitle"> Warning </div>
+		<div class="alert-dialog-content"> 
+			<p> You leaving this question to return to the home page. </p>
+			<p>  No progress will be saved. </p>
+			<p> A new question will be generated the  next time to access this page. </p>
+		</div>
+		<div class="alert-dialog-footer">
+		<ons-alert-dialog-button onclick="hideAlertDialog('home-alert-dialog')">Cancel</ons-alert-dialog-button>
+		<span> <ons-alert-dialog-button onclick="window.location = '../index.html'"> OK</ons-alert-dialog-button> </span>
+		</div>
+	</ons-alert-dialog>
+	</template>
+
+</body>
+</html>

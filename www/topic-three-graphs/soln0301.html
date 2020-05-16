@@ -1,0 +1,174 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+	<link rel="stylesheet" href="../components/loader.css">
+	<script src="../components/loader.js"></script>
+	<!-- Onsen UI -->
+	<script src="../lib/onsenui/js/onsenui.min.js"></script>
+	<link rel="stylesheet" href="../lib/onsenui/css/onsenui.css">
+	<link rel="stylesheet" href="../lib/onsenui/css/onsen-css-components.css">
+	<link rel="stylesheet" href="../css/style.css">
+	<!-- My own scripts -->
+	<script type="text/javascript" src="../onsenuijs.js"></script>
+	<script type="text/javascript" src="../mathjs.js"></script>
+	<script type="text/javascript" src="soln0301.js"></script> <!-- Change this every round-->
+	<script type="text/javascript" src="../progress-bar.js"></script>
+	<link rel="stylesheet" href="../lib/katex/katex.min.css">
+	<script defer src="../lib/katex/katex.min.js"> </script>
+</head>
+<body>
+	<!-- Loading screen -->
+	<ons-modal direction="up">
+ 		<div style="text-align: center">
+			<p>	<ons-icon icon="md-spinner" size="28px" spin></ons-icon> Loading...	</p>
+  		</div>
+	</ons-modal>
+	<!-- Left menu-->
+	<ons-splitter>
+		<ons-splitter-side id="menu" side="left" width="120px" collapse>
+			<ons-page>
+				<ons-list>
+					<ons-list-item onclick="window.location='../index.html' " tappable>
+						Home
+					</ons-list-item>
+				</ons-list>
+			</ons-page>
+		</ons-splitter-side>
+		<ons-splitter-content id="content" page="soln001.html">	</ons-splitter-content>
+	</ons-splitter>
+<!-- Actual Page -->
+<template id="soln001.html">
+<ons-page>
+	<!-- Title -->
+	<ons-toolbar>
+		<div class="left">
+		<ons-toolbar-button onclick="fn.open()">
+			<ons-icon icon="ion-ios-menu, material:md-menu"></ons-icon>
+		</ons-toolbar-button>
+		</div>
+		<div class="center">
+			Question 0301 answer
+		</div>
+	</ons-toolbar>
+	<!-- Tabbar -->
+	<ons-tabbar swipeable position="top">
+		<ons-tab page="qn001a.html" label="Question" icon="fa-question-circle" active> <!-- badge="7"-->
+		</ons-tab>
+		<ons-tab page="ans001.html" label="Answer" icon="fa-lightbulb">
+		</ons-tab>
+	</ons-tabbar>
+</ons-page>
+</template>
+	<!-- Question Tab-->
+	<template id="qn001a.html">
+	<ons-page id="qn001atab">
+			<div style="text-align: left; opacity: 0.6; padding-top: 20px; padding-left: 10px;"> 
+				<p> (ai) Show that the equation <span id="improperFractionOne"> </span> can be written as <span id="properFractionOne"> </span>
+					, where <span id="bigA"></span> and <span id="bigB"></span> are constants to be found.
+				</p>
+				<p> (aii) Hence state a sequence of transformations which transform the graph of <span id="oneOverX"></span> to the graph of <span id="improperFractionTwo"></span>.
+				</p>
+			</div>
+			<div style="text-align: left; opacity: 0.6; padding-top: 20px; padding-left: 10px;"> 
+				Consider the graph of <span id="qntext1"></span>.
+			</div>
+			<div style="text-align: left; opacity: 0.6; padding-top: 20px; padding-left: 10px;"> 
+				(bi) State the equations of the asymptotes of the graph.
+			</div>
+			<div style="text-align: left; opacity: 0.6; padding-top: 20px; padding-left: 10px;"> 
+				(bii) State the coordinates of the points of intersection between the graph and the <span id='x'></span>- and <span id='y'></span>-axes.
+			</div>
+			<div style="text-align:left; opacity: 0.6; padding-top: 20px; padding-left: 10px;">
+				This question is  worth 4+2 marks.
+			</div>
+			<hr>
+			<div style="text-align:center; margin:20px"  id="goToAnswerButton">
+				<ons-button onclick="document.querySelector('ons-tabbar').setActiveTab(1)"> Go to answer </ons-button>
+			</div>
+	</ons-page>
+	</template>
+
+	<!-- Answer Tab-->
+	<template id="ans001.html"> <ons-page id="ans001tab">
+	<!-- Student's solution -->
+	<div style="text-align:left;opacity:0.6;padding:10px;">
+		Your attempt:
+		<div>
+			(ai) <span id="studentAi"></span>
+			<span id="checkMarkOne" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+		</div>
+		<div>
+			(aii) Transformation 1: 
+			<span id="studentTOne"></span><span id="studentDOne"></span>
+			<div id="studentTTwoDiv" style="display:none">
+				Transformation 2: <span id="studentTTwo"></span><span id="studentDTwo"></span>
+			</div>
+			<div id="studentTThreeDiv" style="display:none">
+				Transformation 3: <span id="studentTThree"></span><span id="studentDThree"></span>
+			</div>
+			<div id="studentTFourDiv" style="display:none">
+				Transformation 4: <span id="studentTFour"></span><span id="studentDFour"></span>
+			</div>
+			<div id="aiiCheckMarks">
+				<span id="checkMarkTwo" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+				<span id="checkMarkThree" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+				<span id="checkMarkFour" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+				<span id="aiiComments" style="display:none;color:#0076ff"></span>
+			</div>
+		</div>
+		<div>
+			(bi) Asymptotes: <span id="studentAsymptotes"></span>.
+			<span id="checkMarkFive" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+		</div>
+		<div>
+			(bii) Axial intercepts: <span id="studentIntercepts"></span>.
+			<span id="checkMarkSix" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+		</div>
+	</div> <hr>
+	<!-- Actual Solution -->
+	<div style="text-align:left;padding:10px;">
+		The answer:
+		<div>
+			(ai) <span id="answerAi">  </span> 
+		</div>
+		<div>
+			(aii) Transformation 1: <span id="answerTOne"></span><span id="answerDOne"></span>-axis direction.
+			<div>
+				Transformation 2: <span id="answerTTwo"></span><span id="answerFTwo"></span><span id="answerTTwoContd"></span><span id="answerDTwo"></span>-axis.
+			</div>
+			<div>
+				Transformation 3: <span id="answerTThree"></span><span id="answerDThree"></span>-axis direction.
+			</div>
+		<div>
+			(bi) Asymptotes: <span id="answerAsymptotes"></span>.
+		</div>
+		<div>
+			(bii) Axial intercepts <span id="answerIntercepts"></span>.
+		</div>
+	</div>
+
+	<hr>
+	<!-- Comments -->
+	<div style="text-align:center;">
+		<div class="box">
+  			<div class="progress" id="progress">
+    			<div class="inner" id = "progressBarText"> 6 </div>
+ 			 </div>
+		</div>
+	</div>
+	<div style="text-align:left; opacity: 0.6; padding: 10px;">
+		<div id="answerComments"> </div>
+	</div>
+	<hr>
+	<div style="text-align:center; margin:10px">
+		<span class="left">  <ons-button onclick="document.querySelector('ons-tabbar').setActiveTab(0)"> Go to question </ons-button> </span>
+		<span class="center" style="margin:10px">  <ons-button onclick="window.location='qn0301.html'"> Try again </ons-button> </span> <!-- Change for every question-->
+		<span class="right"> <ons-button onclick="window.location = '../index.html'"> Return Home </ons-button> </span>
+	</div> 
+	</ons-page>
+	</template>
+</body>
+</html>

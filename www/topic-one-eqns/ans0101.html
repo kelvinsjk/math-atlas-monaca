@@ -1,22 +1,22 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
-    <link rel="stylesheet" href="../components/loader.css">
-    <script src="../components/loader.js"></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+	<link rel="stylesheet" href="../components/loader.css">
+	<script src="../components/loader.js"></script>
 	<!-- Onsen UI -->
-		<script src="../lib/onsenui/js/onsenui.js"></script>
-		<link rel="stylesheet" href="../lib/onsenui/css/onsenui.css">
-		<link rel="stylesheet" href="../lib/onsenui/css/onsen-css-components.css">
-		<link rel="stylesheet" href="../css/style.css">
+	<script src="../lib/onsenui/js/onsenui.js"></script>
+	<link rel="stylesheet" href="../lib/onsenui/css/onsenui.css">
+	<link rel="stylesheet" href="../lib/onsenui/css/onsen-css-components.css">
+	<link rel="stylesheet" href="../css/style.css">
 	<!-- My own scripts -->
-		<script src="../onsenuijs.js"></script>
-		<script src="../mathjs.js"></script>
-		<script src="ans0101.js"></script>
-		<link rel="stylesheet" href="../lib/katex/katex.min.css">
-		<script defer src="../lib/katex/katex.min.js"> </script>
+	<script src="../onsenuijs.js"></script>
+	<script src="../mathjs.js"></script>
+	<script src="ans0101.js"></script>
+	<link rel="stylesheet" href="../lib/katex/katex.min.css">
+	<script defer src="../lib/katex/katex.min.js"> </script>
 	<title> Key in your answer </title>
 </head>
 <body>
@@ -26,7 +26,6 @@
 			<p>	<ons-icon icon="md-spinner" size="28px" spin></ons-icon> Loading...	</p>
   		</div>
 	</ons-modal>
-
 	<!-- Left menu-->
 	<ons-splitter>
 		<ons-splitter-side id="menu" side="left" width="120px" collapse>
@@ -40,7 +39,6 @@
 		</ons-splitter-side>
 		<ons-splitter-content id="content" page="answer001.html">	</ons-splitter-content>
 	</ons-splitter>
-
 	<!-- Actual Page -->
 	<template id="answer001.html">
 	<ons-page>
@@ -55,7 +53,6 @@
 			Key in your answer
 			</div>
 		</ons-toolbar>
-
 		<!-- Tabbar -->
 		<ons-tabbar swipeable position="top">
 			<ons-tab page="qn001a.html" label="Question" icon="fa-question-circle" active> <!-- badge="7"-->
@@ -65,7 +62,6 @@
 		</ons-tabbar>
 	</ons-page>
 	</template>
-
 	<!-- Question Tab-->
 	<template id="qn001a.html">
 	<ons-page id="qn001atab">
@@ -82,7 +78,6 @@
 		<div style="text-align:center; margin:10px">  <ons-button onclick="document.querySelector('ons-tabbar').setActiveTab(1)"> Key in your answer  </ons-button> </div> 
 	</ons-page>
 	</template>
-
 	<!-- Answer Tab-->
 	<template id="ans001.html">
 	<ons-page id="ans001tab">
@@ -99,7 +94,7 @@
 					<span id="xLess"> </span> <span id="spana" style="padding-left: 55px"> </span>
 				</div>
 				<div class="right">
-					<ons-switch id="switch1"</ons-switch>
+					<ons-switch id="switch1"></ons-switch>
 				</div>
 			</ons-list-item>
 			<ons-list-item>
@@ -142,7 +137,6 @@
 		<div style="text-align:center; margin:10px">  <ons-button onclick="document.querySelector('ons-tabbar').setActiveTab(0)"> Go to question  </ons-button> </div> 
 	</ons-page>
 	</template>
-
 	<!-- Return to home alert -->
 	<template id="home-alert-dialog.html">
 	<ons-alert-dialog id="home-alert-dialog" modifier="rowfooter">
@@ -158,6 +152,5 @@
 		</div>
 	</ons-alert-dialog>
 	</template>
-
 </body>
 </html>

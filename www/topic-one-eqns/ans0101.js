@@ -4,10 +4,8 @@
 var queriesObject = parseQuery( window.location.search);
 var a = Number(queriesObject.a), b = Number(queriesObject.b), c=Number(queriesObject.c), d=Number(queriesObject.d), e = Number(queriesObject.e);
 var G = Number(queriesObject.G), sign = queriesObject.sign;
-
 // Global variables
 var sOne, sTwo, sThree, sFour, aOne, bOne, cThree, dThree, eFour, fFour;
-
 // Math calculations and building latex
 var A = d+G, B=-c*d-e-G*a-G*b, C=G*a*b+e*c, d2 = e/d;
 var rootsArray = [a, b, c, d2];
@@ -32,7 +30,6 @@ if (sign == 1) {
 };
 var mathqn1 = fraction  + '-' +G+ '=' + fractionBuilder(numerator, denominator) + '.';
 var mathqn2 = fraction + signstr + G + '.';
-
 // things that need id
 document.addEventListener('init', function(event) {if (event.target.matches('#qn001atab')) {
 	// loading screen: show modal screen upon load // function showModal() {}
@@ -109,7 +106,6 @@ document.addEventListener('init', function(event) {if (event.target.matches('#qn
 			katex.render("e < x < f", document.getElementById('betweenTwo'),{throwOnError: false});
 	})
 }},false); // End of window.onload
-
 // preview Answer
 var previewAnswer = function () {
 	// switches
@@ -176,7 +172,6 @@ var previewAnswer = function () {
 	if (proceedFlag) {document.getElementById('finalSubmission').style.display = 'block' 
 	} else {document.getElementById('finalSubmission').style.display = 'none'};
 };
-
 // submit answer: pass our required options to soln page
 var submitAnswer = function() {
 	// switches
@@ -241,5 +236,4 @@ var submitAnswer = function() {
 		window.location = htmlQueryConstructor('soln0101.html',queriesObject);
 	}
 	else {return }
-}
-
+};

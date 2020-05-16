@@ -9,7 +9,6 @@
 var a =  getRandomInt(-9,9), b = getRandomInt(-5,5), c = getRandomInt(-7,7), d = getRandomInt(1,2), e = getRandomInt(-7,7), g = getRandomInt(-7,7), G = getRandomInt(1,3);
 var sign = getRandomInt(1,2); // 1: >, 2: <
 var partAMark = 1;
-
 // Make sure integers work as expected
 if (d == 2 && e%2 == 0) {e += 1}; // make sure simplest form
 while (b == a) {var b = getRandomInt(-3,3)}; // ensure no duplicate b
@@ -19,7 +18,6 @@ if (d == 1) { // Danger of repeating roots
 		var e = getRandomInt(-3,3);
 	}; // ensure no duplicate e
 };
-
 // Start to build question
 var A = d+G, B=-c*d-e-G*a-G*b, C=G*a*b+e*c;
 var denominator = polyBuilder([1, -a-b, a*b]);
@@ -42,7 +40,6 @@ if (sign == 1) {
 };
 var mathqn1 = fraction  + '-' +G+ '=' + fractionBuilder(numerator, denominator) + '.';
 var mathqn2 = fraction + signstr + G + '.';
-
 //Initialize Math
 document.addEventListener('init', function(event) {
 	if (event.target.matches('#questionPage')) {
@@ -50,7 +47,6 @@ document.addEventListener('init', function(event) {
 		katex.render("k? \\; k= ", document.getElementById('typeK'),{throwOnError:false,});
 	}
 }, false);
-
 // check answer to part a
 var checkK = function() {
 	hideAlertDialog('my-alert-dialog');
@@ -69,7 +65,6 @@ var checkK = function() {
 			katex.render("k="+actualK, document.getElementById('kAnswer'), {throwOnError: false});
       });
 };
-
 // proceeds to b
 var proceedTob = function() {
 	// hides Dialog and hides part a interaction
@@ -87,7 +82,6 @@ var proceedTob = function() {
 	document.getElementById('questionOrPart').innerHTML = 'question';
 	document.getElementById('marksOnDisplay').innerHTML = '1+4';
 };
-
 // passesOptionselected to answer page
 var answerQuestion = function() {
 	var queryObject = {a: a, b: b, c : c, d:d, e:e, G:G, sign:sign, partAMark: partAMark}

@@ -27,6 +27,30 @@ function getRandomNonZero(min,max){
 	while (b==0) {b = getRandomInt(min,max)};
 	if (Math.random()>.5) {return b} else {return -b};
 }
+// B3) GCD
+function gcd(a,b) {
+	a = Math.abs(a);
+	b = Math.abs(b);
+	if (b > a) {var temp = a; a = b; b = temp;}
+	while (true) {
+		if (b == 0) return a;
+		a %= b;
+		if (a == 0) return b;
+		b %= a;
+	}
+}
+// B4) fraction simplifier: returns an array with simplified numerator and denominator. 
+// two negatives are cancelled and one negative is always hoisted to the numerator
+function simplifyFraction(num, den) {
+	var gcD = gcd(num,den)
+	if (myXOR(num > 0, den>0)) {return [-Math.abs(num)/gcD, Math.abs(den/gcD)]} else{return [Math.abs(num)/gcD, Math.abs(den/gcD)]};
+}
+// B5) Add two fractions
+function addFractions(fOne, fTwo) { //fOne and fTwo are both two-element arrays: they should be parsed through simplifyFraction if necessary
+	var a = fOne[0], b = fOne[1], c = fTwo[0], d = fTwo[1];
+	return simplifyFraction(a*d+b*c,b*d)
+}
+
 
 // Section C -- Relevant Website Scripts
 // C1) Handle decimal inputs: in particular, convert .5 and -.5 to 0.5 and -0.5
@@ -35,7 +59,23 @@ function handleDecimal(b) {
 		else if (b.substring(0,2)=='-.') {return '-0.' + b.substring(2);}
 			else {return b}
 }
-// C2) Check student's input
+// C2) Handle fractions: return an array with 4 elements:
+// 1st (str): '-' if answer negative, '' if positive
+// 2nd (str): numerator (absolute value)
+// 3rd (str): denominator (='1' for integers and decimals) (absolute value)
+// 4th (float): actual number
+function handleFractions(f) {
+	var fracIndex = f.indexOf('/');
+	if (fracIndex > 0) { // we disallow inputs to start from / in our input box, so only need to check from index 1
+		if (f[0] == '-') {var num = f.slice(1,fracIndex), negStr = '-', negNum = -1;} else {var num=f.slice(0,fracIndex), negStr='', negNum = 1;};
+		var den = f.slice(fracIndex+1), ansFloat = negNum * Number(num) / Number(den);
+		return [negStr, num, den, ansFloat];
+	} else { // not a fraction
+		answer = handleDecimal(f);
+		if (answer[0]=='-') {return ['-', answer.slice(1), '1', Number(answer)];} else {return ['', answer, '1', Number(answer)];};
+	};
+}
+// C3) Check student's input
 // WARNING: To be used only with "alert-dialog.html" template
 // WARNING: student's input will always be ID-ed 'inputk'
 var checkStudentInput = function(varName) {
@@ -79,15 +119,14 @@ var mcqPicker = function(array, requiredOptions, correctIndex) {
 }
 
 //Section D --  Relevant Latex Scripts
-// D1) Inline Latex
-function latexifyInline(str) {return '$'+str+'$';}
-// D2) Inline Latex (displaystyle)
-function latexifyDstyle(str) {return '$\\displaystyle '+str+'$';}
+// D1) Displaystyle 
 function katexifyDstyle(str) {return '\\displaystyle ' +str;}
-// D3) Displayed Latex
-function latexifyDenv(str) {return '$$'+str+'$$';}
-// D4) Align
-function latexAlign(str) {return '\\begin{align}' + str + '\\end{align}'}
+// D2) Aligned
+function katexAlign(str) {return '\\begin{aligned}' + str + '\\end{aligned}'}
+// D3) Boxed
+function katexBoxed(str) {return '\\boxed{' +str+ '}'}
+// D4) Add parenthesis
+function addParenthesis(str) {return '('+str+')'}
 
 //D5) Polynomial builder: Given coefficientArray [a_n, a_(n-1), ... a_0], form a_n x^n + a_(n-1) x^(n-1) + ... + a_0
 function polyBuilder(coefficientArray) { // WARNING: Must have at least 2 elements!
@@ -140,3 +179,17 @@ function polyBuilder(coefficientArray) { // WARNING: Must have at least 2 elemen
 function fractionBuilder(num, den) {
 	return '\\frac{' +num + '}{' +den + '}';
 }
+// D7) (Negative) Fraction Typeset: Take a array with two elements and return latex string
+function fractionTypeset(fractionArray) {
+	var num = fractionArray[0], den = fractionArray[1];
+	var fractionString = ''
+	if (myXOR(num > 0, den>0)) {var fractionString='-';}
+	return fractionString + fractionBuilder(Math.abs(num), Math.abs(den));
+}
+
+document.addEventListener('init', function(event) {
+	if (event.target.matches('#indexMain')) {
+		console.log('hi')
+		document.getElementById('clone-dest').innerHTML = document.getElementById('clone-master').cloneNode(true).innerHTML;
+	}
+}, false);

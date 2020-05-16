@@ -1,30 +1,23 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
-    <link rel="stylesheet" href="../components/loader.css">
-    <script src="../components/loader.js"></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+	<link rel="stylesheet" href="../components/loader.css">
+	<script src="../components/loader.js"></script>
 	<!-- Onsen UI -->
-		<script src="../lib/onsenui/js/onsenui.min.js"></script>
-		<link rel="stylesheet" href="../lib/onsenui/css/onsenui.css">
-		<link rel="stylesheet" href="../lib/onsenui/css/onsen-css-components.css">
-		<link rel="stylesheet" href="../css/style.css">
+	<script src="../lib/onsenui/js/onsenui.min.js"></script>
+	<link rel="stylesheet" href="../lib/onsenui/css/onsenui.css">
+	<link rel="stylesheet" href="../lib/onsenui/css/onsen-css-components.css">
+	<link rel="stylesheet" href="../css/style.css">
 	<!-- My own scripts -->
-		<script type="text/javascript" src="../onsenuijs.js"></script>
-		<script type="text/javascript" src="../mathjs.js"></script>
-		<script type="text/javascript" src="soln0101.js"></script>
-		<script type="text/javascript" src="../progress-bar.js"></script> <!-- progressbar: put before mathjax config-->
-		<link rel="stylesheet" href="../lib/katex/katex.min.css">
-		<script defer src="../lib/katex/katex.min.js"> </script>
-	<!-- MathJax -->
-		<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML"></script>
-		<script type="text/x-mathjax-config">
-			MathJax.Hub.Config({
-				tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
-			});
-		</script>
+	<script type="text/javascript" src="../onsenuijs.js"></script>
+	<script type="text/javascript" src="../mathjs.js"></script>
+	<script type="text/javascript" src="soln0101.js"></script>
+	<script type="text/javascript" src="../progress-bar.js"></script>
+	<link rel="stylesheet" href="../lib/katex/katex.min.css">
+	<script defer src="../lib/katex/katex.min.js"> </script>
 </head>
 <body>
 	<!-- Loading screen -->
@@ -33,7 +26,6 @@
 			<p>	<ons-icon icon="md-spinner" size="28px" spin></ons-icon> Loading...	</p>
   		</div>
 	</ons-modal>
-
 	<!-- Left menu-->
 	<ons-splitter>
 		<ons-splitter-side id="menu" side="left" width="120px" collapse>
@@ -47,7 +39,6 @@
 		</ons-splitter-side>
 		<ons-splitter-content id="content" page="soln001.html">	</ons-splitter-content>
 	</ons-splitter>
-
 <!-- Actual Page -->
 <template id="soln001.html">
 <ons-page>
@@ -62,7 +53,6 @@
 			Solution
 		</div>
 	</ons-toolbar>
-
 	<!-- Tabbar -->
 	<ons-tabbar swipeable position="top">
 		<ons-tab page="qn001a.html" label="Question" icon="fa-question-circle" active> <!-- badge="7"-->
@@ -72,7 +62,6 @@
 	</ons-tabbar>
 </ons-page>
 </template>
-
 <!-- Question Tab-->
 <template id="qn001a.html">
   <ons-page id="qn001atab">
@@ -89,7 +78,6 @@
 	<div style="text-align:center; margin:10px">  <ons-button onclick="document.querySelector('ons-tabbar').setActiveTab(1)"> Go at the answer  </ons-button> </div> 
   </ons-page>
 </template>
-
 <!-- Answer Tab-->
 <template id="soln001b.html">
   <ons-page id="soln001tab">
@@ -121,6 +109,5 @@
 	</div> 
   </ons-page>
 </template>
-
 </body>
 </html>
