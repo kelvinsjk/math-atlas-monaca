@@ -79,9 +79,9 @@ function handleFractions(f) {
 // WARNING: To be used only with "alert-dialog.html" template
 // WARNING: student's input will always be ID-ed 'inputk'
 var checkStudentInput = function(varName) {
-	k = document.getElementById('inputk').value;
+	k = document.getElementById('inputk').value; // Remarks: must be global
 	if (!k) {
-		var showText =  'It appears that the  input is   blank or invalid (not a number). Try again!', titleText = 'Error', visiText = 'hidden';
+		var showText =  'It appears that the input is blank or invalid (not a number). Try again!', titleText = 'Error', visiText = 'hidden';
 	} else {
 		if (document.getElementById('negativeK').checked) {k = -k};
 		var showText = "You have keyed in <span id='kConfirm'> </span>. Submit this answer?", titleText = 'Confirmation', visiText = 'visible';
@@ -129,7 +129,7 @@ function katexBoxed(str) {return '\\boxed{' +str+ '}'}
 function addParenthesis(str) {return '('+str+')'}
 
 //D5) Polynomial builder: Given coefficientArray [a_n, a_(n-1), ... a_0], form a_n x^n + a_(n-1) x^(n-1) + ... + a_0
-function polyBuilder(coefficientArray) { // WARNING: Must have at least 2 elements!
+function polyBuilder(coefficientArray,x='x') { // WARNING: coefficientArray Must have at least 2 elements!
 	if (coefficientArray[0] == 0) {return 'ERROR: Leading coefficient cannot be 0'};
 	var n = coefficientArray.length - 1;
 	var firstCoefficient = coefficientArray.shift();
@@ -142,7 +142,7 @@ function polyBuilder(coefficientArray) { // WARNING: Must have at least 2 elemen
 			var latexPolynomial = firstCoefficient
 		}
 	}; //testing of first coefficient
-	latexPolynomial  += 'x' // Assume at least 2 elements
+	latexPolynomial += x; // Assume at least 2 elements
 	if (n>1) {latexPolynomial += '^{' + n+ '}'}; // powers needed if bigger than 1
 	coefficientArray.forEach( a => {
 		n -= 1;
@@ -166,7 +166,7 @@ function polyBuilder(coefficientArray) { // WARNING: Must have at least 2 elemen
 				}; // end of negative coefficient
 			}; // end of typesetting coefficient
 			if (n>0) {
-				latexPolynomial += 'x' // add x 
+				latexPolynomial += x; // add x 
 				if (n>1) {
 					latexPolynomial += '^{' +n+ '}' // add power of x
 				}
