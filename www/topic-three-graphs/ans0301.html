@@ -92,11 +92,12 @@
 	<template id="ans001.html">
 		<ons-page id="ans001tab">
 			<!-- (bi) Question -->
-			<ons-list> 
-				<ons-list-item> Answer to (bi): </ons-list-item> 
-				<ons-list-item> 
+			<ons-list>
+				<ons-list-item><span id="showQuestion"></span></ons-list-item>
+				<ons-list-item> Answer to (bi): </ons-list-item>
+				<ons-list-item>
 					<div>(bi) State the equations of the asymptotes.</div>
-				</ons-list-item> 
+				</ons-list-item>
 				<div id="biInstructions">
 					<ons-list-header>
 						Instructions: <br>
@@ -170,10 +171,10 @@
 					These are your submitted answers: <br>
 				</div>
 				<div>
-					(bi) Equations of asymptotes: <span id="asymptotesTypeset"> </span>.
+					(bi) Equations of asymptotes: <br> <span id="asymptotesTypeset"> </span>.
 				</div>
 				<div>
-					(bii) Axial intercepts: <span id="interceptsTypeset"> </span>. <hr>
+					(bii) Axial intercepts: <br> <span id="interceptsTypeset"> </span>. <hr>
 				</div>
 				<div id="biiConfirmationInstructions" style="display:block;"> 
 					Click "OK" to confirm these answers and see the solution, or "Cancel" to change some of your answers.

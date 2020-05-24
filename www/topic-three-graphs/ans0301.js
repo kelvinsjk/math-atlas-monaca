@@ -36,6 +36,7 @@ var startAnswering = function(){
 	document.getElementById('answerButton').style.display = 'none';
 	document.getElementById('goToAnswerButton').style.display = 'block';
 	// typeset (bi) 
+	katex.render(improperFraction,document.getElementById('showQuestion'),{throwOnError:false});
 	katex.render("x=c",document.getElementById('vertical'),{throwOnError:false});
 	katex.render("y=d",document.getElementById('horizontal'),{throwOnError:false});
 	katex.render("c=",document.getElementById('biC'),{throwOnError:false});
@@ -130,12 +131,13 @@ var biiProceed = function() {
 	katex.render(biString, document.getElementById('biLockedin'), {throwOnError:false});
 	document.getElementById('biSubmitted').style.display = 'block';
 	document.getElementById('bii').style.display = 'block';
+	katex.render("-\\frac{22}{7}",document.getElementById('fractionExampleTwo'), {throwOnError: false});
+	katex.render("-22 / 7", document.getElementById('decimalExampleTwo'),{throwOnError: false});
 	// typeset bii answer section
 	katex.render("(e,0). \\; e=",document.getElementById('xIntE'),{throwOnError:false});
 	katex.render("(0,f). \\; f=",document.getElementById('yIntF'),{throwOnError:false});
 	katex.render("x",document.getElementById('xTwo'),{throwOnError:false});
 	katex.render("y",document.getElementById('yTwo'),{throwOnError:false});
-	
 	
 	// Input box for (bii) x-intercept
 	var input_field_three = document.querySelector('#inputkThree'); // class type: fraction

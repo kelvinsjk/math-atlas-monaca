@@ -186,7 +186,7 @@ function fractionTypeset(fractionArray) {
 	if (myXOR(num > 0, den>0)) {var fractionString='-';}
 	return fractionString + fractionBuilder(Math.abs(num), Math.abs(den));
 }
-
+// TODO: remove cloning
 document.addEventListener('init', function(event) {
 	if (event.target.matches('#indexMain')) {
 		console.log('hi')

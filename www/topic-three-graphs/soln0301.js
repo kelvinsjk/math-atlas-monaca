@@ -14,7 +14,7 @@ var fractionFlag = false;
 // Query
 var queriesObject = parseQuery(window.location.search);
 var a = Number(queriesObject.a), b = Number(queriesObject.b), c = Number(queriesObject.c), sA = Number(queriesObject.sA), sB = Number(queriesObject.sB), order = Number(queriesObject.order);
-var tString = queriesObject.tString;
+var tString = queriesObject.t;
 var tOneN = Number(queriesObject.tOneN), tTwoN = Number(queriesObject.tTwoN), tThreeN = Number(queriesObject.tThreeN), tFourN = Number(queriesObject.tFourN);
 var tOneD = Number(queriesObject.tOneD), tTwoD = Number(queriesObject.tTwoD), tThreeD = Number(queriesObject.tThreeD), tFourD = Number(queriesObject.tFourD);
 var biXSign = queriesObject.biXSign, biXNum = queriesObject.biXNum, biXDen = queriesObject.biXDen, biYSign = queriesObject.biYSign, biYNum = queriesObject.biYNum, biYDen = queriesObject.biYDen;
@@ -184,7 +184,7 @@ document.addEventListener('init', function(event) {
 				} else { // partial marks
 					var componentsSum = componentsArray.reduce(function (a, b) { return a + b; }, 0); // add up array
 					if (componentsSum == 3) { // 2 marks: got all components but either order off or got too many extra parts
-						document.getElementById('aiiComments').innerHTML = 'Remarks: transformations could have been given in wrong order.';
+						document.getElementById('aiiComments').innerHTML = 'Remarks: Partial credit.';
 						document.getElementById('aiiComments').style.display = 'inline';
 						runningMark += 2;
 						document.getElementById('checkMarkTwo').style.display = 'inline';
@@ -279,7 +279,7 @@ document.addEventListener('init', function(event) {
 		if (biiYDen == 1) {
 			var yInt = biiYSign + biiYNum;
 		} else { // fraction
-			var yInt = biiYSign + fractionBuilder(biiXNum, biiYDen);
+			var yInt = biiYSign + fractionBuilder(biiYNum, biiYDen);
 		};
 		katex.render("\\left ( " + xInt + ",0\\right ), \\; \\left(0, " + yInt + "\\right )", document.getElementById('studentIntercepts'), { throwOnError: false });
 		// bii answer typeset and marking. x-coordinate first
@@ -289,7 +289,7 @@ document.addEventListener('init', function(event) {
 			if (biiXDen == 1 && Number(biiXSign + biiXNum) == ansXInt) { var xIntCheck = true; } else { var xIntCheck = false; };
 		} else { // fraction
 			if (ansXIntArray[0] > 1) { var ansXInt = fractionBuilder(ansXIntArray[0], ansXIntArray[1]); } else { var ansXInt = "-" + fractionBuilder(-1 * ansXIntArray[0], ansXIntArray[1]) };
-			if (biiXDen == ansXIntArray[1] && Number(biiXSign + biiXNum) == ansXIntArray[0]) { var xIntCheck = true; } else { var xIntCheck = false; };
+			if ( (biiXDen == ansXIntArray[1] && Number(biiXSign + biiXNum) == ansXIntArray[0]) || (biiXDen == 1 && (Number(biiXSign+biiXNum)).toFixed(11)==(-b/a).toFixed(11)) ) { var xIntCheck = true; } else { var xIntCheck = false; };
 		};
 		// (aii) y-coordinate
 		var ansYIntArray = simplifyFraction(b, c);
@@ -298,7 +298,7 @@ document.addEventListener('init', function(event) {
 			if (biiYDen == 1 && Number(biiYSign + biiYNum) == ansYInt) { var yIntCheck = true; } else { var yIntCheck = false; };
 		} else { // fraction
 			if (ansYIntArray[0] > 1) { var ansYInt = fractionBuilder(ansYIntArray[0], ansYIntArray[1]); } else { var ansYInt = "-" + fractionBuilder(-1 * ansYIntArray[0], ansYIntArray[1]) };
-			if (biiYDen == ansYIntArray[1] && Number(biiYSign + biiYNum) == ansYIntArray[0]) { var yIntCheck = true; } else { var yIntCheck = false; };
+			if ( (biiYDen == ansYIntArray[1] && Number(biiYSign + biiYNum) == ansYIntArray[0]) || (biiYDen == 1 && (Number(biiYSign+biiYNum)).toFixed(11)==(b/c).toFixed(11))  ) { var yIntCheck = true; } else { var yIntCheck = false; };
 		};
 		var intString = "\\left (" + ansXInt + ",0 \\right ), \\; \\left ( 0," + ansYInt + "\\right )";
 		katex.render(intString, document.getElementById('answerIntercepts'), { throwOnError: false });
