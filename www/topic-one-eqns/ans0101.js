@@ -122,7 +122,7 @@ var previewAnswer = function () {
 	// set up preview
 	var previewSpace = document.getElementById('mathans2'), answerPreviewArray = [];
 	// check for no options. Return if nothing done
-	if (!switchStatusArray.some(function(e) {return e})) {previewSpace.innerHTML = 'You have not selected any options. Try again.'; previewSpace.style.display ='block'; return };
+	if (!switchStatusArray.some(function(e) {return e})) {previewSpace.innerHTML = 'You have not selected any options. Try again.'; previewSpace.style.display ='block'; document.getElementById('mathans3').style.display = 'none'; return };
 	// iterates switches, get input values
 	switchStatusArray.forEach(function(switchStatus, i) {
 		if (switchStatus) {

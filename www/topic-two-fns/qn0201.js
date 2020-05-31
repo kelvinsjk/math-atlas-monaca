@@ -132,7 +132,7 @@ var radioClick = function(indexStr) {
 	}); // end of spacebar prevention
 	// only show button to proceed if input is valid
 	input_field.addEventListener('input', function(e) { 
-		if (input_field.validity.valid) {
+		if (input_field.validity.valid && input_field.value) {
 			document.getElementById('submitButton').innerHTML = "<ons-button id='proceedToAiii' onclick='aiiiProceed()'>" +proceedToAiiiText+ "</ons-button>";
 		} else {
 			document.getElementById('submitButton').innerHTML = '';
