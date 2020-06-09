@@ -7,7 +7,7 @@
 // (aiv) We will ask for the sum to infinity in the form ka. 
 
 // global variables
-var proceedToAiiiText = 'Proceed to next part';
+var proceedToAiiiText = 'Proceed to next part'; //check if this is necessary
 var studentB, studentC, studentR, studentK;
 var partAiMark = 0, partAiiMark = 0;
 var studentRArray, studentRTypeset, n;
@@ -78,13 +78,14 @@ document.addEventListener('init', function(event) {
 var checkStudentInputTwo = function() {
 	studentB = document.getElementById('inputB').value;
 	studentC = document.getElementById('inputC').value;
-	if (!studentB || !studentC) {
+	if (!studentB || !studentC) { //invalid input
 		var showText = 'It appears that some of the inputs are blank or invalid (not a number). Try again!', titleText = 'Error', visiText = 'hidden';
-	} else {
+	} else { // handle student's answer
 		if (document.getElementById('negativeB').checked) { studentB = -studentB };
 		if (document.getElementById('negativeC').checked) { studentC = -studentC };
-		var showText = "You have keyed in <span id='aiConfirm'> </span>. Submit this answer?", titleText = 'Confirmation', visiText = 'visible';
+		var showText = "You have keyed in <br> <span id='aiConfirm'> </span>. <br> Submit this answer?", titleText = 'Confirmation', visiText = 'visible';
 	};
+	// show dialog for confirmation
 	var dialog = document.getElementById('my-alert-dialog-ai');
 	if (dialog) { // it's already present
 		document.getElementById('confirmationAi').innerHTML = showText;
@@ -104,14 +105,16 @@ var checkStudentInputTwo = function() {
 	};	
 }
 
-// go from (ai) to (aii)
+// student confirms (ai): go to (aii)
 var checkAi = function () {
+	// hide previous dialog and samsung warning
 	hideAlertDialog('my-alert-dialog-ai');
 	document.getElementById('samsungWarning').style.display = 'none';
 	// show new Dialog to comment on answer
 	ons.createElement('dialog-ai.html', { append: true })
 		.then(function (dialog) {
 			dialog.show();
+			// mark student's (ai)
 			if (b == studentB && c == studentC) { // full marks
 				partAiMark = 4;
 				document.getElementById('rightOrWrong').innerHTML = "Well done!";
@@ -133,11 +136,11 @@ var checkAi = function () {
 		});
 }
 
-// proceed to (aii)
+// end of (ai): proceed to (aii)
 var proceedToAii = function () {
 	// hide Dialog
 	hideDialog('my-dialog-ai');
-	// change show to actual answer
+	// change show in (ai) to actual answer
 	document.getElementById('qnAiToHide').style.display = 'none';
 	katex.render(polyBuilder([a, b, c], 'r') + "=0.", document.getElementById('show'), { throwOnError: false });
 	document.getElementById('qnA').style.display = 'none';
@@ -146,9 +149,10 @@ var proceedToAii = function () {
 	document.getElementById('marksOnDisplay').innerHTML = "4+2";
 	// show (aii) question and r input
 	document.getElementById('qnAii').style.display = 'block';
+	document.getElementById('aiiSubmitButton').style.display = 'block';
 	katex.render('r', document.getElementById('rTwo'), { throwOnError: false });
-	katex.render(fractionBuilder(22,7), document.getElementById('fractionExample'), { throwOnError: false });
-	katex.render('22/7', document.getElementById('decimalExample'), { throwOnError: false });
+	katex.render('-'+fractionBuilder(22,7), document.getElementById('fractionExample'), { throwOnError: false });
+	katex.render('-22/7', document.getElementById('decimalExample'), { throwOnError: false });
 	katex.render('r=', document.getElementById('rEquals'), { throwOnError: false });
 	// prevents spaces
 	var input_field = document.querySelector('#inputR'); // class type: fraction
@@ -164,7 +168,7 @@ var proceedToAii = function () {
 	}); // end of spacebar prevention
 }
 
-// show dialog: r value
+// show dialog:confirming r value
 var checkStudentInputR = function () {
 	studentR = document.getElementById('inputR').value;
 	if (!studentR || !document.getElementById('inputR').validity.valid) {
@@ -174,6 +178,7 @@ var checkStudentInputR = function () {
 		studentRArray = handleFractions(studentR);
 		if (studentRArray[2] == 1) {studentRTypeset = studentRArray[0] + studentRArray[1]; } else {studentRTypeset = studentRArray[0]+ fractionBuilder(studentRArray[1], studentRArray[2]); };
 	};
+	// show dialog
 	var dialog = document.getElementById('my-alert-dialog-aii');
 	if (dialog) { // it's already present
 		document.getElementById('confirmationAii').innerHTML = showText;
@@ -181,7 +186,7 @@ var checkStudentInputR = function () {
 		document.getElementById('okButtonAii').style.visibility = visiText;
 		dialog.show();
 		if (studentR && document.getElementById('inputR').validity.valid) { katex.render("r=" + studentRTypeset, document.getElementById('aiiConfirm'), { throwOnError: false }); };
-	} else {
+	} else { // create new dialog
 		ons.createElement('alert-dialog-aii.html', { append: true })
 		.then(function (dialog) {
 			document.getElementById('confirmationAii').innerHTML = showText;
@@ -193,7 +198,7 @@ var checkStudentInputR = function () {
 	};
 }
 
-// give students r value answer 
+// after (aii) confirmation: give students r value answer 
 var checkAii = function () {
 	hideAlertDialog('my-alert-dialog-aii');
 	// show new Dialog to comment on answer
@@ -225,6 +230,7 @@ var proceedToAiii = function () {
 	hideDialog('my-dialog-aii');
 	// change show to actual answer
 	document.getElementById('qnAiiQuestion').style.display = 'none';
+	document.getElementById('aiiSubmitButton').style.display = 'none';
 	katex.render("r=" + fractionBuilder(nSimplified, mSimplified), document.getElementById('rAnswer'), { throwOnError: false });
 	document.getElementById('qnAiiDone').style.display = 'block';
 	// modify marks on display
@@ -347,6 +353,5 @@ var moveOn = function() {
 var proceedTob = function() {
 	var reason = mcqArrayPlusAnswer[0][iD].slice(0,2)
 	var queriesObject = { m: m, n: n, aiM: partAiMark, aiiM: partAiiMark, aiiiR: reason, aivKSign: studentKFractionArray[0], aivKNum: studentKFractionArray[1], aivKDen: studentKFractionArray[2]};
-	console.log(queriesObject); //TODO: change this
 	window.location = htmlQueryConstructor('ans0401.html',queriesObject);
 };

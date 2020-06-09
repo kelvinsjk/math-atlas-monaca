@@ -1,0 +1,217 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <link rel="stylesheet" href="../components/loader.css">
+    <script src="../components/loader.js"></script>
+	<!-- Onsen UI -->
+		<script src="../lib/onsenui/js/onsenui.min.js"></script>
+		<link rel="stylesheet" href="../lib/onsenui/css/onsenui.css">
+		<link rel="stylesheet" href="../lib/onsenui/css/onsen-css-components.css">
+		<link rel="stylesheet" href="../css/style.css">
+		
+		<script src="../onsenuijs.js"></script>
+		<script src="../mathjs.js"></script>
+		<script src="ans0401.js"></script> <!-- change for each qn-->
+		<link rel="stylesheet" href="../lib/katex/katex.min.css">
+		<script defer src="../lib/katex/katex.min.js"> </script>
+		<title> Question 0401 part b </title>
+</head>
+
+<body>
+	<!-- Loading Screen -->
+	<ons-modal direction="up">
+		<div style="text-align: center">
+			<p>
+				<ons-icon icon="md-spinner" size="28px" spin></ons-icon> Loading...
+			</p>
+		</div>
+	</ons-modal>
+
+	<!-- Left menu -->
+	<ons-splitter>
+		<ons-splitter-side id="menu" side="left" width="120px" collapse swipeable>
+			<ons-page>
+				<ons-list>
+					<ons-list-item onclick="returnHome()" tappable>
+						Home
+					</ons-list-item>
+				</ons-list>
+			</ons-page>
+		</ons-splitter-side>
+		<ons-splitter-content id="content" page="qn001.html"> </ons-splitter-content>
+	</ons-splitter>
+
+	<!-- Actual page -->
+	<template id="qn001.html">
+		<ons-page>
+			<ons-toolbar>
+				<div class="left">
+					<ons-toolbar-button onclick="fn.open()">
+						<ons-icon icon="ion-ios-menu, material:md-menu"></ons-icon>
+					</ons-toolbar-button>
+				</div>
+				<div class="center">
+					Question part b
+				</div>
+			</ons-toolbar>
+			<!-- Tabbar -->
+			<ons-tabbar position="bottom" hide-tabs>
+				<ons-tab page="qn001a.html" label="Question" icon="fa-question-circle" active>
+					<!-- badge="7"-->
+				</ons-tab>
+				<ons-tab page="ans001.html" label="Input Answer" icon="fa-keyboard" active-icon="fa-calculator">
+				</ons-tab>
+			</ons-tabbar>
+		</ons-page>
+	</template>
+
+	<!-- Question Tab-->
+	<template id="qn001a.html">
+		<ons-page id="qn001atab">
+			<div style="text-align: left; opacity: 0.6; padding-top: 20px; padding-left: 10px;">
+				<p>
+					An arithmetic series has first term <span id="a"></span> and common difference <span id="d"></span>,
+					where <span id="aTwo"></span> and <span id="dTwo"></span> are non-zero, and a geometric
+					series has common ratio <span id="r"></span>.
+				</p>
+				<p>
+					The 1st, <span id="mPlusOne"></span> and <span id="mPlusNPlusOne"></span> terms of the arithmetic series
+					are equal to the first three terms of the geometric series.
+				</p>
+				<div>
+					(ai) Show that <span id="show"></span><span id="qnAiToHide">, where <span id="b"></span> and <span
+							id="c"></span> are constants to be determined.</span>
+				</div>
+			</div>
+			<div style="text-align: left; opacity: 0.6; padding-top: 10px; padding-left: 10px;" id="qnAii">
+				<div id='qnAiiDone'>
+					(aii) Hence show that <span id="rAnswer"></span>.
+					<hr>
+				</div>
+			</div>
+			<div style="text-align: left; opacity: 0.6; padding-top: 10px; padding-left: 10px;" id="qnPartB">
+				<div>
+					(bi) Find, exactly, the common difference <span id="dThree"></span> in terms of <span id="aThree"></span>.
+				</div>
+				<div style="padding-top: 10px">
+					(bii) The sum of the first <span id="n"></span> terms of the arithmetic series is denoted by <span id="sN"></span>. 
+					Given that <span id="aMore"></span>, find the smallest and largest possible values of <span id="nTwo"></span> for which 
+					<span id="sNTwo"></span> exceeds <span id="hA"></span>.
+				</div>
+			</div>
+			<div style="text-align:left; opacity: 0.6; padding-top: 20px; padding-left: 10px;">
+				Part (b) of this question is worth 2+3 marks.
+			</div>
+			<hr>
+			<div style="text-align:center; margin:20px;" id="answerButton">
+				<ons-button onclick="startAnswering()">Answer part (b) </ons-button>
+			</div>
+			<div style="text-align:center; margin:20px; display:none;" id="goToAnswerButton">
+				<ons-button onclick="document.querySelector('ons-tabbar').setActiveTab(1)"> Key in your answer </ons-button>
+			</div>
+		</ons-page>
+	</template>
+
+	<!-- Answer Tab-->
+	<template id="ans001.html">
+		<ons-page id="ans001tab">
+			<!-- (bi) Question: Find d -->
+			<ons-list>
+				<ons-list-item> Answer to (bi): </ons-list-item>
+				<ons-list-item>
+					<div> 
+						(bi) <span id="dEquals"></span>. What is the exact value of <span id="j"></span>?
+					</div>
+				</ons-list-item>
+				<ons-list-header>
+					Instructions: <br>
+					Key in your numerical answer(s). <br>
+					For fractions like <span id="fractionExample"> </span>, key in <span id="decimalExample"> </span>
+				</ons-list-header>
+			</ons-list>
+			<div style="padding:10px;">
+				<hr>
+				<span id='jEquals'></span>
+				<input id='inputJ'
+				pattern='(\d+|(?=.+\.)\d+\.\d{1,5}|(?=\.)\.\d+|(?=.+/)\d+/\d{1,5})|[\-](\d+|(?=.+\.)\d+\.\d{1,5}|(?=\.)\.\d{1,5}|(?=.+/)\d+/\d+)'
+				class='fraction'></input>
+			</div>
+			<!-- (bii) Question: nMin and nMax -->
+			<ons-list>
+				<ons-list-item> Answer to (bii): </ons-list-item>
+				<ons-list-item>
+					<div> 
+						(bii) What is the smallest and largest possible values of <span id="nThree"></span> for which <span id="sNThree"></span> exceeds <span id="hATwo"></span>.
+					</div>
+				</ons-list-item>
+			</ons-list>
+			<div style="padding:10px;">
+				Minimum <span id='nEquals'></span>
+				<input id='inputNMin' type='number'> </input> <br>
+				Maximum <span id='nEqualsTwo'></span>
+				<input id='inputNMax' type='number'> </input>
+			</div>
+			
+			<div id="submitButton"
+			style="text-align:center; margin:10px;">
+				<ons-button style="background-color:#0076ff;color: white" onclick="moveOn()"> Submit answer </ons-button>
+			</div>
+			<div style="text-align:center;margin:10px">
+				<hr>
+				<ons-button onclick="document.querySelector('ons-tabbar').setActiveTab(0)"> Go to question </ons-button>
+			</div>
+		</ons-page>
+	</template> <!-- End of answer tab-->
+
+	<!-- Confirmation of part b answer using a dialog -->
+	<template id="dialog.html">
+		<!--TODO: Change title-->
+		<ons-dialog id="my-dialog" cancelable>
+			<div id='invalidInput' style="text-align: left; padding: 10px;">
+				It appears that some of the inputs are blank or invalid (not a number). Try again!
+			</div>
+			<div id='bAnswer' style="text-align: left; padding: 10px; display:none">
+				<div>
+					These are your submitted answers:
+				</div>
+				<div>
+					(bi) <span id="studentD"></span>
+				</div>
+				<div>
+					(bii) Smallest <span id="studentNMin"></span>, <br>largest <span id="studentNMax"></span>
+				</div>
+				<div id="aConfirmationInstructions" style="padding-bottom:10px">
+					<hr> Click "OK" to confirm these answers and see the solution, or "Cancel" to change some of your
+					answers.
+				</div>
+			</div>
+			<div class="alert-dialog-footer">
+				<ons-alert-dialog-button onclick="hideDialog('my-dialog')">Cancel</ons-alert-dialog-button>
+				<ons-alert-dialog-button onclick="proceedTob()" id="moveOnButton"> OK </ons-alert-dialog-button>
+			</div>
+		</ons-dialog>
+	</template>
+
+	<!-- Return to home alert -->
+	<template id="home-alert-dialog.html">
+		<ons-alert-dialog id="home-alert-dialog" modifier="rowfooter">
+			<div class="alert-dialog-title" id="homeAlertTitle"> Warning </div>
+			<div class="alert-dialog-content">
+				<p> You leaving this question to return to the home page. </p>
+				<p> No progress will be saved. </p>
+				<p> A new question will be generated the next time to access this page. </p>
+			</div>
+			<div class="alert-dialog-footer">
+				<ons-alert-dialog-button onclick="hideAlertDialog('home-alert-dialog')">Cancel</ons-alert-dialog-button>
+				<span>
+					<ons-alert-dialog-button onclick="window.location = '../index.html'"> OK</ons-alert-dialog-button>
+				</span>
+			</div>
+		</ons-alert-dialog>
+	</template>
+
+</body>
+</html>

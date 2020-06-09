@@ -1,0 +1,201 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+	<link rel="stylesheet" href="../components/loader.css">
+	<script src="../components/loader.js"></script>
+	<!-- Onsen UI -->
+	<script src="../lib/onsenui/js/onsenui.min.js"></script>
+	<link rel="stylesheet" href="../lib/onsenui/css/onsenui.css">
+	<link rel="stylesheet" href="../lib/onsenui/css/onsen-css-components.css">
+	<link rel="stylesheet" href="../css/style.css">
+	<!-- My own scripts -->
+	<script type="text/javascript" src="../onsenuijs.js"></script>
+	<script type="text/javascript" src="../mathjs.js"></script>
+	<script type="text/javascript" src="soln0401.js"></script> <!-- Change this every round-->
+	<script type="text/javascript" src="../progress-bar.js"></script>
+	<link rel="stylesheet" href="../lib/katex/katex.min.css">
+	<script defer src="../lib/katex/katex.min.js"> </script>
+</head>
+<body>
+	<!-- Loading screen -->
+	<ons-modal direction="up">
+ 		<div style="text-align: center">
+			<p>	<ons-icon icon="md-spinner" size="28px" spin></ons-icon> Loading...	</p>
+  		</div>
+	</ons-modal>
+	<!-- Left menu-->
+	<ons-splitter>
+		<ons-splitter-side id="menu" side="left" width="120px" collapse>
+			<ons-page>
+				<ons-list>
+					<ons-list-item onclick="window.location='../index.html' " tappable>
+						Home
+					</ons-list-item>
+				</ons-list>
+			</ons-page>
+		</ons-splitter-side>
+		<ons-splitter-content id="content" page="soln001.html">	</ons-splitter-content>
+	</ons-splitter>
+<!-- Actual Page -->
+<template id="soln001.html">
+<ons-page>
+	<!-- Title -->
+	<ons-toolbar>
+		<div class="left">
+		<ons-toolbar-button onclick="fn.open()">
+			<ons-icon icon="ion-ios-menu, material:md-menu"></ons-icon>
+		</ons-toolbar-button>
+		</div>
+		<div class="center">
+			Question 0401 answer
+		</div>
+	</ons-toolbar>
+	<!-- Tabbar -->
+	<ons-tabbar swipeable position="top">
+		<ons-tab page="qn001a.html" label="Question" icon="fa-question-circle" active> <!-- badge="7"-->
+		</ons-tab>
+		<ons-tab page="ans001.html" label="Answer" icon="fa-lightbulb">
+		</ons-tab>
+	</ons-tabbar>
+</ons-page>
+</template>
+	<!-- Question Tab-->
+	<template id="qn001a.html">
+	<ons-page id="qn001atab">
+			<div style="text-align: left; opacity: 0.6; padding-top: 20px; padding-left: 10px;"> 
+				<p>
+					An arithmetic series has first term <span id="a"></span> and common difference <span id="d"></span>,
+					where <span id="aTwo"></span> and <span id="dTwo"></span> are non-zero, and a geometric
+					series has common ratio <span id="r"></span>.
+				</p>
+				<p>
+					The 1st, <span id="mPlusOne"></span> and <span id="mPlusNPlusOne"></span> terms of the arithmetic series
+					are equal to the first three terms of the geometric series.
+				</p>
+				<div>
+					(ai) Show that <span id="show"></span>.
+				</div>
+				<div>
+					(aii) Hence show that <span id="rAnswer"></span>.
+				</div>
+				<div>
+					(aiii) Explain why the geometric series converges.
+				</div>
+				<div>
+					(aiv) Find the sum to infinity of the geometric series in terms of <span id="aThree"></span>.
+				</div>
+				<div>
+					(bi) Find, exactly, the common difference <span id="dThree"></span> in terms of <span id="aFour"></span>.
+				</div>
+				<div>
+					(bii) The sum of the first <span id="n"></span> terms of the arithmetic series is denoted by <span id="sN"></span>.
+					Given that <span id="aMore"></span>, find the smallest and largest possible values of <span id="nTwo"></span> for
+					which <span id="sNTwo"></span> exceeds <span id="hA"></span>.
+				</div>
+			</div>
+			<div style="text-align:left; opacity: 0.6; padding-top: 20px; padding-left: 10px;">
+				This question is  worth (4+2+1+2)+(2+3)=14 marks.
+			</div>	
+			<hr>
+			<div style="text-align:center; margin:20px"  id="goToAnswerButton">
+				<ons-button onclick="document.querySelector('ons-tabbar').setActiveTab(1)"> Go to answer </ons-button>
+			</div>
+		</ons-page>
+	</template>
+
+	<!-- Answer Tab-->
+	<template id="ans001.html"> <ons-page id="ans001tab">
+	<!-- Student's solution -->
+	<div style="text-align:left;opacity:0.6;padding:10px;">
+		Your attempt:
+		<div>
+			(ai) 
+			<span id="checkMarkOne" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+			<span id="checkMarkTwo" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+			<span id="checkMarkThree" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+			<span id="checkMarkFour" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+		</div>
+		<div>
+			(aii) 
+			<span id="checkMarkFive" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+			<span id="checkMarkSix" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+		</div>
+		<div>
+			(aiii) The geometric series converges because <span id="studentReason"></span> <span id="checkMarkSeven" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+		</div>
+		<div>
+			(aiv) <span id="studentS"></span>.
+			<span id="checkMarkEight" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+			<span id="checkMarkNine" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+		</div>
+		<div>
+			(bi) <span id="studentD"></span>.
+			<span id="checkMarkTen" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+			<span id="checkMarkEleven" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+		</div>
+		<div>
+			(bii) Smallest <span id="studentNMin"></span>, largest <span id="studentNMax"></span>.
+			<span id="checkMarkTwelve" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+			<span id="checkMarkThirteen" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+			<span id="checkMarkFourteen" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+		</div>
+	</div> <hr>
+	<!-- Actual Solution -->
+	<div style="text-align:left;padding:10px;">
+		The answer:
+		<div>
+			(ai) <span id="showTwo"></span> 
+		</div>
+		<div>
+			(aii) <span id="rAnswerTwo"></span> 
+		</div>
+		<div>
+			(aiii) The geometric series converges because <span id="rBetween"></span>.
+		</div>
+		<div>
+			(aiv) <span id="sInf"></span>.
+		<div>
+			(bi) <span id="dAnswer"></span>.
+		</div>
+		<div>
+			(bii) Smallest <span id="answerNMin"></span>, largest <span id="answerNMax"></span>.
+		</div>
+	</div>
+
+	<hr>
+	<!-- Comments -->
+	<div style="text-align:center;">
+		<div class="box">
+			<div class="progress" id="progress">
+				<div class="inner" id = "progressBarText"> 14 </div>
+			</div>
+		</div>
+	</div>
+	<div style="text-align:left; opacity: 0.6; padding: 10px;">
+		<div id="answerComments"> </div>
+	</div>
+	<hr>
+	<ons-toolbar inline="true">
+		<div class="left" style="background-color:#f0c251;text-align:center;">
+			<ons-toolbar-button onclick="document.querySelector('ons-tabbar').setActiveTab(0)" style="color:black;">
+				Question
+			</ons-toolbar-button>
+		</div>
+		<div class="center" style="background-color:#0076ff;text-align:center;">
+			<ons-toolbar-button onclick="window.location = '../index.html'" style="color:white;">
+				Return home
+			</ons-toolbar-button>
+		</div>
+		<div class="right" style="background-color:#f0c251;text-align:center">
+			<ons-toolbar-button onclick="window.location = 'qn0401.html'" style="color:black;">
+				Try again
+			</ons-toolbar-button>
+		</div>
+	</ons-toolbar>
+	</ons-page>
+	</template>
+</body>
+</html>

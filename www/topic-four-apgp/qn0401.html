@@ -84,7 +84,7 @@
 		</div>
 		<div id="qnA">
 			<div style="text-align: left; opacity: 0.6; padding-top: 10px; padding-left: 10px;">
-				What is the value of <span id="bTwo"></span> and <span id="cTwo"></span>?
+				What are the values of <span id="bTwo"></span> and <span id="cTwo"></span>?
 				<div>
 					<div>
 						<span id="bThree"></span>
@@ -116,21 +116,21 @@
 						Instructions: <br>
 						Key in your numerical answer(s). <br>
 						For fractions like <span id="fractionExample"> </span>, key in <span id="decimalExample"> </span>
-						<hr>
 					</ons-list-header>
 				</ons-list>
 				<div>
+						<hr>
 					<span id='rEquals'></span>
 					<input id='inputR' pattern='(\d+|(?=.+\.)\d+\.\d{1,5}|(?=\.)\.\d+|(?=.+/)\d+/\d{1,5})|[\-](\d+|(?=.+\.)\d+\.\d{1,5}|(?=\.)\.\d{1,5}|(?=.+/)\d+/\d+)' class='fraction'></input>
-				</div>
-				<div style="text-align:center; margin:10px">
-					<ons-button onclick="checkStudentInputR()"> Submit answer </ons-button>
 				</div>
 			</div>
 			<div id='qnAiiDone' style="display: none">
 				(aii) Hence show that <span id="rAnswer"></span>.
 				<hr>
 			</div>
+		</div>
+		<div id="aiiSubmitButton" style="text-align:center; margin:10px; display:none">
+			<ons-button onclick="checkStudentInputR()"> Submit answer </ons-button>
 		</div>
 		<div style="text-align: left; opacity: 0.6; padding-top: 10px; padding-left: 10px; display: none" id="qnARest">
 			<div>
@@ -319,10 +319,10 @@
 					Instructions: <br>
 					Key in your numerical answer(s). <br>
 					For fractions like <span id="fractionExampleTwo"> </span>, key in <span id="decimalExampleTwo"> </span>
-					<hr>
 				</ons-list-header>
 			</ons-list>
-			<div>
+			<div style="padding:10px;">
+					<hr>
 				<span id='kEquals'></span>
 				<input id='inputK' pattern='(\d+|(?=.+\.)\d+\.\d{1,5}|(?=\.)\.\d+|(?=.+/)\d+/\d{1,5})|[\-](\d+|(?=.+\.)\d+\.\d{1,5}|(?=\.)\.\d{1,5}|(?=.+/)\d+/\d+)' class='fraction'></input>
 			</div>
