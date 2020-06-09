@@ -1,0 +1,181 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+	<link rel="stylesheet" href="../components/loader.css">
+	<script src="../components/loader.js"></script>
+	<!-- Onsen UI -->
+	<script src="../lib/onsenui/js/onsenui.min.js"></script>
+	<link rel="stylesheet" href="../lib/onsenui/css/onsenui.css">
+	<link rel="stylesheet" href="../lib/onsenui/css/onsen-css-components.css">
+	<link rel="stylesheet" href="../css/style.css">
+	<!-- My own scripts -->
+	<script type="text/javascript" src="../onsenuijs.js"></script>
+	<script type="text/javascript" src="../mathjs.js"></script>
+	<script type="text/javascript" src="../mathts.js"></script>
+	<script type="text/javascript" src="soln0501.js"></script> <!-- Change this every round-->
+	<script type="text/javascript" src="../progress-bar.js"></script>
+	<link rel="stylesheet" href="../lib/katex/katex.min.css">
+	<script defer src="../lib/katex/katex.min.js"> </script>
+</head>
+<body>
+	<!-- Loading screen -->
+	<ons-modal direction="up">
+ 		<div style="text-align: center">
+			<p>	<ons-icon icon="md-spinner" size="28px" spin></ons-icon> Loading...	</p>
+  		</div>
+	</ons-modal>
+	<!-- Left menu-->
+	<ons-splitter>
+		<ons-splitter-side id="menu" side="left" width="120px" collapse>
+			<ons-page>
+				<ons-list>
+					<ons-list-item onclick="window.location='../index.html' " tappable>
+						Home
+					</ons-list-item>
+				</ons-list>
+			</ons-page>
+		</ons-splitter-side>
+		<ons-splitter-content id="content" page="qn001.html">	</ons-splitter-content>
+	</ons-splitter>
+	<!-- Actual page -->
+	<template id="qn001.html">
+		<ons-page>
+			<ons-toolbar>
+				<div class="left">
+				<ons-toolbar-button onclick="fn.open()">
+					<ons-icon icon="ion-ios-menu, material:md-menu"></ons-icon>
+				</ons-toolbar-button>
+				</div>
+				<div class="center">
+				Question 0501 answer
+				</div>
+			</ons-toolbar>
+			<!-- Tabbar -->
+			<ons-tabbar position="top">
+				<ons-tab page="qn001a.html" label="Question" icon="fa-question-circle" active> <!-- badge="7"-->
+				</ons-tab>
+				<ons-tab page="ans001.html" label="Answer" icon="fa-lightbulb">
+				</ons-tab>
+			</ons-tabbar>
+		</ons-page>
+	</template>
+
+	<!-- Question Tab-->
+	<template id="qn001a.html">
+		<ons-page id="qn001atab">
+			<div style="text-align: left; opacity: 0.6; padding-top: 20px; padding-left: 10px;">
+				<p>
+					A sequence <span id="uOneTwo"></span> is such that <span id="uN"></span> for all <span id='nGreater'></span>
+				</p>
+				<div>
+					(ai) Show that <span id="uNMinus"></span>
+				</div>
+				<div>
+					(aii) Hence show that <div id="summationAnswer"></div>
+				</div>
+				<div>
+					(aiii) Give a reason why the series in (aii) is convergent.
+				</div>
+				<div>
+					(aiv) State the sum to infinity.
+				</div>
+				<div>
+					(b) Use your answer to part (aii) to find <div id="summationSub"></div>
+				</div>
+			</div>
+			<div style="text-align:left; opacity: 0.6; padding-top: 0px; padding-left: 10px;">
+				<span id="questionOrPart">This question is</span> worth <span id="marksOnDisplay"> 2+2+1+1+2 </span> marks.
+			</div>
+			<hr>
+			<div style="text-align:center; margin:20px;" id="goToAnswerButton">
+				<ons-button onclick="document.querySelector('ons-tabbar').setActiveTab(1)"> Go to answer </ons-button>
+			</div>
+		</ons-page>
+	</template>
+
+	<!-- Answer Tab-->
+	<template id="ans001.html"> <ons-page id="ans001tab">
+	<!-- Student's solution -->
+	<div style="text-align:left;opacity:0.6;padding:10px;">
+		Your attempt:
+		<div>
+			(ai) (Show question)
+			<span id="checkMarkOne" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+			<span id="checkMarkTwo" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+		</div>
+		<div>
+			(aii) (Show question)
+			<span id="checkMarkThree" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+			<span id="checkMarkFour" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+		</div>
+		<div>
+			(aiii) The series converges because <span id="studentReason"></span>
+			<span id="checkMarkFive" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+		</div>
+		<div>
+			(aiv) <span id="studentS"></span>.
+			<span id="checkMarkSix" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+		</div>
+		<div>
+			(b) <span id="studentSubstitution"></span>.
+			<span id="checkMarkSeven" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+			<span id="checkMarkEight" style="display:none"> <ons-icon icon="fa-check-circle" style="color:#0076ff"></ons-icon> </span> 
+		</div>
+	</div> <hr>
+	<!-- Actual Solution -->
+	<div style="text-align:left;padding:10px;">
+		The answer:
+		<div>
+			(ai) <span id="showAi"></span>.
+		</div>
+		<div>
+			(aii) <span id="showAii"></span> 
+		</div>
+		<div>
+			(aiii) The series converges because <br> <span id="actualReason"></span>
+		</div>
+		<div>
+			(aiv) <span id="actualS"></span>.
+		<div>
+			(b) <span id="actualSubstitution"></span>.
+		</div>
+	</div>
+
+	<hr>
+	<!-- Comments -->
+	<div style="text-align:center;">
+		<div class="box">
+			<div class="progress" id="progress">
+				<div class="inner" id = "progressBarText"> 8 </div>
+			</div>
+		</div>
+	</div>
+	<div style="text-align:left; opacity: 0.6; padding: 10px;">
+		<div id="answerComments"> </div>
+	</div>
+	<hr>
+	<!-- Ending toolbar for navigation-->
+	<ons-toolbar inline="true">
+		<div class="left" style="background-color:#f0c251;text-align:center;">
+			<ons-toolbar-button onclick="document.querySelector('ons-tabbar').setActiveTab(0)" style="color:black;">
+				Question
+			</ons-toolbar-button>
+		</div>
+		<div class="center" style="background-color:#0076ff;">
+			<ons-toolbar-button onclick="window.location = '../index.html'" style="color:white;">
+				Return home
+			</ons-toolbar-button>
+		</div>
+		<div class="right" style="background-color:#f0c251;text-align:center">
+			<ons-toolbar-button onclick="window.location = 'qn0501.html'" style="color:black;">
+				Try again
+			</ons-toolbar-button>
+		</div>
+	</ons-toolbar>
+	</ons-page>
+	</template>
+</body>
+</html>

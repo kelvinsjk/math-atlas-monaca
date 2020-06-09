@@ -75,7 +75,7 @@ function handleFractions(f) {
 		if (answer[0]=='-') {return ['-', answer.slice(1), '1', Number(answer)];} else {return ['', answer, '1', Number(answer)];};
 	};
 }
-// C3) Fraction Object initializer function
+// C2_NEW) Fraction Object initializer function
 // takes in f as a string of the following types:
 // '1', '2/3', '2.3', '0.3', '.3' and negative versions of these cases
 // object properties: sign: '-' or '', num: numerator, den: denominator, typeset: latex typeset
@@ -168,9 +168,63 @@ function katexAlign(str) {return '\\begin{aligned}' + str + '\\end{aligned}'}
 function katexBoxed(str) {return '\\boxed{' +str+ '}'}
 // D4) Add parenthesis
 function addParenthesis(str) {return '('+str+')'}
+// SquareX: takes a string. If string of length 1, append ^2. Else add parenthesis around it and append ^2
+function squareX(str) { if (str.length == 1) { return str + '^2';} else { return '(' + str + ')^2'} };
+// parenthesisX: if string of length 1, return string, else add parenthesis to it
+function parenthesisX(str) { if (str.length == 1) { return str;} else {	return addParenthesis(str) } };
 
 //D5) Polynomial builder: Given coefficientArray [a_n, a_(n-1), ... a_0], form a_n x^n + a_(n-1) x^(n-1) + ... + a_0
-function polyBuilder(coefficientArray,x='x') { // WARNING: coefficientArray Must have at least 2 elements!
+// second argument allows for variables other than x
+function polyBuilder(coefficientArray, x = 'x') { // WARNING: coefficientArray Must have at least 1 element
+	if (coefficientArray.length == 1) { return coefficientArray[0].toString(); }; // 
+	if (coefficientArray[0] == 0) { return polyBuilder(coefficientArray.slice(1),x) };
+	var n = coefficientArray.length - 1;
+	var firstCoefficient = coefficientArray.shift();
+	if (firstCoefficient == 1) {
+		var latexPolynomial = ''
+	} else {
+		if (firstCoefficient == -1) {
+			var latexPolynomial = '-'
+		} else { // Neither 0 nor 1 nor -1
+			var latexPolynomial = firstCoefficient
+		}
+	}; //testing of first coefficient
+	latexPolynomial += x; // Assume at least 2 elements
+	if (n > 1) { latexPolynomial += '^{' + n + '}' }; // powers needed if bigger than 1
+	coefficientArray.forEach(a => {
+		n -= 1;
+		if (a == 0) { // don't do anything: skip iteration
+		} else {
+			if (typeof a === 'string') { // coefficient is a string
+				latexPolynomial += a;
+			} else { // coefficient is a number
+				if (a > 0) { // positive a
+					if (a == 1 && n != 0) {
+						latexPolynomial += '+'; // special case for coefficient of 1
+					} else {
+						latexPolynomial += '+' + a; // need a + sign 
+					};
+				} else {// a < 0
+					if (a == -1 && n != 0) {
+						latexPolynomial += '-' // special case for coefficient of -1
+					} else {
+						latexPolynomial += a // the negative sign is already in the coefficient
+					} // end of normal (not -1) negative coefficient	
+				}; // end of negative coefficient
+			}; // end of typesetting coefficient
+			if (n > 0) {
+				latexPolynomial += x; // add x 
+				if (n > 1) {
+					latexPolynomial += '^{' + n + '}' // add power of x
+				}
+			}
+		}
+	});
+	return latexPolynomial
+};
+
+//D5_OLD) Polynomial builder: Given coefficientArray [a_n, a_(n-1), ... a_0], form a_n x^n + a_(n-1) x^(n-1) + ... + a_0
+function polyBuilderLegacy(coefficientArray,x='x') { // WARNING: coefficientArray Must have at least 2 elements!
 	if (coefficientArray[0] == 0) {return 'ERROR: Leading coefficient cannot be 0'};
 	var n = coefficientArray.length - 1;
 	var firstCoefficient = coefficientArray.shift();
@@ -227,10 +281,3 @@ function fractionTypeset(fractionArray) {
 	if (myXOR(num > 0, den>0)) {var fractionString='-';}
 	return fractionString + fractionBuilder(Math.abs(num), Math.abs(den));
 }
-// TODO: remove cloning
-document.addEventListener('init', function(event) {
-	if (event.target.matches('#indexMain')) {
-		console.log('hi')
-		document.getElementById('clone-dest').innerHTML = document.getElementById('clone-master').cloneNode(true).innerHTML;
-	}
-}, false);

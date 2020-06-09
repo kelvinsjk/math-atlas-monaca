@@ -1,0 +1,448 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <link rel="stylesheet" href="../components/loader.css">
+    <script src="../components/loader.js"></script>
+	<!-- Onsen UI -->
+		<script src="../lib/onsenui/js/onsenui.min.js"></script>
+		<link rel="stylesheet" href="../lib/onsenui/css/onsenui.css">
+		<link rel="stylesheet" href="../lib/onsenui/css/onsen-css-components.css">
+		<link rel="stylesheet" href="../css/style.css">
+		
+		<script src="../onsenuijs.js"></script>
+		<script src="../mathjs.js"></script>
+		<script src="qn0501.js"></script> <!-- change for each qn-->
+		<link rel="stylesheet" href="../lib/katex/katex.min.css">
+		<script defer src="../lib/katex/katex.min.js"> </script>
+		<title> Question 0501 </title>
+</head>
+
+<body>
+	<!-- Loading Screen -->
+	<ons-modal direction="up">
+		<div style="text-align: center">
+			<p> <ons-icon icon="md-spinner" size="28px" spin></ons-icon> Loading... </p>
+		</div>
+	</ons-modal>
+
+	<!-- Left menu -->
+	<ons-splitter>
+		<ons-splitter-side id="menu" side="left" width="120px" collapse swipeable>
+			<ons-page>
+				<ons-list>
+					<ons-list-item onclick="returnHome()" tappable>
+						Home
+					</ons-list-item>
+				</ons-list>
+			</ons-page>
+		</ons-splitter-side>
+		<ons-splitter-content id="content" page="qn001.html">	</ons-splitter-content>
+	</ons-splitter>
+
+	<!-- Actual page -->
+	<template id="qn001.html">
+		<ons-page>
+			<ons-toolbar>
+				<div class="left">
+				<ons-toolbar-button onclick="fn.open()">
+					<ons-icon icon="ion-ios-menu, material:md-menu"></ons-icon>
+				</ons-toolbar-button>
+				</div>
+				<div class="center">
+				Question 0501 
+				</div>
+			</ons-toolbar>
+			<!-- Tabbar -->
+			<ons-tabbar position="bottom" hide-tabs>
+				<ons-tab page="qn001a.html" label="Question" icon="fa-question-circle" active> <!-- badge="7"-->
+				</ons-tab>
+				<ons-tab page="ans001.html" label="Input Answer" icon="fa-keyboard" active-icon="fa-calculator">
+				</ons-tab>
+			</ons-tabbar>
+		</ons-page>
+	</template>
+
+	<!-- Question Tab-->
+	<template id="qn001a.html">
+	<ons-page id="qn001atab">
+		<div style="text-align: left; opacity: 0.6; padding-top: 20px; padding-left: 10px;"> 
+			<p>
+				A sequence <span id="uOneTwo"></span> is such that <span id="uN"></span> for all <span id='nGreater'></span>
+			</p>
+			<p>
+				(ai) Show that <span id="uNMinus"></span><span id='qnAiToHide'>, where <span id="a"></span> and <span id="b"></span> are constants to be found.</span>
+			</p>
+		</div>
+		<div id="qnA">
+			<div style="text-align: left; opacity: 0.6; padding-top: 10px; padding-left: 10px;">
+				What are the value of <span id="aTwo"></span> and <span id="bTwo"></span>?
+				<div>
+					<div>
+						<span id="aEquals"></span>
+						<ons-input id='inputA' type='number'> </ons-input>
+						<label class="left">
+							<ons-checkbox input-id="negativeA" id="negativeA"></ons-checkbox>
+						</label>
+						<label for="negativeA" class="center"> Make negative </label>
+					</div>
+					<div>
+						<span id="bEquals"></span>
+						<ons-input id='inputB' type='number'> </ons-input>
+						<label class="left">
+							<ons-checkbox input-id="negativeB" id="negativeB"></ons-checkbox>
+						</label>
+						<label for="negativeB" class="center"> Make negative </label>
+					</div>
+				</div>
+			</div>
+			<div style="text-align:center; margin:10px">
+				<ons-button onclick="checkStudentInputTwo()"> Submit answer </ons-button>
+			</div>
+		</div>
+		<div style="text-align: left; opacity: 0.6; padding-top: 10px; padding-left: 10px; display: none" id="qnAii">
+			<div id="qnAiiQuestion">
+				(aii) Hence find <span id="summation"></span>, leaving your answer in the form <span id='summationForm'></span>.
+				<ons-list>
+					<ons-list-header>
+						Instructions: <br>
+						Key in your numerical answer and choose an option. For fractions like <span id="fractionExample"> </span>, key in <span id="decimalExample"> </span>
+						<hr>
+					</ons-list-header>
+				</ons-list>
+				<div>
+					<span id='cEquals'></span>
+					<input id='inputC' pattern='(\d+|(?=.+\.)\d+\.\d{1,5}|(?=\.)\.\d+|(?=.+/)\d+/\d{1,5})|[\-](\d+|(?=.+\.)\d+\.\d{1,5}|(?=\.)\.\d{1,5}|(?=.+/)\d+/\d+)' class='fraction'></input>
+				</div>
+				<div> <!--Start of radio buttons-->
+					<span id='fNInstructions'>Choose an option below: </span>
+					<ons-list>
+						<div id="radioZero">
+							<ons-list-item tappable style="background: rgb(0,0,0,0.07);">
+								<label class="left">
+									<ons-radio name="reason" input-id="radio-0" value="0" onclick="radioClick(this.value)"></ons-radio>
+								</label>
+								<label for="radio-0" class="center">
+									<span id="reasonZero"> </span>
+									<span id="caretZero" style="padding-left:10px; display:none">
+										<ons-icon icon="fa-caret-down"> </ons-icon>
+								</label>
+							</ons-list-item>
+						</div>
+						<div id="radioOne">
+							<ons-list-item tappable style="background: rgb(0,0,0,0.07);">
+								<label class="left">
+									<ons-radio name="reason" input-id="radio-1" value="1" onclick="radioClick(this.value)"></ons-radio>
+								</label>
+								<label for="radio-1" class="center">
+									<span id="reasonOne"></span>
+									<span id="caretOne" style="padding-left:10px; display:none">
+										<ons-icon icon="fa-caret-down"> </ons-icon>
+								</label>
+							</ons-list-item>
+						</div>
+						<div id="radioTwo">
+							<ons-list-item tappable style="background: rgb(0,0,0,0.07);">
+								<label class="left">
+									<ons-radio name="reason" input-id="radio-2" value="2" onclick="radioClick(this.value)"></ons-radio>
+								</label>
+								<label for="radio-2" class="center">
+									<span id="reasonTwo"></span>
+									<span id="caretTwo" style="padding-left:10px; display:none">
+										<ons-icon icon="fa-caret-down"> </ons-icon>
+								</label>
+							</ons-list-item>
+						</div>
+						<div id="radioThree">
+							<ons-list-item tappable style="background: rgb(0,0,0,0.07);">
+								<label class="left">
+									<ons-radio name="reason" input-id="radio-3" value="3" onclick="radioClick(this.value)"></ons-radio>
+								</label>
+								<label for="radio-3" class="center">
+									<span id="reasonThree"> </span>
+									<span id="caretThree" style="padding-left:10px; display:none">
+										<ons-icon icon="fa-caret-down"> </ons-icon>
+								</label>
+							</ons-list-item>
+						</div>
+						<div id="radioFour">
+							<ons-list-item tappable style="background: rgb(0,0,0,0.07);">
+								<label class="left">
+									<ons-radio name="reason" input-id="radio-4" value="4" onclick="radioClick(this.value)"></ons-radio>
+								</label>
+								<label for="radio-4" class="center">
+									<span id="reasonFour"> </span>
+									<span id="caretFour" style="padding-left:10px; display:none">
+										<ons-icon icon="fa-caret-down"> </ons-icon>
+								</label>
+							</ons-list-item>
+						</div>
+						<div id="radioFive">
+							<ons-list-item tappable style="background: rgb(0,0,0,0.07);">
+								<label class="left">
+									<ons-radio name="reason" input-id="radio-5" value="5" onclick="radioClick(this.value)"></ons-radio>
+								</label>
+								<label for="radio-5" class="center">
+									<span id="reasonFive"> </span>
+									<span id="caretFive" style="padding-left:10px; display:none">
+										<ons-icon icon="fa-caret-down"> </ons-icon>
+								</label>
+							</ons-list-item>
+						</div>
+					</ons-list>
+				</div> <!-- End of radio buttons-->
+			</div>
+			<div id='qnAiiDone' style="display: none">
+				(aii) Hence show that <div id="summationAnswer"></div>
+				<hr>
+			</div>
+		</div>
+		<div id="aiiSubmitButton" style="text-align:center; margin:10px; display:none">
+			<ons-button onclick="checkStudentInputC()"> Submit answer </ons-button>
+		</div>
+		<div style="text-align: left; opacity: 0.6; padding-top: 10px; padding-left: 10px; display: none" id="qnARest">
+			<div>
+				(aiii) Give a reason why the series in (aii) is convergent.
+			</div>
+			<div>
+				(aiv) State the sum to infinity.
+			</div>
+		</div>
+		<div style="text-align:left; opacity: 0.6; padding-top: 20px; padding-left: 10px;">
+			<span id="questionOrPart">This part is</span> worth <span id="marksOnDisplay"> 2 </span> marks.
+		</div>
+		<hr>
+		<div style="text-align:left; opacity: 0.6; padding-left: 10px;" id="samsungWarning">
+			<p> Some Samsung devices may be unable to key in negative values. A check box is provided to modify the sign of your
+				input. </p>
+			<p> You can ignore the checkbox if you are able to key in negative values</p>
+		</div>
+		<div style="text-align:center; margin:20px; display:none"  id="answerButton">
+			<ons-button onclick="startAnswering()">Answer (aiii)</ons-button>
+		</div>
+		<div style="text-align:center; margin:20px;display:none"  id="goToAnswerButton">
+			<ons-button onclick="document.querySelector('ons-tabbar').setActiveTab(1)"> Key in your answer </ons-button>
+		</div>
+	</ons-page>
+	</template>
+
+	<!-- Transition from part ai to aii using an Alert dialog -->
+	<template id="alert-dialog-ai.html">
+		<ons-alert-dialog id="my-alert-dialog-ai" modifier="rowfooter">
+			<div class="alert-dialog-title" id="alertTitleAi"> </div>
+			<div class="alert-dialog-content" id="confirmationAi"> </div>
+			<div class="alert-dialog-footer">
+				<ons-alert-dialog-button onclick="hideAlertDialog('my-alert-dialog-ai')">Cancel</ons-alert-dialog-button>
+				<span id="okButtonAi">
+					<ons-alert-dialog-button onclick="var partAMark = checkAi()"> OK</ons-alert-dialog-button>
+				</span>
+			</div>
+		</ons-alert-dialog>
+	</template>
+	<!-- Confirmation of part ai answer using a dialog -->
+	<template id="dialog-ai.html">
+		<ons-dialog id="my-dialog-ai">
+			<div style="text-align: center; padding: 10px;">
+				<div>
+					<span id="rightOrWrong"> Unfortunately, <span id='studentAi'></span> is incorrect. <br></span> The answer is <span id="aiAnswer"> </span>. <br>
+				</div>
+				<div id='answerAiComments'>Do check your answer to see if you can spot any mistakes.</div>
+				<div id="aiMarksReceived"> You have earned <span id='aiMarksSpan'>2</span> marks. </div>
+				<p> Let us proceed to part (aii) of the question. </p>
+				<div class="alert-dialog-footer">
+					<ons-alert-dialog-button button onclick="proceedToAii()"> OK </ons-alert-dialog-button>
+				</div>
+			</div>
+		</ons-dialog>
+	</template>
+
+	<!-- Transition from part aii to aiii using an Alert dialog -->
+	<template id="alert-dialog-aii.html">
+		<ons-alert-dialog id="my-alert-dialog-aii" modifier="rowfooter">
+			<div class="alert-dialog-title" id="alertTitleAii"> </div>
+			<div class="alert-dialog-content" id="confirmationAii"> </div>
+			<div class="alert-dialog-footer">
+				<ons-alert-dialog-button onclick="hideAlertDialog('my-alert-dialog-aii')">Cancel</ons-alert-dialog-button>
+				<span id="okButtonAii">
+					<ons-alert-dialog-button onclick="var partAMark = checkAii()"> OK</ons-alert-dialog-button>
+				</span>
+			</div>
+		</ons-alert-dialog>
+	</template>
+	<!-- Confirmation of part aii answer using a dialog -->
+	<template id="dialog-aii.html">
+		<ons-dialog id="my-dialog-aii">
+			<div style="text-align: center; padding: 10px;">
+				<div>
+					<span id="rightOrWrongTwo"> Unfortunately, <span id='studentAii'></span>,<span id='studentAiiFN'></span> is incorrect. <br></span> The answer is
+					<span id="aiiAnswer"> </span>,<span id="aiiFNAnswer"></span><br>
+				</div>
+				<div id='answerAiiComments'>Do check your answer to see if you can spot any mistakes.</div>
+				<div id="aiiMarksReceived"> You have earned <span id='aiiMarksSpan'>2</span> marks. </div>
+				<p> Let us proceed to the rest of part (a). </p>
+				<div class="alert-dialog-footer">
+					<ons-alert-dialog-button button onclick="proceedToAiii()"> OK </ons-alert-dialog-button>
+				</div>
+			</div>
+		</ons-dialog>
+	</template>
+
+	<!-- Answer Tab-->
+	<template id="ans001.html"> <ons-page id="ans001tab">
+		<!-- (aiii) Question -->
+		<ons-list> 
+			<ons-list-item> Answer to (aiii): </ons-list-item> 
+			<ons-list-item> 
+				<div> (aiii) Give a reason why the series in (aii) is convergent.</div>
+			</ons-list-item> 
+		</ons-list>
+		<!-- (aiii) Pick MCQ reason -->
+		<div id="aiiiSubmitter" style="padding:10px">
+			<ons-list>
+				<div id="radioTwoZero">
+					<ons-list-item tappable style="background: rgb(0,0,0,0.07);">
+						<label class="left">
+							<ons-radio name="reasonTwo" input-id="radioTwo-0" value="0" onclick="radioClickTwo(this.value)"></ons-radio>
+						</label>
+						<label for="radioTwo-0" class="center">
+							<span id="reasonTwoZero"> </span>
+							<span id="caretTwoZero" style="padding-left:10px; display:none">
+								<ons-icon icon="fa-caret-down"> </ons-icon>
+						</label>
+					</ons-list-item>
+				</div>
+				<div id="radioTwoOne">
+					<ons-list-item tappable style="background: rgb(0,0,0,0.07);">
+						<label class="left">
+							<ons-radio name="reasonTwo" input-id="radioTwo-1" value="1" onclick="radioClickTwo(this.value)"></ons-radio>
+						</label>
+						<label for="radioTwo-1" class="center">
+							<span id="reasonTwoOne"></span>
+							<span id="caretTwoOne" style="padding-left:10px; display:none">
+								<ons-icon icon="fa-caret-down"> </ons-icon>
+						</label>
+					</ons-list-item>
+				</div>
+				<div id="radioTwoTwo">
+					<ons-list-item tappable style="background: rgb(0,0,0,0.07);">
+						<label class="left">
+							<ons-radio name="reasonTwo" input-id="radioTwo-2" value="2" onclick="radioClickTwo(this.value)"></ons-radio>
+						</label>
+						<label for="radioTwo-2" class="center">
+							<span id="reasonTwoTwo"></span>
+							<span id="caretTwoTwo" style="padding-left:10px; display:none">
+								<ons-icon icon="fa-caret-down"> </ons-icon>
+						</label>
+					</ons-list-item>
+				</div>
+				<div id="radioTwoThree">
+					<ons-list-item tappable style="background: rgb(0,0,0,0.07);">
+						<label class="left">
+							<ons-radio name="reasonTwo" input-id="radioTwo-3" value="3" onclick="radioClickTwo(this.value)"></ons-radio>
+						</label>
+						<label for="radioTwo-3" class="center">
+							<span id="reasonTwoThree"> </span>
+							<span id="caretTwoThree" style="padding-left:10px; display:none">
+								<ons-icon icon="fa-caret-down"> </ons-icon>
+						</label>
+					</ons-list-item>
+				</div>
+				<div id="radioTwoFour">
+					<ons-list-item tappable style="background: rgb(0,0,0,0.07);">
+						<label class="left">
+							<ons-radio name="reasonTwo" input-id="radioTwo-4" value="4" onclick="radioClickTwo(this.value)"></ons-radio>
+						</label>
+						<label for="radioTwo-4" class="center">
+							<span id="reasonTwoFour"> </span>
+							<span id="caretTwoFour" style="padding-left:10px; display:none">
+								<ons-icon icon="fa-caret-down"> </ons-icon>
+						</label>
+					</ons-list-item>
+				</div>
+				<div id="radioTwoFive">
+					<ons-list-item tappable style="background: rgb(0,0,0,0.07);">
+						<label class="left">
+							<ons-radio name="reasonTwo" input-id="radioTwo-5" value="5" onclick="radioClickTwo(this.value)"></ons-radio>
+						</label>
+						<label for="radioTwo-5" class="center">
+							<span id="reasonTwoFive"> </span>
+							<span id="caretTwoFive" style="padding-left:10px; display:none">
+								<ons-icon icon="fa-caret-down"> </ons-icon>
+						</label>
+					</ons-list-item>
+				</div>
+			</ons-list>
+		</div> <!-- End of (aiii) radio buttons-->
+		<!-- (aiv) Question -->
+		<div id="aivQuestion" style="display:none">
+			<ons-list> 
+				<ons-list-item> Answer to (aiv): </ons-list-item> 
+				<ons-list-item> 
+					<div> 
+						State the sum to infinity.
+					</div>
+				</ons-list-item> 
+				<ons-list-header>
+					Instructions: <br>
+					Key in your numerical answer(s). <br>
+					For fractions like <span id="fractionExampleTwo"> </span>, key in <span id="decimalExampleTwo"> </span>
+				</ons-list-header>
+			</ons-list>
+			<hr>
+			<div style="padding-left:10px;">
+				<span id='sInfinityEquals'></span>
+				<input id='inputS' pattern='(\d+|(?=.+\.)\d+\.\d{1,5}|(?=\.)\.\d+|(?=.+/)\d+/\d{1,5})|[\-](\d+|(?=.+\.)\d+\.\d{1,5}|(?=\.)\.\d{1,5}|(?=.+/)\d+/\d+)' class='fraction'></input>
+			</div>
+			<div id="submitButton" style="text-align:center; margin:10px; display:none;">
+				<ons-button onclick="moveOn()" style="background-color:#0076ff;color: white"> Submit answer </ons-button>
+			</div>
+		</div> <!-- End of aiv Question-->
+		<!--<hr>-->
+		<div style="text-align:center;margin:10px"><hr><ons-button onclick="document.querySelector('ons-tabbar').setActiveTab(0)"> Go to question  </ons-button> </div> 
+	</ons-page>
+	</template> <!-- End of answer tab-->
+
+	<!-- Confirmation of part a answer using a dialog -->
+	<template id="dialog.html"> <!--TODO: Change title-->
+		<ons-dialog id="my-dialog" cancelable>
+			<div style="text-align: left; padding: 10px;">
+				<div> 
+					These are your submitted answers:
+				</div>
+				<div>
+					(aiii) The series converges because <br> <span id="answerAiii"></span>
+				</div>
+				<div>
+					(aiv) <span id="answerAiv"></span>
+				</div>
+				<div id="aConfirmationInstructions" style="padding-bottom:10px"> 
+					<hr> Click "OK" to confirm these answers and move on to question part (b), or "Cancel" to change some of your answers.
+				</div>
+				<div class="alert-dialog-footer">
+					<ons-alert-dialog-button onclick="hideDialog('my-dialog')">Cancel</ons-alert-dialog-button>
+					<ons-alert-dialog-button onclick="proceedTob()" id="moveOnButton"> OK </ons-alert-dialog-button>
+				</div>
+			</div>
+		</ons-dialog>
+	</template>
+
+	<!-- Return to home alert -->
+	<template id="home-alert-dialog.html">
+	<ons-alert-dialog id="home-alert-dialog" modifier="rowfooter">
+		<div class="alert-dialog-title" id="homeAlertTitle"> Warning </div>
+		<div class="alert-dialog-content"> 
+			<p> You leaving this question to return to the home page. </p>
+			<p>  No progress will be saved. </p>
+			<p> A new question will be generated the  next time to access this page. </p>
+		</div>
+		<div class="alert-dialog-footer">
+		<ons-alert-dialog-button onclick="hideAlertDialog('home-alert-dialog')">Cancel</ons-alert-dialog-button>
+		<span> <ons-alert-dialog-button onclick="window.location = '../index.html'"> OK</ons-alert-dialog-button> </span>
+		</div>
+	</ons-alert-dialog>
+	</template>
+
+</body>
+</html>

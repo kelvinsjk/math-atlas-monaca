@@ -28,14 +28,14 @@
 					<ons-list-item onclick="window.location='index.html'" tappable>
 						Home
 					</ons-list-item>
-					<ons-list-item onclick="window.location='topic-two-fns/qn0201.html'" tappable> <!-- TODO: menu items-->
-						Question 0201
+					<ons-list-item onclick="window.location='topic-five-summation/soln0501.html?num=0&den=3&numTwo=0&denTwo=4&square=1&bottom=3&uNFront=1'" tappable> <!-- TODO: menu items-->
+						Soln 0501
 					</ons-list-item>
 					<ons-list-item onclick="window.location='topic-three-graphs/soln0301.html'" tappable>
 						Solution 0301
 					</ons-list-item>
-					<ons-list-item onclick="window.location='topic-two-fns/soln0201.html?a=-2&b=4&c=-3&d=-7&e=7&h=5&p=3&aiExist=0&aiReason=10&aiiSign=&aiiNum=50653&aiiDen=343&sOne=true&sTwo=false&sThree=true&sFour=false&sA=3&sC=3&biSign=&biNum=4.166666667&biDen=1&tOne=true&tTwo=false&tThree=true&tFour=false&tA=4&tC=4'" tappable>
-						Solution 0201
+					<ons-list-item onclick="window.location='topic-four-apgp/soln0401.html?m=7&n=1&h=2&aiM=4&aiiM=2&aiiiR=00&aivKSign=&aivKNum=7&aivKDen=6&biJSign=-&biJNum=6&biJDen=49&biiNMin=3&biiNMax=15'" tappable>
+						Solution 0401
 					</ons-list-item>
 				</ons-list>
 			</ons-page>
@@ -80,11 +80,53 @@
 				<div style="text-align: center; margin:10px"> 
 					<ons-button onclick="window.location='topic-four-apgp/qn0401.html'"> Question 0401 </ons-button>
 				</div>
-				<input id="hello"> </input>
-				<button onclick="document.getElementById('katextest').innerHTML = document.getElementById('hello').value === '1'"> Try it! </button>
+				<div style="text-align: center; margin:10px"> 
+					<ons-button onclick="window.location='topic-five-summation/qn0501.html'"> Question 0501 </ons-button>
+				</div>
 			</div>
-			<div id="clone-dest">
+			<div style="margin-left:auto; margin-right:auto; width:70%">
+				<svg viewBox="-110 -110 220 220">
+					<g fill="none" stroke="black">
+						<line x1="-100" y1="0" x2="-100" y2="100" />
+						<line x1="100" y1="100" x2="-100" y2="100" />
+						<line x1="100" y1="100" x2="100" y2="0" />
+						<path d="M -100, 0
+								A 100 100 180 1 1 100 0 " />
+					</g>
+					<g fill="none" stroke="black" stroke-opacity="0.5">
+						<path stroke-dasharray="7" d="M-100 0 100 0" />
+						<line x1="-100" y1="95" x2="-95" y2="95" />
+						<line x1="-95" y1="100" x2="-95" y2="95" />
+						<line x1="100" y1="95" x2="95" y2="95" />
+						<line x1="95" y1="100" x2="95" y2="95" />
+					</g>
+					<text x="0" y="90" style="text-anchor:middle" font-family="serif" font-style="italic">x</text>
+					<text x="-95" y="50" style="text-anchor:start" font-family="serif" font-style="italic">y</text>
+					<text x="95" y="50" style="text-anchor:end" font-family="serif" font-style="italic">y</text>
+				</svg>
 			</div>
+			<div style="margin-left:auto; margin-right:auto; width:70%">
+				<svg  viewBox="-110 -180 220 300">
+					<g fill="none" stroke="black">
+						<polygon points="-100,0, 0,-173.2, 100,0, 100,100, -100,100" />  	
+					</g>
+					<g fill="none" stroke="black" stroke-opacity="0.5">
+						<path stroke-dasharray="7" d="M-100 0 100 0" />
+						<line x1="-100" y1="95" x2="-95" y2="95" />
+						<line x1="-95" y1="100" x2="-95" y2="95" />
+						<line x1="100" y1="95" x2="95" y2="95" />
+						<line x1="95" y1="100" x2="95" y2="95" />
+						<line x1="0" y1="5" x2="0" y2="-5" />
+						<line x1="0" y1="95" x2="0" y2="105" />
+						<line x1="-45.67" y1="-84.1" x2="-54.33" y2="-89.1" />
+						<line x1="45.67" y1="-84.1" x2="54.33" y2="-89.1" />
+					</g>
+					<text x="0" y="90" style="text-anchor:middle" font-family="serif" font-style="italic">x</text>
+					<text x="-95" y="50" style="text-anchor:start" font-family="serif" font-style="italic">y</text>
+					<text x="95" y="50" style="text-anchor:end" font-family="serif" font-style="italic">y</text>
+				</svg>
+			</div>
+
 		</ons-page>
 	</ons-template>
 </body>
