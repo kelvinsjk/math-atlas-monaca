@@ -41,6 +41,17 @@
 			</ons-page>
 		</ons-splitter-side>
 		<ons-splitter-content id="content" page="qn001.html">	</ons-splitter-content>
+		<ons-splitter-side id="menuTwo" side="right" width="90%" collapse>
+			<ons-page>
+				Maclaurin expansion:
+				<div id='binomial' style="overflow:auto"></div>
+				<div id='sinExpand' style="overflow:auto"></div>
+				<div id='cosExpand' style="overflow:auto"></div>
+				<div style="text-align:center; margin:20px;">
+					<ons-button onclick="document.getElementById('menuTwo').close();">Close</ons-button>
+				</div>
+			</ons-page>
+		</ons-splitter-side>
 	</ons-splitter>
 
 	<!-- Actual page -->
@@ -54,6 +65,11 @@
 				</div>
 				<div class="center">
 				Question 0701 
+				</div>
+				<div class="right">
+				<ons-toolbar-button onclick="fn.openTwo()">
+					MF26
+				</ons-toolbar-button>
 				</div>
 			</ons-toolbar>
 			<!-- Tabbar -->
@@ -79,6 +95,7 @@
 					<div id="AB"></div>
 				for constants <span id="a"></span> and <span id="b"></span> to be determined.
 			</p>
+			<p> Part (a) of this question is worth 2 marks. </p>
 		</div>
 		<hr>
 		<div style="text-align:center; margin:20px;"  id="answerButton">
@@ -109,8 +126,8 @@
 			<div style="padding-left:10px;" id="bInputDiv"></div>
 			<hr>
 			<div id="submitButton" style="display:none">
-				<div id="submitButton" style="text-align:center; margin:10px;background-color:#0076ff;color:white;">
-					<ons-button onclick="moveOn()"> Submit answer </ons-button>	
+				<div id="submitButton" style="text-align:center; margin:10px;">
+					<ons-button onclick="moveOn()" style="background-color:#0076ff;color:white;"> Submit answer </ons-button>	
 				</div>
 				<div><hr></div>
 			</div>

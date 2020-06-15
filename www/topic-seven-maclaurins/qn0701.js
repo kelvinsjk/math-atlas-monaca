@@ -33,6 +33,7 @@ if (cosOrSin == 2) {
 // student input fields
 let studentInputA = new StudentInput('iP', 'aInputDiv', 'a', 'submitButton');
 let studentInputB = new StudentInput('iP', 'bInputDiv', 'b', 'submitButton');
+let tabFlag = false;
 // things that need id
 document.addEventListener('init', function (event) {
     if (event.target.matches('#qn001atab')) {
@@ -48,9 +49,33 @@ document.addEventListener('init', function (event) {
             katex.render('BAC=' + fractionBuilderY("\\pi", alpha), document.getElementById('ABCAngle'), { throwOnError: false });
             document.getElementById('sineExtra').style.display = "inline";
         }
+			tabFlag = true;
     }
     ; // end of event listener tab
 }, false); // End of window.onload
+setTimeout( function() {
+	if (!tabFlag) {
+			        // typeset question
+        katex.render("ABC", document.getElementById('ABC'), { throwOnError: false });
+        katex.render(BCString, document.getElementById('BC'), { throwOnError: false });
+        katex.render("BCA = \\theta", document.getElementById('BCAAngle'), { throwOnError: false });
+        katex.render("\\theta", document.getElementById('theta'), { throwOnError: false });
+        katex.render(ABStringStart + ABString + ',', document.getElementById('AB'), { throwOnError: false, displayMode: true });
+        katex.render("a", document.getElementById('a'), { throwOnError: false });
+        katex.render("b", document.getElementById('b'), { throwOnError: false });
+        if (cosOrSin == 2) {
+            katex.render('BAC=' + fractionBuilderY("\\pi", alpha), document.getElementById('ABCAngle'), { throwOnError: false });
+            document.getElementById('sineExtra').style.display = "inline";
+        }
+	}
+}, 1000);
+window.fn.openTwo = function() {
+var menu = document.getElementById('menuTwo');
+menu.open();
+katex.render("(1+x)^n = 1 + nx + \\frac{n(n-1)}{x^2}+\\ldots + \\frac{n(n-1)\\ldots(n-r+1)}{r!}x^r + \\ldots", document.getElementById('binomial'), {throwOnError: false, displayMode:true});
+katex.render("\\sin x = x - \\frac{x^3}{3!}+ \\frac{x^5}{5!} - \\ldots + \\frac{(-1)^r x^{2r+1} }{(2r+1)!} + \\ldots", document.getElementById('sinExpand'), {throwOnError: false, displayMode:true});
+katex.render("\\cos x = 1 - \\frac{x^2}{2!}+ \\frac{x^4}{4!} - \\ldots + \\frac{(-1)^{r+1} x^{2r} }{(2r)!} + \\ldots", document.getElementById('cosExpand'), {throwOnError: false, displayMode:true});
+};
 // answer tab: start answering (aii)
 let startAnswering = function () {
     // change button to say "go to Question" instead
@@ -62,7 +87,7 @@ let startAnswering = function () {
     tabBar.setAttribute('position', 'top');
     tabBar.setAttribute('swipeable', 'true');
     tabBar.setActiveTab(1).then(function () {
-        katex.render(ABString, document.getElementById('ABTwo'), { throwOnError: false });
+        katex.render(ABStringStart +ABString, document.getElementById('ABTwo'), { throwOnError: false });
         katex.render("a", document.getElementById('aTwo'), { throwOnError: false });
         katex.render("b", document.getElementById('bTwo'), { throwOnError: false });
         studentInputA.addToDOM();

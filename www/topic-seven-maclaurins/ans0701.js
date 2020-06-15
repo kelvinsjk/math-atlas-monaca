@@ -53,6 +53,13 @@ document.addEventListener('init', function (event) {
     }
     ; // end of event listener tab
 }, false); // End of window.onload
+window.fn.openTwo = function() {
+var menu = document.getElementById('menuTwo');
+menu.open();
+katex.render("(1+x)^n = 1 + nx + \\frac{n(n-1)}{x^2}+\\ldots + \\frac{n(n-1)\\ldots(n-r+1)}{r!}x^r + \\ldots", document.getElementById('binomial'), {throwOnError: false, displayMode:true});
+katex.render("\\sin x = x - \\frac{x^3}{3!}+ \\frac{x^5}{5!} - \\ldots + \\frac{(-1)^r x^{2r+1} }{(2r+1)!} + \\ldots", document.getElementById('sinExpand'), {throwOnError: false, displayMode:true});
+katex.render("\\cos x = 1 - \\frac{x^2}{2!}+ \\frac{x^4}{4!} - \\ldots + \\frac{(-1)^{r+1} x^{2r} }{(2r)!} + \\ldots", document.getElementById('cosExpand'), {throwOnError: false, displayMode:true});
+};
 // answer tab: start answering (b)
 let startAnswering = function () {
     // change button to say "go to Question" instead

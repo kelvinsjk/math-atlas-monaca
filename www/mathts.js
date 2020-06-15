@@ -476,3 +476,34 @@ var StudentRadio = /** @class */ (function () {
     });
     return StudentRadio;
 }());
+// surdSimplifier: given n, we will return [a, b] such that sqrt{n} = a sqrt{b}
+function surdSimplifier(n, a = 1) {
+    if (n % 4 == 0) { // test if divisible by 2^2
+        return surdSimplifier(n / 4, 2 * a);
+    }
+    let i;
+    for (i = 1; i <= Math.floor((Math.floor(Math.sqrt(n)) - 1) / 2); i++) {
+        let k = 2 * i + 1; // only need to test odd divisors afterwards
+        if (n % (k * k) == 0) {
+            return surdSimplifier(n / k / k, k * a);
+        }
+    }
+    return [a, n];
+}
+// surdTypeset: given a \\sqrt{b} in the form [a,b] typeset an expression: "a" if b = 1, "sqrt(b)" if a = 1, "a sqrt(b)" otherwise
+function surdTypeset(arr) {
+    if (arr[0] == 1 || arr[1] == 1) { // special cases
+        if (arr[0] == 1 && arr[1] == 1) { // 1 sqrt (1) = 1
+            return "1";
+        }
+        else if (arr[0] == 1) { // 1 sqrt (b)
+            return "\\sqrt{" + arr[1] + "}";
+        }
+        else { // a sqrt (1)
+            return arr[0].toString();
+        }
+    }
+    else { // a sqrt(b)
+        return arr[0] + "\\sqrt{" + arr[1] + "}";
+    }
+}

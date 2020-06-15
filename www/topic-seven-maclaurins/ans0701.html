@@ -15,7 +15,7 @@
 		<script src="../onsenuijs.js"></script>
 		<script src="../mathjs.js"></script>
 		<script src="../mathts.js"></script>
-		<script src="ans0601.js"></script> <!-- change for each qn-->
+		<script src="ans0701.js"></script> <!-- change for each qn-->
 		<link rel="stylesheet" href="../lib/katex/katex.min.css">
 		<script defer src="../lib/katex/katex.min.js"> </script>
 		<title> Question 0701 part b </title>
@@ -42,6 +42,16 @@
 			</ons-page>
 		</ons-splitter-side>
 		<ons-splitter-content id="content" page="qn001.html"> </ons-splitter-content>
+		<ons-splitter-side id="menuTwo" side="right" width="90%" collapse>
+			<ons-page>
+				Maclaurin expansion:
+				<div id='binomial' style="overflow:auto"></div>
+				<div id='sinExpand' style="overflow:auto"></div>
+				<div id='cosExpand' style="overflow:auto"></div>
+				<div style="text-align:center; margin:20px;">
+					<ons-button onclick="document.getElementById('menuTwo').close();">Close</ons-button>
+				</div>
+			</ons-page>		
 	</ons-splitter>
 
 	<!-- Actual page -->
@@ -55,6 +65,11 @@
 				</div>
 				<div class="center">
 					Question 0701 part b
+				</div>
+				<div class="right">
+				<ons-toolbar-button onclick="fn.openTwo()">
+					MF26
+				</ons-toolbar-button>
 				</div>
 			</ons-toolbar>
 			<!-- Tabbar -->
@@ -85,6 +100,7 @@
 					(b) Hence or otherwise show that <div id="ABTwo"></div>
 					for constants <span id="c"></span> and <span id="d"></span> to be determined.
 				</p>
+				<p> Part (b) of this question is worth 3 marks.</p>
 			</div>
 			<hr>
 			<div style="text-align:center; margin:20px;" id="answerButton">
@@ -117,8 +133,8 @@
 				<div style="padding-left:10px;" id="dInputDiv"></div>
 				<hr>
 				<div id="submitButton" style="display:none">
-					<div id="submitButton" style="text-align:center; margin:10px;background-color:#0076ff;color:white;">
-						<ons-button onclick="moveOn()"> Submit answer </ons-button>
+					<div id="submitButton" style="text-align:center; margin:10px;">
+						<ons-button onclick="moveOn()" style="background-color:#0076ff;color:white;"> Submit answer </ons-button>
 					</div>
 					<div>
 						<hr>
