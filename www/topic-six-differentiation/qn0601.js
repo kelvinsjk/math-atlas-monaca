@@ -283,7 +283,7 @@ var showAnswerAii = function () {
     var AStringActual = AString.replace("c", actualCType);
     var actualDFraction = simplifyFractionY(a - 2 * b, 8 * a);
     var actualD = new Fraction(actualDFraction[0].toString() + '/' + actualDFraction[1].toString());
-    var actualDType = actualD.typeset;
+		if (actualD.float==-1){var actualDType = '-'} else{   var actualDType = actualD.typeset;};
     AStringActual = AStringActual.replace("+", '');
     AStringActual = AStringActual.replace("d", actualDType);
     // mark c

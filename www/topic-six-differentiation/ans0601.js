@@ -148,7 +148,7 @@ var moveOn = function () {
             moveOn();
         });
     }
-    else { // TODO: start here
+    else { 
         var dialog_1 = document.getElementById('my-dialog');
         // typesetting student's answer
         var sXValue = studentInputX.value, sYValue = studentInputY.value;

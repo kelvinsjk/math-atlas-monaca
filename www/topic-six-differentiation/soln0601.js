@@ -139,13 +139,13 @@ document.addEventListener('init', function (event) {
         var biMarks = 0;
         if (sX.toPrecision(2) == actualX.toPrecision(2)) { // close enough
             biMarks += 1;
-            if (sX.toFixed(2) == actualX.toFixed(2)) {
+            if (Math.abs(sX-actualX) < 0.002) {
                 biMarks += 1;
             }
         }
         if (sY.toPrecision(2) == actualY.toPrecision(2)) { // close enough
             biMarks += 1;
-            if (sY.toFixed(2) == actualY.toFixed(2)) {
+            if ( Math.abs(sY-actualY) < 0.002  ) {
                 biMarks += 1;
             }
         }
