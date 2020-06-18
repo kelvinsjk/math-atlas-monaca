@@ -36,3 +36,13 @@ input[class=fraction]{
 	height: 100%;
 	display: block;
 }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto 120px;
+  padding: 10px;
+}
+.grid-item {
+  padding: 20px;
+  text-align: center;
+}
