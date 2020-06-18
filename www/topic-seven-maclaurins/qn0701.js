@@ -165,7 +165,10 @@ let showAnswerA = function () {
     // @ts-ignore
     ons.createElement('dialog-aii.html', { append: true }).then(function (dialog) {
         dialog.show();
-        katex.render(ABStringStart + ABStringActual + '.', document.getElementById('aAnswer'), { throwOnError: false });
+				var ABEnd = '';
+				if (cosOrSin==2){ var ABEnd = '\\theta'};
+				ABEnd += '.';
+        katex.render(ABStringStart + ABStringActual +  ABEnd, document.getElementById('aAnswer'), { throwOnError: false });
         if (partAMark == 2) { // full marks )
             document.getElementById('rightOrWrong').innerHTML = "Well done!";
             document.getElementById('answerAComments').style.display = 'none';
