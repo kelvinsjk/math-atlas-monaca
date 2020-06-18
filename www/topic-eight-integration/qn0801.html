@@ -1,0 +1,196 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <!-- <link rel="stylesheet" href="../components/loader.css">
+    <script src="../components/loader.js"></script> -->
+
+		<!-- Not valid in Monaca. Only for local -->
+		<link rel="stylesheet" href="style.css">
+		<!-- Onsen UI -->
+		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+		<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+		<script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+		<script src="onsenuijs.js"></script>
+		<script src="mathjs.js"></script>
+		<script src="scripts/mathts.js"></script>
+		<script src="scripts/stringMethods.js"></script>
+		<script src="scripts/qn0801.js"></script> <!-- Change this for every new page-->
+		<script> console.log('Welcome to Math Atlas'); 	</script> <!-- TODO: Remove console.log-->
+		<link rel="stylesheet" href="math_atlas/math-atlas-monaca/www/lib/katex/katex.min.css">
+		<script defer src="math_atlas/math-atlas-monaca/www/lib/katex/katex.min.js"> </script>
+
+		<title> Question 0801 </title>
+</head>
+
+<body>
+	<!-- Loading Screen -->
+	<ons-modal direction="up">
+		<div style="text-align: center">
+			<p> <ons-icon icon="md-spinner" size="28px" spin></ons-icon> Loading... </p>
+		</div>
+	</ons-modal>
+
+	<!-- Left menu -->
+	<ons-splitter>
+		<ons-splitter-side id="menu" side="left" width="120px" collapse swipeable>
+			<ons-page>
+				<ons-list>
+					<ons-list-item onclick="returnHome()" tappable>
+						Home
+					</ons-list-item>
+				</ons-list>
+			</ons-page>
+		</ons-splitter-side>
+		<ons-splitter-content id="content" page="qn001.html">	</ons-splitter-content>
+		<ons-splitter-side id="menuTwo" side="right" width="90%" collapse>
+			<ons-page>
+				Integrals <br> (Arbitrary constants are omitted; <span id="mf26a"></span> denotes a positive constant.)
+				<div class="grid-container" style="overflow:auto">
+					<div class="grid-item"><span id="fx"></span></div>
+					<div class="grid-item"><span id="intFx"></span></div>
+					<div class="grid-item"></div>
+					<div class="grid-item"><span id="intOne"></span></div>
+					<div class="grid-item"><span id="intOneAns"></span></div>
+					<div class="grid-item"></div>
+					<div class="grid-item"><span id="intTwo"></span></div>
+					<div class="grid-item"><span id="intTwoAns"></span></div>
+					<div class="grid-item"><span id="domainTwo"></span></div>
+					<div class="grid-item"><span id="intThree"></span></div>
+					<div class="grid-item"><span id="intThreeAns"></span></div>
+					<div class="grid-item"><span id="domainThree"></span></div>
+					<div class="grid-item"><span id="intFour"></span></div>
+					<div class="grid-item"><span id="intFourAns"></span></div>
+					<div class="grid-item"><span id="domainFour"></span></div>
+				</div>
+				<div style="text-align:center">
+					<ons-button onclick="document.getElementById('menuTwo').close();">Close</ons-button>
+				</div>
+			</ons-page>
+		</ons-splitter-side>
+	</ons-splitter>
+
+	<!-- Actual page -->
+	<template id="qn001.html">
+		<ons-page>
+			<ons-toolbar>
+				<div class="left">
+				<ons-toolbar-button onclick="fn.open()">
+					<ons-icon icon="ion-ios-menu, material:md-menu"></ons-icon>
+				</ons-toolbar-button>
+				</div>
+				<div class="center">
+				Question 0801 
+				</div>
+				<div class="right">
+					<ons-toolbar-button onclick="fn.openTwo()">MF26</ons-toolbar-button>
+				</div>
+			</ons-toolbar>
+			<!-- Tabbar -->
+			<ons-tabbar position="bottom" hide-tabs>
+				<ons-tab page="qn001a.html" label="Question" icon="fa-question-circle" active> <!-- badge="7"-->
+				</ons-tab>
+				<ons-tab page="ans001.html" label="Input Answer" icon="fa-keyboard" active-icon="fa-calculator">
+				</ons-tab>
+			</ons-tabbar>
+		</ons-page>
+	</template>
+
+	<!-- Question Tab-->
+	<template id="qn001a.html">
+	<ons-page id="qn001atab">
+		<div style="text-align: left; opacity: 0.6; padding-top: 20px; padding-left: 10px;"> 
+			<div style="margin-left:auto; margin-right:auto; width:70%" id="svgDiv"></div>
+			<p>
+				(a) Find the exact value of <div id="integralA"></div>
+			</p>
+			<p>
+				Part (a) of this question is worth 3 marks.
+			</p>
+		</div>
+		<hr>
+		<div style="text-align:center; margin:20px;"  id="answerButton">
+			<ons-button onclick="startAnswering()">Answer (a)</ons-button>
+		</div>
+		<div style="text-align:center; margin:20px;display:none"  id="goToAnswerButton">
+			<ons-button onclick="document.querySelector('ons-tabbar').setActiveTab(1)"> Key in your answer </ons-button>
+		</div>
+		<!-- Hooks for page initialization-->
+		<script>
+			ons.getScriptPage().onInit = function () { onPageLoad(); }
+		</script>
+	</ons-page>
+	</template>
+
+	<!-- Answer Tab-->
+	<template id="ans001.html"> <ons-page id="ans001tab">
+		<!-- (a) Question -->
+		<div id="aQuestion">
+			<ons-list> 
+				<ons-list-item> Answer to (a): </ons-list-item> 
+				<ons-list-item>
+					Find the exact value of <span id="integralATwo"></span>
+				</ons-list-item>
+				<ons-list-header>
+					Instructions: choose how your simplified answer look like and key in the exact values below. <br> For fractions like <span id="fractionExample"></span>, key in <span id="decimalExample"></span>.
+				</ons-list-header>
+			</ons-list>
+			<hr>
+			<div style="padding-left:10px;" id="reasonRadioDiv"></div>
+			<ons-list id="fractionText"></ons-list>
+			<div style="padding-left:10px;" id="aInputDiv"></div>
+			<div style="padding-left:10px;" id="bInputDiv"></div>
+			<hr>
+			<div id="submitButton" style="display:none">
+				<div id="submitButton" style="text-align:center; margin:10px;">
+					<ons-button onclick="moveOn()" style="background-color:#0076ff;color:white;"> Submit answer </ons-button>	
+				</div>
+				<div><hr></div>
+			</div>
+		</div> <!-- End of a Question-->
+		<div style="text-align:center;margin:10px"><ons-button onclick="document.querySelector('ons-tabbar').setActiveTab(0)"> Go to question  </ons-button> </div> 
+	</ons-page>
+	</template> <!-- End of answer tab-->
+
+	<!-- Confirmation of part a answer using a dialog -->
+	<template id="dialog.html"> <!--TODO: Change title-->
+		<ons-dialog id="my-dialog" cancelable>
+			<div style="text-align: left; padding: 10px;">
+				<div> 
+					These are your submitted answers:
+				</div>
+				<div>
+					(a) <span id="studentA"></span>.
+				</div>
+				<div id="aConfirmationInstructions" style="padding-bottom:10px"> 
+					<hr> Click "OK" to confirm these answers and move on to question part (b), or "Cancel" to change some of your answers.
+				</div>
+				<div class="alert-dialog-footer">
+					<ons-alert-dialog-button onclick="hideDialog('my-dialog')">Cancel</ons-alert-dialog-button>
+					<ons-alert-dialog-button onclick="proceedTob()" id="moveOnButton"> OK </ons-alert-dialog-button>
+				</div>
+			</div>
+		</ons-dialog>
+	</template>
+
+	<!-- Return to home alert -->
+	<template id="home-alert-dialog.html">
+	<ons-alert-dialog id="home-alert-dialog" modifier="rowfooter">
+		<div class="alert-dialog-title" id="homeAlertTitle"> Warning </div>
+		<div class="alert-dialog-content"> 
+			<p> You leaving this question to return to the home page. </p>
+			<p>  No progress will be saved. </p>
+			<p> A new question will be generated the  next time to access this page. </p>
+		</div>
+		<div class="alert-dialog-footer">
+		<ons-alert-dialog-button onclick="hideAlertDialog('home-alert-dialog')">Cancel</ons-alert-dialog-button>
+		<span> <ons-alert-dialog-button onclick="window.location = '../index.html'"> OK</ons-alert-dialog-button> </span>
+		</div>
+	</ons-alert-dialog>
+	</template>
+
+</body>
+</html>
