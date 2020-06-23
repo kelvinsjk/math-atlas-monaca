@@ -12,11 +12,11 @@ function handleDecimal(b) {
     }
 }
 // fraction object class
-var Fraction = /** @class */ (function () {
-    function Fraction(f) {
-        var fracIndex = f.indexOf('/'), decIndex = f.indexOf('.');
+class Fraction {
+    constructor(f) {
+        let fracIndex = f.indexOf('/'), decIndex = f.indexOf('.');
         if (fracIndex > 0) { // we disallow inputs to start from / in our input box, so only need to check from index 1
-            var negNum = void 0;
+            let negNum;
             if (f[0] == '-') {
                 this.sign = '-';
                 this.num = Number(f.slice(1, fracIndex));
@@ -32,7 +32,7 @@ var Fraction = /** @class */ (function () {
             this.typeOf = 'f';
         }
         else { // not a fraction
-            var answer = handleDecimal(f);
+            let answer = handleDecimal(f);
             if (decIndex >= 0) {
                 this.typeOf = 'd';
             }
@@ -60,8 +60,24 @@ var Fraction = /** @class */ (function () {
             this.typeset = this.sign + this.num;
         }
     }
-    return Fraction;
-}());
+    // methods
+    simplify() {
+        if (this.typeOf == 'f') { // only simplify fraction types
+            let gcd = gcdY(this.num, this.den);
+            if (gcd != 1 || this.den == 1) { // we can further simplify
+                this.num = this.num / gcd;
+                this.den = this.den / gcd;
+                if (this.den == 1) { // no longer a fraction
+                    this.typeOf = 'i';
+                    this.typeset = this.sign + this.num.toString();
+                }
+                else { //typeset new fraction
+                    this.typeset = this.sign + '\\frac{' + this.num + '}{' + this.den + '}';
+                }
+            }
+        }
+    }
+}
 // B1) get Random Int
 function getRandomIntY(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -79,108 +95,9 @@ function getRandomNonZeroY(min, max) {
         return -b;
     }
 }
-
-// parenthesisAdd
-function parenthesisAdd(str) { return '(' + str + ')'; }
-// SquareY: takes a string. If string of length 1, append ^2. Else add parenthesis around it and append ^2
-function squareY(str) {
-    if (str.length == 1) {
-        return str + '^2';
-    }
-    else {
-        return '(' + str + ')^2';
-    }
-}
-// parenthesisY: if string of length 1, return string, else add parenthesis to it
-function parenthesisY(str) {
-    if (str.length == 1) {
-        return str;
-    }
-    else {
-        return parenthesisAdd(str);
-    }
-}
-// Fraction builder: Given numerator and denominator, form \frac{num}{den}
-function fractionBuilderY(num, den) {
-    return '\\frac{' + num + '}{' + den + '}';
-}
-//D5) Polynomial builder: Given coefficientArray [a_n, a_(n-1), ... a_0], form a_n x^n + a_(n-1) x^(n-1) + ... + a_0
-// second argument allows for variables other than x
-function polyBuilderY(coefficientArray, x) {
-    if (x === void 0) {
-        x = 'x';
-    }
-    if (coefficientArray.length == 1) {
-        return coefficientArray[0].toString();
-    }
-    ; // 
-    if (coefficientArray[0] == 0) {
-        return polyBuilderY(coefficientArray.slice(1), x);
-    }
-    ;
-    var n = coefficientArray.length - 1;
-    var firstCoefficient = coefficientArray.shift();
-    var latexPolynomial;
-    if (firstCoefficient == 1) {
-        latexPolynomial = '';
-    }
-    else {
-        if (firstCoefficient == -1) {
-            latexPolynomial = '-';
-        }
-        else { // Neither 0 nor 1 nor -1
-            latexPolynomial = firstCoefficient;
-        }
-    }
-    ; //testing of first coefficient
-    latexPolynomial += x; // Assume at least 2 elements
-    if (n > 1) {
-        latexPolynomial += '^{' + n + '}';
-    }
-    ; // powers needed if bigger than 1
-    coefficientArray.forEach(function (a) {
-        n -= 1;
-        if (a == 0) { // don't do anything: skip iteration
-        }
-        else {
-            if (typeof a === 'string') { // coefficient is a string
-                latexPolynomial += a;
-            }
-            else { // coefficient is a number
-                if (a > 0) { // positive a
-                    if (a == 1 && n != 0) {
-                        latexPolynomial += '+'; // special case for coefficient of 1
-                    }
-                    else {
-                        latexPolynomial += '+' + a; // need a + sign 
-                    }
-                    ;
-                }
-                else { // a < 0
-                    if (a == -1 && n != 0) {
-                        latexPolynomial += '-'; // special case for coefficient of -1
-                    }
-                    else {
-                        latexPolynomial += a.toString(); // the negative sign is already in the coefficient
-                    } // end of normal (not -1) negative coefficient	
-                }
-                ; // end of negative coefficient
-            }
-            ; // end of typesetting coefficient
-            if (n > 0) {
-                latexPolynomial += x; // add x 
-                if (n > 1) {
-                    latexPolynomial += '^{' + n + '}'; // add power of x
-                }
-            }
-        }
-    });
-    return latexPolynomial;
-}
-
 // Section F ---  Change query to Object
 var parseQueryY = function (queryString) {
-    var query = {};
+    let query = {};
     var pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
     for (var i = 0; i < pairs.length; i++) {
         var pair = pairs[i].split('=');
@@ -188,7 +105,6 @@ var parseQueryY = function (queryString) {
     }
     return query;
 };
-
 // A1) XOR
 function myXORY(a, b) {
     return (a || b) && !(a && b);
@@ -229,10 +145,8 @@ function addFractionsY(fOne, fTwo) {
     return simplifyFractionY(a * d + b * c, b * d);
 }
 // Student input class
-var StudentInput = /** @class */ (function () {
-    function StudentInput(typeOf, iD, varName, submitButton) {
-        if (varName === void 0) { varName = ''; }
-        if (submitButton === void 0) { submitButton = ''; }
+class StudentInput {
+    constructor(typeOf, iD, varName = '', submitButton = '') {
         this.typeOf = typeOf;
         this.iD = iD;
         this.varName = varName;
@@ -248,11 +162,11 @@ var StudentInput = /** @class */ (function () {
         this.fractionInstructions = ''; // only writes the instruction if we have typeOf 'fX'
         this.fractionID = ''; // only writes the instruction if we have typeOf 'fX'
         this.decimalID = ''; // only writes the instruction if we have typeOf 'fX'
-        var innerHTML = "<span id='" + this.katexID + "'></span>";
+        let innerHTML = "<span id='" + this.katexID + "'></span>";
         if (typeOf[0] == 'i') {
             innerHTML += "<input id='" + this.inputID + "' type='number'></input>";
             if (typeOf == 'i') { // negative allowed
-                var checkboxID = 'negative' + varName.toUpperCase();
+                let checkboxID = 'negative' + varName.toUpperCase();
                 innerHTML += "<label class='left'><ons-checkbox input-id='" + checkboxID + "' id='" + checkboxID + "'></ons-checkbox></label><label for='" + checkboxID + "' class='center'>Make negative</label>";
                 this.samsungWarningText = '<p> Some Samsung devices may be unable to key in negative values. A check box is provided to modify the sign of your input. </p> <p> You can ignore the checkbox if you are able to key in negative values </p>';
                 this.negativeID = checkboxID;
@@ -273,10 +187,10 @@ var StudentInput = /** @class */ (function () {
         this.innerHTML = innerHTML;
     } // end of constructor
     // methods
-    StudentInput.prototype.addToDOM = function () {
+    addToDOM() {
         document.getElementById(this.iD).innerHTML = this.innerHTML;
         katex.render(this.varName + '=', document.getElementById(this.katexID), { throwOnError: false });
-        var input_field = document.getElementById(this.inputID);
+        let input_field = document.getElementById(this.inputID);
         if (this.typeOf[0] == 'f') { // prevents spaces
             input_field.addEventListener('textInput', function (e) {
                 var char = e.data;
@@ -290,27 +204,27 @@ var StudentInput = /** @class */ (function () {
             }); // end of spacebar prevention
         } // end of fraction if/else
         if (this.submitButton) { // add event listener to show submit button
-            var self_1 = this;
+            let self = this;
             input_field.addEventListener('input', function () {
-                var validityArray = [self_1.updateValidity()];
-                self_1.otherInput.forEach(function (e) {
+                let validityArray = [self.updateValidity()];
+                self.otherInput.forEach(e => {
                     validityArray.push(e.validity);
                 });
-                self_1.otherRadio.forEach(function (e) {
+                self.otherRadio.forEach(e => {
                     validityArray.push(e.selected);
                 });
-                if (validityArray.every(function (e) { return e; })) {
-                    document.getElementById(self_1.submitButton).style.display = 'block';
+                if (validityArray.every(e => e)) {
+                    document.getElementById(self.submitButton).style.display = 'block';
                 }
                 else {
-                    document.getElementById(self_1.submitButton).style.display = 'none';
+                    document.getElementById(self.submitButton).style.display = 'none';
                 }
             });
         }
-    };
-    StudentInput.prototype.updateValidity = function () {
-        var inputElement = document.getElementById(this.inputID);
-        var validityCheck = true; // if integer, no need to check validity
+    }
+    updateValidity() {
+        let inputElement = document.getElementById(this.inputID);
+        let validityCheck = true; // if integer, no need to check validity
         if (this.typeOf[0] == 'f') {
             validityCheck = inputElement.validity.valid;
         }
@@ -322,7 +236,7 @@ var StudentInput = /** @class */ (function () {
                 return true;
             } // else integer 
             if (this.typeOf == 'i') { // potential negative
-                var negativeCheckbox = document.getElementById(this.negativeID);
+                let negativeCheckbox = document.getElementById(this.negativeID);
                 if (negativeCheckbox.checked) {
                     this.value = Number(inputElement.value) * -1;
                     return true;
@@ -336,10 +250,10 @@ var StudentInput = /** @class */ (function () {
             this.value = null;
             return false;
         }
-    };
-    StudentInput.prototype.insertFractionHeader = function (onsListID) {
+    }
+    insertFractionHeader(onsListID) {
         if (this.typeOf[0] == 'f') {
-            var minusSign = '';
+            let minusSign = '';
             if (this.typeOf == 'f') {
                 minusSign = '-';
             }
@@ -348,39 +262,28 @@ var StudentInput = /** @class */ (function () {
             katex.render(minusSign + "\\frac{22}{7}", document.getElementById(this.fractionID), { throwOnError: false });
             katex.render(minusSign + "22/7", document.getElementById(this.decimalID), { throwOnError: false });
         }
-    };
-    Object.defineProperty(StudentInput.prototype, "linkInput", {
-        set: function (s) {
-            this.otherInput.push(s);
-            s.otherInput.push(this);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(StudentInput.prototype, "linkRadio", {
-        set: function (r) {
-            this.otherRadio.push(r);
-            r.otherInput.push(this);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return StudentInput;
-}());
+    }
+    set linkInput(s) {
+        this.otherInput.push(s);
+        s.otherInput.push(this);
+    }
+    set linkRadio(r) {
+        this.otherRadio.push(r);
+        r.otherInput.push(this);
+    }
+}
 // lcm
 function lcmY(a, b) {
     return (!a || !b) ? 0 : Math.abs((a * b) / gcdY(a, b));
 }
 // Student input class
-var StudentRadio = /** @class */ (function () {
-    function StudentRadio(optionsArray, iD, name, submitButton) {
-        if (name === void 0) { name = ''; }
-        if (submitButton === void 0) { submitButton = ''; }
-        var innerHTML = "<ons-list>";
-        var numberWords = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five'];
-        var index;
+class StudentRadio {
+    constructor(optionsArray, iD, name = '', submitButton = '') {
+        let innerHTML = "<ons-list>";
+        let numberWords = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five'];
+        let index;
         for (index = 0; index < optionsArray.length; index++) {
-            var divString = "<div id='radio" + name + numberWords[index] + "'>";
+            let divString = "<div id='radio" + name + numberWords[index] + "'>";
             divString += "<ons-list-item tappable style='background: rgb(0,0,0,0.07);'>";
             divString += "<label class='left'>";
             divString += "<ons-radio name='reason" + name + "' input-id='radio" + name + "-" + index + "' value='" + index + "' onclick='studentRadio" + name + ".click(this.value)'></ons-radio>";
@@ -405,19 +308,18 @@ var StudentRadio = /** @class */ (function () {
         this.option = -1;
     } // end of constructor
     // methods
-    StudentRadio.prototype.addToDOM = function () {
-        var _this = this;
+    addToDOM() {
         document.getElementById(this.iD).innerHTML = this.innerHTML;
-        var numberWords = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five'];
-        this.optionsArray.forEach(function (str, index) {
-            var reasonID = "reason" + _this.name + numberWords[index];
+        let numberWords = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five'];
+        this.optionsArray.forEach((str, index) => {
+            let reasonID = "reason" + this.name + numberWords[index];
             katex.render(str, document.getElementById(reasonID), { throwOnError: false });
         });
-    };
-    StudentRadio.prototype.click = function (indexString) {
-        var iD = Number(indexString);
-        var numberWords = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five'], index;
-        var radioIds = [], caretIds = [];
+    }
+    click(indexString) {
+        let iD = Number(indexString);
+        let numberWords = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five'], index;
+        let radioIds = [], caretIds = [];
         for (index = 0; index < this.optionsArray.length; index++) {
             radioIds.push("radio" + this.name + numberWords[index]);
             caretIds.push("caret" + this.name + numberWords[index]);
@@ -443,39 +345,30 @@ var StudentRadio = /** @class */ (function () {
         this.option = iD;
         // check for display of submit button
         if (this.submitButton) {
-            var validityArray_1 = [this.selected];
-            this.otherInput.forEach(function (e) {
-                validityArray_1.push(e.validity);
+            let validityArray = [this.selected];
+            this.otherInput.forEach(e => {
+                validityArray.push(e.validity);
             });
-            this.otherRadio.forEach(function (e) {
-                validityArray_1.push(e.selected);
+            this.otherRadio.forEach(e => {
+                validityArray.push(e.selected);
             });
-            if (validityArray_1.every(function (e) { return e; })) {
+            if (validityArray.every(e => e)) {
                 document.getElementById(this.submitButton).style.display = 'block';
             }
             else {
                 document.getElementById(this.submitButton).style.display = 'none';
             }
         }
-    };
-    Object.defineProperty(StudentRadio.prototype, "linkInput", {
-        set: function (s) {
-            this.otherInput.push(s);
-            s.otherRadio.push(this);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(StudentRadio.prototype, "linkRadio", {
-        set: function (r) {
-            this.otherRadio.push(r);
-            r.otherRadio.push(this);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return StudentRadio;
-}());
+    }
+    set linkInput(s) {
+        this.otherInput.push(s);
+        s.otherRadio.push(this);
+    }
+    set linkRadio(r) {
+        this.otherRadio.push(r);
+        r.otherRadio.push(this);
+    }
+}
 // surdSimplifier: given n, we will return [a, b] such that sqrt{n} = a sqrt{b}
 function surdSimplifier(n, a = 1) {
     if (n % 4 == 0) { // test if divisible by 2^2
@@ -506,4 +399,60 @@ function surdTypeset(arr) {
     else { // a sqrt(b)
         return arr[0] + "\\sqrt{" + arr[1] + "}";
     }
+}
+function isSimplified(f) {
+    if (f.den == 1) { // decimal or integer: simplified
+        return true;
+    }
+    else if (gcdY(f.num, f.den) == 1) { // fraction: need to check num and den
+        return true;
+    }
+    return false;
+}
+// queryTripleToFraction: given (Sign, Num, Den), convert to Fraction class
+function queryTripleToFraction(sign, num, den) {
+    if (den == '1') {
+        return new Fraction(sign + num);
+    }
+    else {
+        return new Fraction(sign + num + "/" + den);
+    }
+}
+// MarkFraction: given two fractions, check if they are the same/off by signs/correct to 2sf
+class MarkFraction {
+    constructor(f1, f2) {
+        this.correct = false;
+        this.upToSimplified = false;
+        this.upToSign = false;
+        this.close = false;
+        this.partial = false;
+        // check if close
+        if (f1.float.toPrecision(2) == f2.float.toPrecision(2)) {
+            this.close = true;
+        }
+        if ((Math.abs(f1.float)).toPrecision(11) == (Math.abs(f2.float)).toPrecision(11)) { // check if accuracy is good (up to sign)
+            this.upToSign = true;
+            if (f1.float * f2.float >= 0) { // check if same sign (or 0)
+                this.upToSimplified = true;
+                if (isSimplified(f1) && isSimplified(f2)) {
+                    this.correct = true;
+                }
+            }
+        }
+        this.partial = this.upToSign || this.upToSimplified || this.close;
+    }
+}
+function simpson_step(f, a, b) {
+    return (b - a) / 8 * (f(a) + 3 * f((2 * a + b) / 3) + 3 * f((a + 2 * b) / 3) + f(b));
+}
+function simpson(f, a, b, n) {
+    let simpson_step = function (f, a, b) {
+        return (b - a) / 8 * (f(a) + 3 * f((2 * a + b) / 3) + 3 * f((a + 2 * b) / 3) + f(b));
+    };
+    let result = 0, stepSize = (b - a) / n;
+    let i;
+    for (i = 0; i < n; i++) {
+        result += simpson_step(f, a + i * stepSize, a + (i + 1) * stepSize);
+    }
+    return result;
 }
