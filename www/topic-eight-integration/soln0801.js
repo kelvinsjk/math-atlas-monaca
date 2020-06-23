@@ -111,7 +111,11 @@ let onPageLoadZero = function () {
         // actual answers
         // actualA = new Fraction("1/" + (a * b * 2).toString());
         let actualBFraction = simplifyFractionY(c + 1, c - 1);
-        actualB = new Fraction(actualBFraction[0] + "/" + actualBFraction[1]);
+				if (actualBFraction[1]==1){
+        	actualB = new Fraction(actualBFraction[0]);
+				} else{
+        	actualB = new Fraction(actualBFraction[0] + "/" + actualBFraction[1]);
+				}
     }
     // generate question (a)
     let integralAString = "\\displaystyle \\int_0^";
@@ -135,12 +139,12 @@ let onPageLoadZero = function () {
             actualM = new Fraction("0");
         }
         else {
-            actualM = new Fraction("2");
+            actualM = new Fraction("-2");
         }
         ;
     }
     else {
-        let actualMFraction = simplifyFractionY(n - 1, n);
+        let actualMFraction = simplifyFractionY(n - 1, n*n);
         actualM = new Fraction(actualMFraction[0] + "/" + actualMFraction[1]);
     }
     actualN = new Fraction(n.toString());
@@ -184,7 +188,7 @@ let onPageLoad = function () {
         katex.render(fractionBuilderY(1, a * b * c) + "\\pi", document.getElementById('actualA'), { throwOnError: false });
     }
     else {
-        katex.render(fractionBuilderY(1, a * b * 2) + "\\ln" + actualB.typeset, document.getElementById('actualA'), { throwOnError: false });
+        katex.render(fractionBuilderY(1, a * b * 2) + "\\ln" + actualB.typeset + '.', document.getElementById('actualA'), { throwOnError: false });
     }
     // (a) marking
     let partAMark = 0;
@@ -192,11 +196,15 @@ let onPageLoad = function () {
         partAMark++;
     }
     ;
-    if ((aChoice == 1 && sASign == '' && sANum == 1 && sADen == (a * b * c)) || (aChoice == 2 && sASign == '' && sANum == 1 && sADen == (2 * a * b))) {
+		var choiceOneCheck = (aChoice == 1 && sASign == '' && ((sANum == 1 && sADen == (a * b * c)) || (sADen == 1 && sANum.toPrecision(11) == (1 / a / b / c).toPrecision(11))));
+		var choiceTwoCheck = (aChoice == 2 && sASign == '' && ((sANum == 1 && sADen == (2 * a * b)) || (sADen == 1 && sANum.toPrecision(11) == (1 / 2 / b / a).toPrecision(11))));
+    if (choiceOneCheck || choiceTwoCheck) {
         partAMark++;
     }
     ;
-    if ((aChoice == 1 && sBSign == '' && sBNum == 0 && sBDen == 1) || (aChoice == 2 && sBSign == actualB.sign && sBNum == actualB.num && sBDen == actualB.den)) {
+		choiceOneCheck = (aChoice == 1 && sBSign == '' && sBNum == 0 && sBDen == 1);
+		choiceTwoCheck = (aChoice == 2 && sBSign == actualB.sign && ( (sBNum == actualB.num && sBDen == actualB.den) || (sBDen==1 && (sBNum).toPrecision(11)==(actualB.float).toPrecision(11) ) ));
+    if (choiceOneCheck || choiceTwoCheck) {
         partAMark++;
     }
     ;
@@ -246,20 +254,20 @@ let onPageLoad = function () {
         katex.render("1", document.getElementById('actualB'), { throwOnError: false });
     }
     else {
-        katex.render(actualM.typeset + "\\mathrm{e}^{" + actualN.typeset + "}+" + actualO.typeset, document.getElementById('actualB'), { throwOnError: false });
+        katex.render(actualM.typeset + "\\mathrm{e}^{" + actualN.typeset + "}+" + actualO.typeset+'.', document.getElementById('actualB'), { throwOnError: false });
     }
     // (b) marking
     let partBiMark = 0, partBiiMark = 0, partBiiiMark = 0;
-    if (sMSign == actualM.sign && sMNum == actualM.num && sMDen == actualM.den) {
-        partBiMark = 1;
+    if (sMSign == actualM.sign && ((sMNum == actualM.num && sMDen == actualM.den) ||  (sMDen==1 && (sMNum).toPrecision(11)== (actualM.float).toPrecision(11))  )   ) {
+        partBiMark += 1;
     }
     ;
     if (sNSign == actualN.sign && sNNum == actualN.num && sNDen == actualN.den) {
-        partBiiMark = 2;
+        partBiiMark += 2;
     }
     ; // evidence of by parts: 2 marks
-    if (sOSign == actualO.sign && sONum == actualO.num && sODen == actualO.den) {
-        partBiiiMark = 1;
+    if (sOSign == actualO.sign && ((sONum == actualO.num && sODen == actualO.den) ||  (sODen==1 && (sONum).toPrecision(11)== (actualO.float).toPrecision(11))  )   ) {
+        partBiiiMark += 1;
     }
     ;
     let partBMark = partBiMark + partBiiMark + partBiiiMark;
