@@ -112,7 +112,7 @@ let onPageLoadZero = function () {
         // actualA = new Fraction("1/" + (a * b * 2).toString());
         let actualBFraction = simplifyFractionY(c + 1, c - 1);
 				if (actualBFraction[1]==1){
-        	actualB = new Fraction(actualBFraction[0]);
+        	actualB = new Fraction(actualBFraction[0].toString());
 				} else{
         	actualB = new Fraction(actualBFraction[0] + "/" + actualBFraction[1]);
 				}
