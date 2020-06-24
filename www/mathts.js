@@ -488,7 +488,7 @@ function fractionBuilderY(num: string | number | undefined, den: string | number
 
 //D5) Polynomial builder: Given coefficientArray [a_n, a_(n-1), ... a_0], form a_n x^n + a_(n-1) x^(n-1) + ... + a_0
 // second argument allows for variables other than x
-function polyBuilderY(coefficientArray: string[] | number[], x = 'x'): string | number | undefined {
+function polyBuilderY(coefficientArray, x = 'x') {
     if (coefficientArray.length == 1) {
         return coefficientArray[0].toString();
     }
@@ -499,7 +499,7 @@ function polyBuilderY(coefficientArray: string[] | number[], x = 'x'): string | 
     ;
     let n = coefficientArray.length - 1;
     let firstCoefficient = coefficientArray.shift();
-    let latexPolynomial: string | undefined | number;
+    let latexPolynomial;
     if (firstCoefficient == 1) {
         latexPolynomial = '';
     }
@@ -517,13 +517,18 @@ function polyBuilderY(coefficientArray: string[] | number[], x = 'x'): string | 
         latexPolynomial += '^{' + n + '}';
     }
     ; // powers needed if bigger than 1
-    coefficientArray.forEach(function (a: number | string) {
+    coefficientArray.forEach(function (a) {
         n -= 1;
         if (a == 0) { // don't do anything: skip iteration
         }
         else {
             if (typeof a === 'string') { // coefficient is a string
-                latexPolynomial += a;
+                if (a[0] == '-') {
+                    latexPolynomial += a;
+                }
+                else {
+                    latexPolynomial += '+' + a;
+                }
             }
             else { // coefficient is a number
                 if (a > 0) { // positive a
