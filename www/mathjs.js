@@ -80,7 +80,7 @@ function handleFractions(f) {
 // '1', '2/3', '2.3', '0.3', '.3' and negative versions of these cases
 // object properties: sign: '-' or '', num: numerator, den: denominator, typeset: latex typeset
 // typeOf: 'd', 'i', 'f'
-function Fraction(f) {
+/*function Fraction(f) {
 	var fracIndex = f.indexOf('/'), decIndex = f.indexOf('.');
 	if (fracIndex > 0) { // we disallow inputs to start from / in our input box, so only need to check from index 1
 		var negNum, num, negStr
@@ -115,7 +115,7 @@ function Fraction(f) {
     } else {
       this.typeset = this.sign + this.num;
     }
-}
+} */
 // C3) Check student's input
 // WARNING: To be used only with "alert-dialog.html" template
 // WARNING: student's input will always be ID-ed 'inputk'

@@ -1,5 +1,3 @@
-/// <reference path="./math_atlas/math-atlas-monaca/www/lib/onsenui/js/onsenui.d.ts" />
-"use strict";
 // This is a JavaScript file
 // Refer to Math Bounty documentation math-bounty.readthedocs.io for the latest question commentary. Topic 6: questions 0601
 // global variables
