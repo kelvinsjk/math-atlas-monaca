@@ -456,3 +456,103 @@ function simpson(f, a, b, n) {
     }
     return result;
 }
+
+// String methods:
+// parenthesisAdd
+function parenthesisAdd(str: string): string { return '(' + str + ')'; }
+
+// SquareY: takes a string. If string of length 1, append ^2. Else add parenthesis around it and append ^2
+function squareY(str: string): string {
+    if (str.length == 1) {
+        return str + '^2';
+    }
+    else {
+        return '(' + str + ')^2';
+    }
+}
+
+// parenthesisY: if string of length 1, return string, else add parenthesis to it
+function parenthesisY(str: string): string {
+    if (str.length == 1) {
+        return str;
+    }
+    else {
+        return parenthesisAdd(str);
+    }
+}
+
+// Fraction builder: Given numerator and denominator, form \frac{num}{den}
+function fractionBuilderY(num: string | number | undefined, den: string | number): string {
+    return '\\frac{' + num + '}{' + den + '}';
+}
+
+//D5) Polynomial builder: Given coefficientArray [a_n, a_(n-1), ... a_0], form a_n x^n + a_(n-1) x^(n-1) + ... + a_0
+// second argument allows for variables other than x
+function polyBuilderY(coefficientArray: string[] | number[], x = 'x'): string | number | undefined {
+    if (coefficientArray.length == 1) {
+        return coefficientArray[0].toString();
+    }
+    ; // 
+    if (coefficientArray[0] == 0) {
+        return polyBuilderY(coefficientArray.slice(1), x);
+    }
+    ;
+    let n = coefficientArray.length - 1;
+    let firstCoefficient = coefficientArray.shift();
+    let latexPolynomial: string | undefined | number;
+    if (firstCoefficient == 1) {
+        latexPolynomial = '';
+    }
+    else {
+        if (firstCoefficient == -1) {
+            latexPolynomial = '-';
+        }
+        else { // Neither 0 nor 1 nor -1
+            latexPolynomial = firstCoefficient;
+        }
+    }
+    ; //testing of first coefficient
+    latexPolynomial += x; // Assume at least 2 elements
+    if (n > 1) {
+        latexPolynomial += '^{' + n + '}';
+    }
+    ; // powers needed if bigger than 1
+    coefficientArray.forEach(function (a: number | string) {
+        n -= 1;
+        if (a == 0) { // don't do anything: skip iteration
+        }
+        else {
+            if (typeof a === 'string') { // coefficient is a string
+                latexPolynomial += a;
+            }
+            else { // coefficient is a number
+                if (a > 0) { // positive a
+                    if (a == 1 && n != 0) {
+                        latexPolynomial += '+'; // special case for coefficient of 1
+                    }
+                    else {
+                        latexPolynomial += '+' + a; // need a + sign 
+                    }
+                    ;
+                }
+                else { // a < 0
+                    if (a == -1 && n != 0) {
+                        latexPolynomial += '-'; // special case for coefficient of -1
+                    }
+                    else {
+                        latexPolynomial += a.toString(); // the negative sign is already in the coefficient
+                    } // end of normal (not -1) negative coefficient	
+                }
+                ; // end of negative coefficient
+            }
+            ; // end of typesetting coefficient
+            if (n > 0) {
+                latexPolynomial += x; // add x 
+                if (n > 1) {
+                    latexPolynomial += '^{' + n + '}'; // add power of x
+                }
+            }
+        }
+    });
+    return latexPolynomial;
+}
