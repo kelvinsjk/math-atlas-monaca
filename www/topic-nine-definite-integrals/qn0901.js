@@ -9,6 +9,12 @@ let onPageLoad = function () {
     // Randomly generated elements
     n = getRandomIntY(1, 9);
     qnCase = getRandomIntY(0, 3);
+		if (qnCase==0 && n>6) { // to ensure answer for (b) is at least 0.001
+			n = getRandomIntY(1,6);
+		}
+		if (qnCase==2 && n>4){ // to ensure answer for (b) is at least 0.001
+			n=getRandomIntY(1,4);
+		}
     // generate question
     let curve = "y=x^2", nx = polyBuilderY([n, 0]);
     let upperLimit = '';

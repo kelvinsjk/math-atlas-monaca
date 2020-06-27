@@ -87,7 +87,8 @@ let onPageLoad = function () {
 					sType += "+";
 			}
 			;
-			sType += sC.typeset;
+			//sType += sC.typeset;
+			sType = polyBuilderY([sA.typeset, sC.typeset], studentBTerm);
 			katex.render(sType, document.getElementById('student_a'), { throwOnError: false });
 			// (a) typesetting actual answer
 			// case 0: pi/n^3 - 2/n^3; case 1: pi^2/n^3 - 4/n^3; case 2: pi^2/4n^3 - 2/n^3; case 3: 2/n^3 e^2 - 2/n^3
@@ -115,7 +116,8 @@ let onPageLoad = function () {
 					signType = "+";
 			}
 			;
-			const actualAType = actualA.typeset + actualBTerm + signType + actualC.typeset;
+			// const actualAType = actualA.typeset + actualBTerm + signType + actualC.typeset;
+			const actualAType = polyBuilderY([actualA.typeset, actualC.typeset], actualBTerm);
 			katex.render(actualAType, document.getElementById('actual_a'), { throwOnError: false });
 			// (a) marking: fractions a,c are worth 2 marks (with partial marking), b is worth 1 mark
 			let partAMark = 0;

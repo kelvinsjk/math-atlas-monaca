@@ -459,10 +459,10 @@ function simpson(f, a, b, n) {
 
 // String methods:
 // parenthesisAdd
-function parenthesisAdd(str: string): string { return '(' + str + ')'; }
+function parenthesisAdd(str) { return '(' + str + ')'; }
 
 // SquareY: takes a string. If string of length 1, append ^2. Else add parenthesis around it and append ^2
-function squareY(str: string): string {
+function squareY(str) {
     if (str.length == 1) {
         return str + '^2';
     }
@@ -472,7 +472,7 @@ function squareY(str: string): string {
 }
 
 // parenthesisY: if string of length 1, return string, else add parenthesis to it
-function parenthesisY(str: string): string {
+function parenthesisY(str) {
     if (str.length == 1) {
         return str;
     }
@@ -482,7 +482,7 @@ function parenthesisY(str: string): string {
 }
 
 // Fraction builder: Given numerator and denominator, form \frac{num}{den}
-function fractionBuilderY(num: string | number | undefined, den: string | number): string {
+function fractionBuilderY(num, den) {
     return '\\frac{' + num + '}{' + den + '}';
 }
 
