@@ -457,10 +457,123 @@ function simpson(f, a, b, n) {
     return result;
 }
 
+// factors: given a non-zero integer n, return an array [[a1,b1], [a2,b2], ...] such that a_k*b_k = n
+function factors(n1) {
+    const n = Math.abs(n1);
+    let i = 2, factorList = [[1, n]];
+    for (i; i <= Math.floor(Math.sqrt(n)); i++) {
+        if (n % i == 0) {
+            factorList.push([i, n / i]);
+        }
+    }
+    return factorList;
+}
+// ijk: given three numbers/strings a,b,c, typeset ai+bj+ck, where we handle the potential problems of 0s,1s and negative/positive numbers
+function ijk(a, b, c) {
+    let leadingCoefficient = true, ijkString = '';
+    if (a != 0) { // leading coefficient is a: typeset ai
+        leadingCoefficient = false; // be careful when typesetting j and k
+        if (a == 1) { // typeset just i
+            ijkString = '\\mathbf{i}';
+        }
+        else if (a == -1) { // typeset just -i
+            ijkString = '-\\mathbf{i}';
+        }
+        else {
+            ijkString = a + '\\mathbf{i}';
+        }
+    }
+    if (b != 0) { // need to typeset b
+        if (leadingCoefficient || b < 0 || b.toString()[0] === '-') { // can just typeset bj
+            if (b == 1) { // typeset just j
+                ijkString += '\\mathbf{j}';
+            }
+            else if (b == -1) { // typeset just -j
+                ijkString += '-\\mathbf{j}';
+            }
+            else {
+                ijkString += b + '\\mathbf{j}';
+            }
+        }
+        else {
+            ijkString += "+";
+            if (b == 1) { // typeset just j
+                ijkString += '\\mathbf{j}';
+            }
+            else {
+                ijkString += b + '\\mathbf{j}';
+            }
+        }
+        leadingCoefficient = false; // be careful when typesetting j and k
+    }
+    if (c != 0) { // need to typeset c
+        if (leadingCoefficient || c < 0 || c.toString()[0] === '-') { // can just typeset ck
+            if (c == 1) { // typeset just k
+                ijkString += '\\mathbf{k}';
+            }
+            else if (c == -1) { // typeset just -k
+                ijkString += '-\\mathbf{k}';
+            }
+            else {
+                ijkString += c + '\\mathbf{k}';
+            }
+        }
+        else {
+            ijkString += "+";
+            if (c == 1) { // typeset just k
+                ijkString += '\\mathbf{k}';
+            }
+            else {
+                ijkString += c + '\\mathbf{k}';
+            }
+        }
+    }
+    return ijkString;
+}
+// count zeroes: given an array of numbers, count how many zeroes there are
+function countZeroes(arr) {
+    let count = 0;
+    arr.forEach(e => {
+        if (e === 0) {
+            count++;
+        }
+    });
+    return count;
+}
+// check parallel: given two arrays arr1 = [a1,a2,a3], arr2 = [b1,b2,b3] and a number k, check if arr1 = k arr2 for some k \neq 0
+function isParallel(arr1, arr2) {
+    let k;
+    const a1 = arr1[0], a2 = arr1[1], a3 = arr1[2];
+    const b1 = arr2[0], b2 = arr2[1], b3 = arr2[2];
+    // find a multiple k by locating ai,bi both non-zero.
+    if (a1 != 0 && b1 != 0) {
+        k = b1 / a1;
+    }
+    else if (a2 != 0 && b2 != 0) {
+        k = b2 / a2;
+    }
+    else if (a3 != 0 && b3 != 0) {
+        k = b3 / a3;
+    }
+    else {
+        return false;
+    }
+    // check if k works for all 3 components
+    if ((a1 * k).toFixed(11) == b1.toFixed(11) && (a2 * k).toFixed(11) == b2.toFixed(11) && (a3 * k).toFixed(11) == b3.toFixed(11)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 // String methods:
 // parenthesisAdd
 function parenthesisAdd(str) { return '(' + str + ')'; }
+<<<<<<< HEAD
 
+=======
+>>>>>>> f50ed0725e1005a53db4345993043b4455893781
 // SquareY: takes a string. If string of length 1, append ^2. Else add parenthesis around it and append ^2
 function squareY(str) {
     if (str.length == 1) {
@@ -470,7 +583,6 @@ function squareY(str) {
         return '(' + str + ')^2';
     }
 }
-
 // parenthesisY: if string of length 1, return string, else add parenthesis to it
 function parenthesisY(str) {
     if (str.length == 1) {
@@ -480,12 +592,10 @@ function parenthesisY(str) {
         return parenthesisAdd(str);
     }
 }
-
 // Fraction builder: Given numerator and denominator, form \frac{num}{den}
 function fractionBuilderY(num, den) {
     return '\\frac{' + num + '}{' + den + '}';
 }
-
 //D5) Polynomial builder: Given coefficientArray [a_n, a_(n-1), ... a_0], form a_n x^n + a_(n-1) x^(n-1) + ... + a_0
 // second argument allows for variables other than x
 function polyBuilderY(coefficientArray, x = 'x') {
@@ -561,3 +671,4 @@ function polyBuilderY(coefficientArray, x = 'x') {
     });
     return latexPolynomial;
 }
+
