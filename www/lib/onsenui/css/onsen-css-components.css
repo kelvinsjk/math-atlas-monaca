@@ -2477,7 +2477,8 @@ ONS-BUTTON
 }
 .tabbar--material__button {
   background-color: transparent;
-  color: #31313a;
+	/* color: #0076ff; */
+  color: #31313a; 
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 500;
@@ -2493,7 +2494,8 @@ ONS-BUTTON
   bottom: 0;
   position: absolute;
   margin-top: -2px;
-  background-color: #31313a;
+	background-color: #0076ff;
+ /*  background-color: #31313a; */
 }
 :checked + .tabbar--material__button:after {
   width: 100%;
@@ -2501,14 +2503,16 @@ ONS-BUTTON
 }
 :checked + .tabbar--material__button {
   background-color: transparent;
-  color: #31313a;
+	color: #0076ff;
+ /*  color: #31313a; */
 }
 .tabbar--material__item:not([ripple]):active {
   background-color: rgba(49, 49, 58, .1);
 }
 .tabbar--material__border {
   height: 2px;
-  background-color: #31313a;
+	background-color: #0076ff;
+ /*  background-color: #31313a; */
 }
 /*~
   name: Material Tabbar (Icon only)

@@ -80,7 +80,7 @@ let calculus = function () {
     katex.render("\\cosec x", document.getElementById('cosec'), { throwOnError: false, displayMode: true });
     // integration
     katex.render("f(x)", document.getElementById('fx_i'), { throwOnError: false, displayMode: true });
-    katex.render("f'(x)", document.getElementById('int_fx'), { throwOnError: false, displayMode: true });
+    katex.render("\\int f(x) \\; \\mathrm{d}x", document.getElementById('int_fx'), { throwOnError: false, displayMode: true });
     katex.render("\\frac{1}{x^2+a^2}", document.getElementById('x2_plus'), { throwOnError: false, displayMode: true });
     katex.render("\\frac{1}{\\sqrt{a^2-x^2}}", document.getElementById('sqrt_a2'), { throwOnError: false, displayMode: true });
     katex.render("\\frac{1}{x^2-a^2}", document.getElementById('x2_minus'), { throwOnError: false, displayMode: true });

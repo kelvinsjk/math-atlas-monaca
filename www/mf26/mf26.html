@@ -78,6 +78,7 @@
 	<!-- Algebra Tab-->
 	<template id="algebra.html">
 	<ons-page>
+		<div class="content" style="overflow-x:hidden">
 		<div style="text-align: left; opacity: 0.6; padding-top: 20px; padding-left: 10px;">
 			Macluarin expansion:
 			<div class="grid-container-two" style="overflow:auto">
@@ -116,6 +117,7 @@
 			<div> Non-repeated quadratic factor: </div>
 			<div id="quadratic" style="overflow:auto"></div>
 		</div>
+		</div>
 		<!-- Hooks for page initialization-->
 		<script>
 			var tryInit = function () {
@@ -134,6 +136,7 @@
 	<!-- Trigo Tab-->
 	<template id="trigo.html">
 		<ons-page>
+			<div class="content" style="overflow-x:hidden">
 			<div style="text-align: left; opacity: 0.6; padding-top: 20px; padding-left: 10px;">
 				<div>
 					<span style="font-style:italic;">Trigonometry:</span>
@@ -161,11 +164,13 @@
 					<div class="grid-item-two"><span id="arc_tan"></span></div>
 				</div>
 			</div>
+			</div>
 		</ons-page>
 	</template>
 	
 	<!-- Calculus Tab-->
 	<template id="calculus.html"> <ons-page>
+		<div class="content" style="overflow-x:hidden">
 		<div style="text-align: left; opacity: 0.6; padding-top: 20px; padding-left: 10px;">
 			<span style="font-style:italic;">Derivatives</span>
 			<div class="grid-container-two" style="overflow:auto">
@@ -216,12 +221,14 @@
 				<div class="grid-item-two"><span id="domain_sec_i"></span></div>
 			</div>
 		</div>
+		</div>
 	</ons-page>
 	</template> 
 
 	<!-- Stats Tab-->
 	<template id="stats.html">
 		<ons-page>
+			<div class="content" style="overflow-x:hidden">
 			<div style="text-align: left; opacity: 0.6; padding-top: 20px; padding-left: 10px;">
 				<span style="font-style:italic;">Standard discrete distributions</span>
 				<div style="overflow: auto;">
@@ -302,12 +309,14 @@
 					<div style="overflow:auto" id="regression"></div>
 				</div>
 			</div>
+			</div>
 		</ons-page>
 	</template>
 
 	<!-- Others Tab-->
 	<template id="others.html">
 		<ons-page>
+			<div class="content" style="overflow-x:hidden">
 			<div style="text-align: left; opacity: 0.6; padding-top: 20px; padding-left: 10px;">
 				<span style="font-style:italic;">Vectors</span>
 				<div>
@@ -341,6 +350,7 @@
 					<div id="u2_equals_y1" style="overflow:auto"></div>
 					<div id="y2_equals_y1_two" style="overflow:auto"></div>
 				</div>
+			</div>
 			</div>
 		</ons-page>
 	</template>
