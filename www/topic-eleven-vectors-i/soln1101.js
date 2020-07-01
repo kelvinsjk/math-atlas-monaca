@@ -146,7 +146,7 @@ let onPageLoad = function () {
         if (bMark.correct) {
             partBMark += 2;
         }
-        else if (bMark.partial || sB.float = actualB.float/2) { //partial marks, or forget 1/2 in formula
+        else if (bMark.partial || sB.float == actualB.float/2) { //partial marks, or forget 1/2 in formula
             partBMark += 1;
         }
         if (Math.abs(actualBArray[1]) == Math.abs(sC)) {
