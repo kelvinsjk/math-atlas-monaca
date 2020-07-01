@@ -20,41 +20,59 @@
 	<title> Main </title>
 </head>
 
-<body> <!-- Menu-->
+<body>
+	<!-- Menu-->
 	<ons-splitter>
-		<ons-splitter-side id="menu" side="left" width="220px" swipeable collapse>
+		<ons-splitter-side id="menu" side="left" width="30%" collapse>
 			<ons-page>
 				<ons-list>
 					<ons-list-item onclick="window.location='index.html'" tappable>
 						Home
 					</ons-list-item>
-					<ons-list-item onclick="window.location='topic-five-summation/soln0501.html?num=0&den=3&numTwo=0&denTwo=4&square=1&bottom=3&uNFront=1'" tappable> <!-- TODO: menu items-->
-						Soln 0501
+					<ons-list-item
+						onclick="window.location='topic-five-summation/soln0501.html?num=0&den=3&numTwo=0&denTwo=4&square=1&bottom=3&uNFront=1'"
+						tappable>
+						MF26
 					</ons-list-item>
 					<ons-list-item onclick="window.location='topic-three-graphs/soln0301.html'" tappable>
-						Solution 0301
+						Topical
 					</ons-list-item>
-					<ons-list-item onclick="window.location='topic-four-apgp/soln0401.html?m=7&n=1&h=2&aiM=4&aiiM=2&aiiiR=00&aivKSign=&aivKNum=7&aivKDen=6&biJSign=-&biJNum=6&biJDen=49&biiNMin=3&biiNMax=15'" tappable>
-						Solution 0401
+					<ons-list-item
+						onclick="window.location='topic-four-apgp/soln0401.html?m=7&n=1&h=2&aiM=4&aiiM=2&aiiiR=00&aivKSign=&aivKNum=7&aivKDen=6&biJSign=-&biJNum=6&biJDen=49&biiNMin=3&biiNMax=15'"
+						tappable>
+						Random
+					</ons-list-item>
+					<ons-list-item
+						onclick="window.location='topic-four-apgp/soln0401.html?m=7&n=1&h=2&aiM=4&aiiM=2&aiiiR=00&aivKSign=&aivKNum=7&aivKDen=6&biJSign=-&biJNum=6&biJDen=49&biiNMin=3&biiNMax=15'"
+						tappable>
+						About
+					</ons-list-item>
+					<ons-list-item
+						onclick="window.location='topic-four-apgp/soln0401.html?m=7&n=1&h=2&aiM=4&aiiM=2&aiiiR=00&aivKSign=&aivKNum=7&aivKDen=6&biJSign=-&biJNum=6&biJDen=49&biiNMin=3&biiNMax=15'"
+						tappable>
+						Feedback
 					</ons-list-item>
 				</ons-list>
 			</ons-page>
 		</ons-splitter-side>
-		<ons-splitter-content id="content" page="home.html">
+		<ons-splitter-content id="content" page="content.html">
 		</ons-splitter-content>
 	</ons-splitter>
 
-	<ons-template id="home.html"> <!-- Actual Page-->
+	<ons-template id="content.html">
+		<!-- Actual Page-->
 		<ons-page id="indexMain">
 			<!-- Toolbar-->
-			<ons-toolbar> <!-- Menu icon-->
+			<ons-toolbar>
+				<!-- Menu icon-->
 				<div class="left">
 					<ons-toolbar-button onclick="fn.open()">
 						<ons-icon icon="ion-ios-menu, material:md-menu"></ons-icon>
 					</ons-toolbar-button>
 				</div>
-				<div class="center"> <!-- Center of toolbar-->
-					Main
+				<div class="center" style="text-align: center">
+					<!-- Center of toolbar-->
+					Math Atlas
 				</div>
 				<div class="right">
 					<ons-toolbar-button onclick="window.location = 'mf26/mf26.html'">
@@ -62,46 +80,89 @@
 					</ons-toolbar-button>
 				</div>
 			</ons-toolbar>
-			<!-- Content-->
-			<div id="clone-master">
-				<p style="text-align: center; opacity: 0.6; padding-top: 20px;">
-					Swipe right to open the menu!
-				</p>
-				<span id="katextest"> </span>
-				<div style="text-align: center; margin:10px"> 
-					<ons-button onclick="window.location='topic-one-eqns/qn0101.html'"> Question 0101 </ons-button>
+			<!-- Tabbar -->
+			<ons-tabbar position="top" swipeable>
+				<ons-tab page="topical.html" label="Topical" icon="fa-list-ol" active></ons-tab>
+				<ons-tab page="home.html" label="Home" icon="fa-home"></ons-tab>
+				<ons-tab page="random.html" label="Random" icon="fa-dice"></ons-tab>
+			</ons-tabbar>
+		</ons-page>
+	</ons-template>
+
+	<!-- Topical Tab-->
+	<template id="topical.html">
+		<ons-page id="qn001atab">
+			<div style="text-align:center; padding-top:1rem">Choose a topic/question to work on</div>
+			<div class="choose-grid-container">
+				<div class="choose-grid-item" onclick="window.location='topic-one-eqns/qn0101.html'">
+					Topic 1: Equations and Inequalities
 				</div>
-				<div style="text-align: center; margin:10px"> 
-					<ons-button onclick="window.location='topic-two-fns/qn0201.html'"> Question 0201 </ons-button>
+				<div class="choose-grid-item" onclick="window.location='topic-two-fns/qn0201.html'">
+					Topic 2: Functions
 				</div>
-				<div style="text-align: center; margin:10px"> 
-					<ons-button onclick="window.location='topic-three-graphs/qn0301.html'"> Question 0301 </ons-button>
+				<div class="choose-grid-item" onclick="window.location='topic-three-graphs/qn0301.html'">
+					<div style="margin-left:auto; margin-right:auto; width:70%">
+						<svg viewBox="-110 -110 220 220">
+							<g fill="none" stroke="black">
+								<line x1="-100" y1="0" x2="-100" y2="100" />
+								<line x1="100" y1="100" x2="-100" y2="100" />
+								<line x1="100" y1="100" x2="100" y2="0" />
+								<path d="M -100, 0
+								A 100 100 180 1 1 100 0 " />
+							</g>
+							<g fill="none" stroke="black" stroke-opacity="0.5">
+								<path stroke-dasharray="7" d="M-100 0 100 0" />
+								<line x1="-100" y1="95" x2="-95" y2="95" />
+								<line x1="-95" y1="100" x2="-95" y2="95" />
+								<line x1="100" y1="95" x2="95" y2="95" />
+								<line x1="95" y1="100" x2="95" y2="95" />
+							</g>
+							<text x="0" y="90" style="text-anchor:middle" font-family="serif" font-style="italic">x</text>
+							<text x="-95" y="50" style="text-anchor:start" font-family="serif" font-style="italic">y</text>
+							<text x="95" y="50" style="text-anchor:end" font-family="serif" font-style="italic">y</text>
+						</svg>
+					</div>
+					<div>
+						Topic 3: Graphs and transformations
+					</div>
 				</div>
-				<div style="text-align: center; margin:10px"> 
-					<ons-button onclick="window.location='topic-four-apgp/qn0401.html'"> Question 0401 </ons-button>
+				<div class="choose-grid-item" onclick="window.location='topic-four-apgp/qn0401.html'">
+					Topic 4: Arithmetic and geometric progressions
 				</div>
-				<div style="text-align: center; margin:10px"> 
-					<ons-button onclick="window.location='topic-five-summation/qn0501.html'"> Question 0501 </ons-button>
+				<div class="choose-grid-item" onclick="window.location='topic-five-summation/qn0501.html'">
+					Topic 5: Sigma notation
 				</div>
-				<div style="text-align: center; margin:10px"> 
-					<ons-button onclick="window.location='topic-six-differentiation/qn0601.html'"> Question 0601 </ons-button>
+				<div class="choose-grid-item" onclick="window.location='topic-six-differentiation/qn0601.html'">
+					Topic 6: Differentiation
 				</div>
-				<div style="text-align: center; margin:10px"> 
-					<ons-button onclick="window.location='topic-seven-maclaurins/qn0701.html'"> Question 0701 </ons-button>
+				<div class="choose-grid-item" onclick="window.location='topic-seven-maclaurins/qn0701.html'">
+					Topic 7: Maclaurin series
 				</div>
-				<div style="text-align: center; margin:10px"> 
-					<ons-button onclick="window.location='topic-eight-integration/qn0801.html'"> Question 0801 </ons-button>
+				<div class="choose-grid-item" onclick="window.location='topic-eight-integration/qn0801.html'">
+					Topic 8: Integration techniques
 				</div>
-				<div style="text-align: center; margin:10px"> 
-					<ons-button onclick="window.location='topic-nine-definite-integrals/qn0901.html'"> Question 0901 </ons-button>
+				<div class="choose-grid-item" onclick="window.location='topic-nine-definite-integrals/qn0901.html'">
+					Topic 9: Definite integrals
 				</div>
-				<div style="text-align: center; margin:10px"> 
-					<ons-button onclick="window.location='topic-ten-de/qn1001.html'"> Question 1001 </ons-button>
+				<div class="choose-grid-item" onclick="window.location='topic-ten-de/qn1001.html'">
+					Topic 10: Differential equations
 				</div>
-				<div style="text-align: center; margin:10px"> 
-					<ons-button onclick="window.location='topic-eleven-vectors-i/qn1101.html'"> Question 1101 </ons-button>
+				<div class="choose-grid-item" onclick="window.location='topic-eleven-vectors-i/qn1101.html'">
+					Topic 11: Vectors I: basics, scalar and vector products
+				</div>
+				<div class="choose-grid-item" onclick="alert('hi')">
+					Topic 12: Vectors II: lines and planes
+				</div>
+				<div class="choose-grid-item" onclick="alert('hi')">
+					Topic 13: Complex numbers
 				</div>
 			</div>
+		</ons-page>
+	</template>
+
+	<!-- Home Tab-->
+	<template id="home.html">
+		<ons-page id="home">
 			<div style="margin-left:auto; margin-right:auto; width:70%">
 				<svg viewBox="-110 -110 220 220">
 					<g fill="none" stroke="black">
@@ -123,29 +184,44 @@
 					<text x="95" y="50" style="text-anchor:end" font-family="serif" font-style="italic">y</text>
 				</svg>
 			</div>
-			<div style="margin-left:auto; margin-right:auto; width:70%">
-				<svg  viewBox="-110 -180 220 300">
-					<g fill="none" stroke="black">
-						<polygon points="-100,0, 0,-173.2, 100,0, 100,100, -100,100" />  	
-					</g>
-					<g fill="none" stroke="black" stroke-opacity="0.5">
-						<path stroke-dasharray="7" d="M-100 0 100 0" />
-						<line x1="-100" y1="95" x2="-95" y2="95" />
-						<line x1="-95" y1="100" x2="-95" y2="95" />
-						<line x1="100" y1="95" x2="95" y2="95" />
-						<line x1="95" y1="100" x2="95" y2="95" />
-						<line x1="0" y1="5" x2="0" y2="-5" />
-						<line x1="0" y1="95" x2="0" y2="105" />
-						<line x1="-45.67" y1="-84.1" x2="-54.33" y2="-89.1" />
-						<line x1="45.67" y1="-84.1" x2="54.33" y2="-89.1" />
-					</g>
-					<text x="0" y="90" style="text-anchor:middle" font-family="serif" font-style="italic">x</text>
-					<text x="-95" y="50" style="text-anchor:start" font-family="serif" font-style="italic">y</text>
-					<text x="95" y="50" style="text-anchor:end" font-family="serif" font-style="italic">y</text>
-				</svg>
-			</div>
-
+			<hr>
+			<!-- Ending toolbar for navigation-->
+			<ons-toolbar inline="true">
+				<div class="left" style="background-color:#f0c251;text-align:center;">
+					<ons-toolbar-button onclick="document.querySelector('ons-tabbar').setActiveTab(0)" style="color:black;">
+						Question
+					</ons-toolbar-button>
+				</div>
+				<div class="center" style="background-color:#0076ff;">
+					<ons-toolbar-button onclick="window.location = '../index.html'" style="color:white;">
+						Return home
+					</ons-toolbar-button>
+				</div>
+				<div class="right" style="background-color:#f0c251;text-align:center">
+					<ons-toolbar-button onclick="window.location = 'qn1001.html'" style="color:black;">
+						Try again
+					</ons-toolbar-button>
+				</div>
+			</ons-toolbar>
 		</ons-page>
-	</ons-template>
+	</template>
+
+	<!-- Random Tab-->
+	<template id="random.html">
+		<ons-page id="random">
+			<div id="random-button" style="width:70%; padding:1rem; margin:auto">
+				<div class="choose-grid-item" onclick="alert('hi')">
+					<div style="text-align: center; padding-bottom: 1rem;">Get a random question</div>
+					<div>
+						<ons-icon icon="fa-dice" size="100px"></ons-icon>
+					</div>
+					<div style="padding-top:1rem">
+						<ons-button>I'm feeling lucky!</ons-button>
+					</div>
+				</div>
+			</div>
+		</ons-page>
+	</template>
 </body>
+
 </html>
