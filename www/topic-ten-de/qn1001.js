@@ -13,7 +13,7 @@ let onPageLoad = function () {
     d = getRandomIntY(1, 9);
     // generate question
     let DE = polyBuilderY([a, 0], fractionBuilderY("\\mathrm{d}m", "\\mathrm{d}t"));
-    DE += "=" + polyBuilderY([b, -c], "m");
+    DE += "=" + polyBuilderY([-c, b], "m");
     // typeset question
     katex.render("m,", document.getElementById('m'), { throwOnError: false });
     katex.render("m", document.getElementById('m_two'), { throwOnError: false });
@@ -42,7 +42,7 @@ let startAnswering = function () {
         let answerForm = "a\\mathrm{e}^{kt}+b";
         // typeset
         katex.render("\\textrm{Find } m \\textrm{ in terms of } t.", document.getElementById('find_m'), { throwOnError: false });
-        katex.render(answerForm + '.', document.getElementById('answer_form'), { throwOnError: false });
+        katex.render("m="+answerForm + '.', document.getElementById('answer_form'), { throwOnError: false });
         katex.render("a,b \\textrm{ and } k?", document.getElementById('ab_k'), { throwOnError: false });
         katex.render("-" + fractionBuilderY(22, 7), document.getElementById('fraction_example'), { throwOnError: false });
         katex.render("-22/7", document.getElementById('decimal_example'), { throwOnError: false });
@@ -74,7 +74,7 @@ let moveOn = function () {
         sK = studentInputK.value;
         let exponent = polyBuilderY([sK.typeset, 0], 't');
         let sType = polyBuilderY([sA.typeset, sB.typeset], "\\mathrm{e}^{" + exponent + "}");
-        katex.render(sType, document.getElementById('student_part_a'), { throwOnError: false });
+        katex.render("m="+sType, document.getElementById('student_part_a'), { throwOnError: false });
         // shows dialog
         dialog.show();
     } // end of if/else (dialog)		

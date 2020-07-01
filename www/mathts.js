@@ -570,10 +570,7 @@ function isParallel(arr1, arr2) {
 // String methods:
 // parenthesisAdd
 function parenthesisAdd(str) { return '(' + str + ')'; }
-<<<<<<< HEAD
 
-=======
->>>>>>> f50ed0725e1005a53db4345993043b4455893781
 // SquareY: takes a string. If string of length 1, append ^2. Else add parenthesis around it and append ^2
 function squareY(str) {
     if (str.length == 1) {
@@ -671,4 +668,3 @@ function polyBuilderY(coefficientArray, x = 'x') {
     });
     return latexPolynomial;
 }
-

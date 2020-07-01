@@ -26,7 +26,7 @@ let onPageLoad = function () {
     let sC = queryTripleToFraction(sCSign, sCNum, sCDen);
     // generate question
     let DE = polyBuilderY([a, 0], fractionBuilderY("\\mathrm{d}m", "\\mathrm{d}t"));
-    DE += "=" + polyBuilderY([b, -c], "m");
+    DE += "=" + polyBuilderY([-c, b], "m");
     // typeset question
     katex.render("m,", document.getElementById('m'), { throwOnError: false });
     katex.render("m", document.getElementById('m_two'), { throwOnError: false });
@@ -74,10 +74,10 @@ let onPageLoad = function () {
         // typeset answer
         let exponent = polyBuilderY([sK.typeset, 0], 't');
         let sType = polyBuilderY([sA.typeset, sB.typeset], "\\mathrm{e}^{" + exponent + "}");
-        katex.render(sType, document.getElementById('student_a'), { throwOnError: false });
+        katex.render("m="+sType, document.getElementById('student_a'), { throwOnError: false });
         exponent = polyBuilderY([actualK.typeset, 0], 't');
         sType = polyBuilderY([actualA.typeset, actualB.typeset], "\\mathrm{e}^{" + exponent + "}");
-        katex.render(sType, document.getElementById('actual_a'), { throwOnError: false });
+        katex.render("m="+sType, document.getElementById('actual_a'), { throwOnError: false });
         // check marks
         if (partAMark > 0) {
             document.getElementById('check_mark_one').style.color = "#0076ff";
