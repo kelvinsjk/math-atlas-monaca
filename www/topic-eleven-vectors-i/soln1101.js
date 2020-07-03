@@ -91,7 +91,7 @@ let onPageLoad = function () {
         let mOneAltTwo = new Fraction((m * bArr[0] + (m + n) * aArr[0]) + "/" + (m + n + m));
         mOneAltTwo.simplify();
         const mOneMarkAltOne = new MarkFraction(mOneAltOne, sMOne);
-        const mOneMarkAltTwo = new MarkFraction(mOneAltTwo, sMTwo);
+        const mOneMarkAltTwo = new MarkFraction(mOneAltTwo, sMOne);
         if (partAiiMark == 0 && (mOneMark.partial || mTwoMark.partial || mThreeMark.partial || mOneMarkAltOne.partial || mOneMarkAltTwo.partial)) {
             partAiiMark++;
             if (mOneMark.partial && mTwoMark.partial && mThreeMark.partial) {
@@ -157,8 +157,8 @@ let onPageLoad = function () {
             ;
         }
         const actualFloat = actualB.float * Math.sqrt(actualBArray[1]), studentFloat = sB.float * Math.sqrt(sC);
-        if (partBMark <= 2 && actualFloat.toPrecision(2) == studentFloat.toPrecision(2)) {
-            partBMark++;
+        if (partBMark <= 1 && actualFloat.toPrecision(2) == studentFloat.toPrecision(2)) {
+            partBMark+=2;
         }
         ;
         // check marks
