@@ -75,47 +75,7 @@ function handleFractions(f) {
 		if (answer[0]=='-') {return ['-', answer.slice(1), '1', Number(answer)];} else {return ['', answer, '1', Number(answer)];};
 	};
 }
-// C2_NEW) Fraction Object initializer function
-// takes in f as a string of the following types:
-// '1', '2/3', '2.3', '0.3', '.3' and negative versions of these cases
-// object properties: sign: '-' or '', num: numerator, den: denominator, typeset: latex typeset
-// typeOf: 'd', 'i', 'f'
-/*function Fraction(f) {
-	var fracIndex = f.indexOf('/'), decIndex = f.indexOf('.');
-	if (fracIndex > 0) { // we disallow inputs to start from / in our input box, so only need to check from index 1
-		var negNum, num, negStr
-        if (f[0] == '-') {
-          num = f.slice(1,fracIndex); negStr = '-'; negNum = -1;
-        } else {
-          num=f.slice(0,fracIndex); negStr=''; negNum = 1;
-        }
-		var den = f.slice(fracIndex+1), ansFloat = negNum * Number(num) / Number(den);
-        this.sign = negStr;
-        this.num = num;
-        this.den = den;
-        this.float = ansFloat;
-        this.typeOf = 'f';
-	} else { // not a fraction
-		var answer = handleDecimal(f);
-        if (decIndex >= 0) { this.typeOf = 'd'; } else{ this.typeOf = 'i'; }
-		if (answer[0]=='-') {
-            this.sign = '-';
-            this.num = answer.slice(1);
-            this.den = '1';
-            this.float = Number(answer);
-        } else {
-            this.sign = '';
-            this.num = answer;
-            this.den = '1';
-            this.float = Number(answer);
-        }
-	};
-    if (this.typeOf == 'f') {
-      this.typeset = this.sign + '\\frac{' + this.num + '}{' + this.den + '}';
-    } else {
-      this.typeset = this.sign + this.num;
-    }
-} */
+
 // C3) Check student's input
 // WARNING: To be used only with "alert-dialog.html" template
 // WARNING: student's input will always be ID-ed 'inputk'
@@ -127,14 +87,14 @@ var checkStudentInput = function(varName) {
 		if (document.getElementById('negativeK').checked) {k = -k};
 		var showText = "You have keyed in <span id='kConfirm'> </span>. Submit this answer?", titleText = 'Confirmation', visiText = 'visible';
 	};
-  	var dialog = document.getElementById('my-alert-dialog');
-  	if (dialog) { // it's already present
-	  	document.getElementById('confirmationK').innerHTML = showText;
+  var dialog = document.getElementById('my-alert-dialog');
+  if (dialog) { // it's already present
+		document.getElementById('confirmationK').innerHTML = showText;
 		document.getElementById('alertTitle').innerHTML = titleText;
 		document.getElementById('okButton').style.visibility = visiText;
-    	dialog.show();
+		dialog.show();
 		if (k) { katex.render(varName+"="+k,document.getElementById('kConfirm'),{throwOnError: false});};
-  	} else {
+	} else {
     ons.createElement('alert-dialog.html', { append: true })
       .then(function(dialog) {
 		document.getElementById('confirmationK').innerHTML = showText;

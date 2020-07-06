@@ -1,0 +1,274 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport"
+		content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta http-equiv="Content-Security-Policy"
+		content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+	<link rel="stylesheet" href="../components/loader.css">
+	<script src="../components/loader.js"></script>
+	<!-- Onsen UI -->
+	<script src="../lib/onsenui/js/onsenui.min.js"></script>
+	<link rel="stylesheet" href="../lib/onsenui/css/onsenui.css">
+	<link rel="stylesheet" href="../lib/onsenui/css/onsen-css-components.css">
+	<link rel="stylesheet" href="../css/style.css">
+
+	<script src="../onsenuijs.js"></script>
+	<script src="../mathjs.js"></script>
+	<script src="../mathts.js"></script>
+	<link rel="stylesheet" href="../lib/katex/katex.min.css">
+	<script defer src="../lib/katex/katex.min.js"> </script>
+	<script src="qn1201.js"></script> <!-- change for each qn-->
+		<title> Question 1201 </title>
+</head>
+
+<body>
+	<!-- Loading Screen -->
+	<ons-modal direction="up">
+		<div style="text-align: center">
+			<p> <ons-icon icon="md-spinner" size="28px" spin></ons-icon> Loading... </p>
+		</div>
+	</ons-modal>
+
+	<!-- Left menu -->
+	<ons-splitter>
+		<ons-splitter-side id="menu" side="left" width="120px" collapse swipeable>
+			<ons-page>
+				<ons-list>
+					<ons-list-item onclick="returnHome()" tappable>
+						Home
+					</ons-list-item>
+				</ons-list>
+			</ons-page>
+		</ons-splitter-side>
+		<ons-splitter-content id="content" page="qn001.html">	</ons-splitter-content>
+	</ons-splitter>
+
+	<!-- Actual page -->
+	<template id="qn001.html">
+		<ons-page>
+			<ons-toolbar>
+				<div class="left">
+				<ons-toolbar-button onclick="fn.open()">
+					<ons-icon icon="ion-ios-menu, material:md-menu"></ons-icon>
+				</ons-toolbar-button>
+				</div>
+				<div class="center">
+				Question 1201 
+				</div>
+			</ons-toolbar>
+			<!-- Tabbar -->
+			<ons-tabbar position="bottom" hide-tabs>
+				<ons-tab page="qn001a.html" label="Question" icon="fa-question-circle" active> <!-- badge="7"-->
+				</ons-tab>
+				<ons-tab page="ans001.html" label="Input Answer" icon="fa-keyboard" active-icon="fa-calculator">
+				</ons-tab>
+			</ons-tabbar>
+		</ons-page>
+	</template>
+
+	<!-- Question Tab-->
+	<template id="qn001a.html">
+	<ons-page id="qn001atab">
+		<div style="text-align: left; opacity: 0.6; padding-top: 20px; padding-left: 10px;">
+			<div id="variant_one">
+				<p> 
+					The line <span id="l_one"></span> passes through the points <span id="A"></span> and <span id="B"></span> with coordinates
+					<span id="A_coordinates"></span> and <span id="B_coordinates"></span> respectively.
+				</p>
+				<p>
+					The plane <span id="p_one"></span> has equation <div id="plane_equation"></div>
+				</p>
+			</div>
+			<div id="variant_two" style="display: none">
+				<p> 
+					The plane <span id="p_two"></span> passes through the point <span id="C"></span> and is parallel to the vectors
+					<span id="direction_one"></span> and <span id="direction_two"></span>.
+				</p>
+				<p>
+					The line <span id="l_two"></span> has equation <div id="line_equation"></div>
+				</p>
+			</div>
+			<div id="qn_ai">
+				<p>
+					(ai) Find an equation for the <span id="line_or_plane">line</span> <span id="l_four"></span> in the form 
+					<div id="line_plane_form"></div>
+				</p>
+			</div>
+			<div id="show_ai" style="display: none">
+				<p> 
+					(ai) Show that an equation of <span id="line_or_plane_two"></span> is
+					<div id="line_plane_show"></div>
+				</p>
+			</div>
+			<div id="qn_aii" style="display: none">
+				<p>
+					(aii) Find the coordinates of the point of intersection of <span id="l_three"></span> and <span id="p_three"></span>.
+				</p>
+			</div>
+		</div>
+		<div id="answer_ai" style="text-align: left; padding-left: 10px;">
+			<hr>
+			What are the values of <span id="a_s"></span> and <span id="d_three"></span>?
+			<div id="aOneInputDiv"></div>
+			<div id="aTwoInputDiv"></div>
+			<div id="aThreeInputDiv"></div>
+			<div id="dOneInputDiv"></div>
+			<div id="dTwoInputDiv"></div>
+			<div id="dThreeInputDiv"></div>
+			<div id="submitButtonOne" style="display: none">
+				<div style="text-align:center; margin:10px;">
+					<ons-button onclick="checkAi()"> Submit answer </ons-button>
+				</div>
+			</div>
+			<div id="samsungWarning" style="opacity:0.6"></div>
+			<hr>
+		</div>
+		<div style="text-align: left; opacity: 0.6; padding-left: 10px;">
+			<p>
+				Part <span id="qn_part">(ai)</span> of this question is worth <span id="marks">2</span> marks.
+			</p>
+		</div>
+		<hr>
+		<div style="text-align:center; margin:20px; display:none"  id="answer_button">
+			<ons-button onclick="startAnswering()">Answer (aii)</ons-button>
+		</div>
+		<div style="text-align:center; margin:20px;display:none"  id="goto_answer_button">
+			<ons-button onclick="document.querySelector('ons-tabbar').setActiveTab(1)"> Key in your answer </ons-button>
+		</div>
+		<!-- Hooks for page initialization-->
+		<script>
+			var tryInit = function () {
+				try {
+					var modal = document.querySelector('ons-modal');
+					modal.show();
+					onPageLoad();
+					modal.hide();
+				} catch (err) { console.log(err.message); setTimeout(tryInit, 1000); }
+			};
+			ons.getScriptPage().onInit = function () { tryInit(); }
+		</script>
+	</ons-page>
+	</template>
+
+	<!-- Confirmation of part ai answer using a dialog -->
+	<template id="dialog-ai.html">
+		<!--TODO: Change title-->
+		<ons-dialog id="my-dialog-ai" cancelable>
+			<div style="text-align: left; padding: 10px;">
+				<div>
+					These are your submitted answers:
+				</div>
+				<div>
+					(ai) <div. id="student_part_ai"></div.>
+				</div>
+				<div id="ai_confirmation_instructions" style="padding-bottom:10px">
+					<hr> Click "OK" to confirm these answers and move on to question part (b), or "Cancel" to change some of your
+					answers.
+				</div>
+				<div class="alert-dialog-footer">
+					<ons-alert-dialog-button onclick="hideDialog('my-dialog-ai')">Cancel</ons-alert-dialog-button>
+					<ons-alert-dialog-button onclick="showAiAnswer()" id="ai_move_on_button"> OK </ons-alert-dialog-button>
+				</div>
+			</div>
+		</ons-dialog>
+	</template>
+
+	<!-- Show part ai answer using a dialog -->
+	<template id="dialog-ans-ai.html">
+		<ons-dialog id="my-dialog-ans-ai">
+			<div style="text-align: center; padding: 10px;">
+				<div>
+					<span id="right_or_wrong">
+						Unfortunately, 
+						<div id='student_ai'></div> is incorrect. <br>
+					</span>
+					<span id="alternative_answer">The answer is</span>
+					<div id="ai_answer"> </div>
+					<span id="alternative_answer_comments" style="display:none"><br> Your may use either this answer or the answer you entered for the following parts of the question.</span>
+				</div>
+				<div id='answer_ai_comments'>Do check your answer to see if you can spot any mistakes.</div>
+				<div id="ai_marks_received"> You have earned <span id='ai_marks_span'>2 marks</span>. </div>
+				<p> Let us proceed to part (aii) of the question. </p>
+				<div class="alert-dialog-footer">
+					<ons-alert-dialog-button button onclick="proceedToAii()"> OK </ons-alert-dialog-button>
+				</div>
+			</div>
+		</ons-dialog>
+	</template>
+
+	<!-- Answer Tab-->
+	<template id="ans001.html"> <ons-page id="ans001tab">
+		<!-- (a) Question -->
+		<div id="aQuestion">
+			<ons-list> 
+				<ons-list-item> Answer to (aii): </ons-list-item> 
+				<ons-list-item>
+					Find the coordinates of the point of intersection of the line and the plane.
+				</ons-list-item>
+				<ons-list-item> 
+					The answer is of the form <span id="answer_form" style="padding-left:5px; padding-right: 5px;"></span>
+					What are the exact values of <span id="m_s" style="padding-left:5px; padding-right: 5px;"></span>
+				</ons-list-item>
+				<ons-list-header>
+					Instructions: Key in your values.
+					<br> For fractions like <span id="fraction_example"></span>, key in <span id="decimal_example"></span>.
+				</ons-list-header>
+			</ons-list>
+			<hr>
+			<div style="padding-left:10px;" id="mOneInputDiv"></div>
+			<div style="padding-left:10px;" id="mTwoInputDiv"></div>
+			<div style="padding-left:10px;" id="mThreeInputDiv"></div>
+			<hr>
+			<div id="submitButton" style="display:none">
+				<div style="text-align:center; margin:10px;">
+					<ons-button onclick="moveOn()" style="background-color:#0076ff;color:white;"> Submit answer </ons-button>	
+				</div>
+				<div><hr></div>
+			</div>
+		</div> <!-- End of a Question-->
+		<div style="text-align:center;margin:10px"><ons-button onclick="document.querySelector('ons-tabbar').setActiveTab(0)"> Go to question  </ons-button> </div> 
+	</ons-page>
+	</template> <!-- End of answer tab-->
+
+	<!-- Confirmation of part aii answer using a dialog -->
+	<template id="dialog.html"> <!--TODO: Change title-->
+		<ons-dialog id="my-dialog" cancelable>
+			<div style="text-align: left; padding: 10px;">
+				<div> 
+					These are your submitted answers:
+				</div>
+				<div>
+					(aii) <span id="student_part_aii"></span>.
+				</div>
+				<div id="aConfirmationInstructions" style="padding-bottom:10px"> 
+					<hr> Click "OK" to confirm these answers and move on to question part (b), or "Cancel" to change some of your answers.
+				</div>
+				<div class="alert-dialog-footer">
+					<ons-alert-dialog-button onclick="hideDialog('my-dialog')">Cancel</ons-alert-dialog-button>
+					<ons-alert-dialog-button onclick="proceedTob()" id="moveOnButton"> OK </ons-alert-dialog-button>
+				</div>
+			</div>
+		</ons-dialog>
+	</template>
+
+	<!-- Return to home alert -->
+	<template id="home-alert-dialog.html">
+	<ons-alert-dialog id="home-alert-dialog" modifier="rowfooter">
+		<div class="alert-dialog-title" id="homeAlertTitle"> Warning </div>
+		<div class="alert-dialog-content"> 
+			<p> You leaving this question to return to the home page. </p>
+			<p>  No progress will be saved. </p>
+			<p> A new question will be generated the  next time to access this page. </p>
+		</div>
+		<div class="alert-dialog-footer">
+		<ons-alert-dialog-button onclick="hideAlertDialog('home-alert-dialog')">Cancel</ons-alert-dialog-button>
+		<span> <ons-alert-dialog-button onclick="window.location = '../index.html'"> OK</ons-alert-dialog-button> </span>
+		</div>
+	</ons-alert-dialog>
+	</template>
+
+</body>
+</html>

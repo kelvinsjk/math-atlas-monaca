@@ -566,6 +566,44 @@ function isParallel(arr1, arr2) {
         return false;
     }
 }
+// dot product
+function dotProduct(a, b) {
+    return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+}
+// cross product
+function crossProduct(a, b) {
+    return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+}
+// column vector
+function cVec(a, b, c) {
+    return "\\begin{pmatrix}" + a + "\\\\" + b + "\\\\" + c + "\\end{pmatrix}";
+}
+// multiply fractions
+function multiplyFractions(a, b) {
+    // determine new sign
+    let sign = '';
+    if (a.float * b.float < 0) {
+        sign = '-';
+    }
+    let num = a.num * b.num, den = a.den * b.den;
+    let newFrac = new Fraction(sign + num + "/" + den);
+    newFrac.simplify();
+    return newFrac;
+}
+// add fractions
+function addFractions(a, b) {
+    let den = a.den * b.den;
+    let signedNum = Number(a.sign + a.num) * b.den + a.den * Number(b.sign + b.num);
+    let sign = '';
+    if (signedNum < 0) {
+        sign = '-';
+    }
+    ;
+    let num = Math.abs(signedNum);
+    let newFrac = new Fraction(sign + num + "/" + den);
+    newFrac.simplify();
+    return newFrac;
+}
 
 // String methods:
 // parenthesisAdd
