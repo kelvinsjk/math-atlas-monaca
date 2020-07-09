@@ -233,8 +233,6 @@ let onPageLoad = function () {
                 acVec = [qnVariableArray[10] - qnVariableArray[3], qnVariableArray[11] - qnVariableArray[4], qnVariableArray[12] - qnVariableArray[5]];
             }
             let actualBii = Math.abs(dotProduct(acVec, nVec)) / Math.sqrt(dotProduct(nVec, nVec));
-            console.log(acVec, nVec);
-            console.log(qnVariableArray);
             katex.render(actualBii.toFixed(1) + "\\textrm{ units}", document.getElementById('actual_bii'), { throwOnError: false });
             // marking
             if (sDistance.toFixed(1) == actualBii.toFixed(1)) { // full marks
