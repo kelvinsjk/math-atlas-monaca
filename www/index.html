@@ -663,15 +663,6 @@
    <path transform="matrix(-1.1,0,0,-1.1,5.5,0)" d="m8.72 4.03-10.9-4.02 10.9-4.02c-1.75 2.37-1.74 5.62-6e-7 8.04z" fill-rule="evenodd" stroke-linejoin="round" stroke-width=".625"/>
   </marker>
  </defs>
- <metadata>
-  <rdf:RDF>
-   <cc:Work rdf:about="">
-    <dc:format>image/svg+xml</dc:format>
-    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:title/>
-   </cc:Work>
-  </rdf:RDF>
- </metadata>
  <g opacity=".997">
   <g transform="matrix(.246 0 0 .239 -3.18 4.54)" stroke-width="5.00">
    <g stroke="#000">
@@ -689,7 +680,7 @@
 					</div>
 					Topic 12: Vectors II: lines and planes
 				</div>
-				<div class="choose-grid-item" onclick="alert('hi')">
+				<div class="choose-grid-item" onclick="window.location='topic-thirteen-complex/qn1301.html'">
 					<div style="margin-left:auto; margin-right:auto; width:70%">
 						<svg viewBox="0 -912 5525 4144">
 <defs>
@@ -776,7 +767,15 @@
 	<template id="random.html">
 		<ons-page id="random">
 			<div id="random-button" style="width:70%; padding:1rem; margin:auto">
-				<div class="choose-grid-item" onclick="alert('hi')">
+        <div class="choose-grid-item" onclick="
+          const names = ['topic-one-eqns/qn0101.html', 'topic-two-fns/qn0201.html', 'topic-three-graphs/qn0301.html', 'topic-four-apgp/qn0401.html',
+            'topic-five-summation/qn0501.html', 'topic-six-differentiation/qn0601.html', 'topic-seven-maclaurins/qn0701.html', 'topic-eight-integration/qn0801.html',
+            'topic-nine-definite-integrals/qn0901.html', 'topic-ten-de/qn1001.html', 'topic-eleven-vectors-i/qn1101.html',
+            'topic-twelve-vectors-ii/qn1201.html', 'topic-thirteen-complex/qn1301.html'];
+          const rand = getRandomInt(0,12);
+          const urlString = names[rand];
+          window.location=urlString;
+        ">
 					<div style="text-align: center; padding-bottom: 1rem;">Get a random question</div>
 					<div>
 						<ons-icon icon="fa-dice" size="100px"></ons-icon>
