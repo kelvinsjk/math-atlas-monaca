@@ -52,7 +52,7 @@ let onPageLoad = function () {
     katex.render('z', document.getElementById('z_three'), { throwOnError: false });
     katex.render('z^*', document.getElementById('z_star'), { throwOnError: false });
     katex.render('x+yi', document.getElementById('x_plus'), { throwOnError: false });
-    katex.render(complexEqn, document.getElementById('complex_equation'), { throwOnError: false });
+    katex.render(complexEqn+',', document.getElementById('complex_equation'), { throwOnError: false, displayMode: true });
     // solution page: tabbar load
     let tabBar = document.querySelector('ons-tabbar');
     tabBar.setActiveTab(1).then(function () {
