@@ -12,12 +12,14 @@ let onPageLoad = function () {
     // TODO: change this
     const c = a * y, b = (4 * y * y - a * a) / 4; // b guaranteed to be integer since a is even
     qnVariableArray = [a, b, c, y];
+		console.log(qnVariableArray);
+		console.log(qnVariant);
     // symbol based on qn variant:
     let symbol = "z";
-    if (qnVariant == 1) {
+    if (qnVariant == 2) {
         symbol = "iz";
     }
-    else if (qnVariant == 2) {
+    else if (qnVariant == 3) {
         symbol = "z^*";
     }
     let complexString = '';
@@ -91,6 +93,7 @@ let onPageLoad = function () {
                 }
             }
         }
+				console.log(actualX,actualY);
         let sType = "z=" + complexString;
         katex.render(sType, document.getElementById('student_answer'), { throwOnError: false });
         // typeset actual answer
@@ -136,6 +139,9 @@ let onPageLoad = function () {
             runningMark++;
         }
         if ((runningMark <= 1) && (sX * sX + sY * sY + qnVariableArray[0] * sX == qnVariableArray[1] || sX * sX + sY * sY - qnVariableArray[0] * sY == qnVariableArray[1])) { // ecf
+            runningMark += 2;
+        }
+        if ((runningMark <= 1) && (actualX == sY && actualY == sX) ) { // ecf: swapped around
             runningMark += 2;
         }
         // (aii) check marks

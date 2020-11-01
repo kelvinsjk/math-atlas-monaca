@@ -469,39 +469,39 @@ function factors(n1) {
     return factorList;
 }
 // ijk: given three numbers/strings a,b,c, typeset ai+bj+ck, where we handle the potential problems of 0s,1s and negative/positive numbers
-function ijk(a, b, c) {
+function ijk(a, b, c, i = "\\mathbf{i}", j = "\\mathbf{j}", k = "\\mathbf{k}") {
     let leadingCoefficient = true, ijkString = '';
     if (a != 0) { // leading coefficient is a: typeset ai
         leadingCoefficient = false; // be careful when typesetting j and k
         if (a == 1) { // typeset just i
-            ijkString = '\\mathbf{i}';
+            ijkString = i;
         }
         else if (a == -1) { // typeset just -i
-            ijkString = '-\\mathbf{i}';
+            ijkString = '-'+i;
         }
         else {
-            ijkString = a + '\\mathbf{i}';
+            ijkString = a + i;
         }
     }
     if (b != 0) { // need to typeset b
         if (leadingCoefficient || b < 0 || b.toString()[0] === '-') { // can just typeset bj
             if (b == 1) { // typeset just j
-                ijkString += '\\mathbf{j}';
+                ijkString += j;
             }
             else if (b == -1) { // typeset just -j
-                ijkString += '-\\mathbf{j}';
+                ijkString += '-'+j;
             }
             else {
-                ijkString += b + '\\mathbf{j}';
+                ijkString += b + j;
             }
         }
         else {
             ijkString += "+";
             if (b == 1) { // typeset just j
-                ijkString += '\\mathbf{j}';
+                ijkString += j;
             }
             else {
-                ijkString += b + '\\mathbf{j}';
+                ijkString += b + j;
             }
         }
         leadingCoefficient = false; // be careful when typesetting j and k
@@ -509,22 +509,22 @@ function ijk(a, b, c) {
     if (c != 0) { // need to typeset c
         if (leadingCoefficient || c < 0 || c.toString()[0] === '-') { // can just typeset ck
             if (c == 1) { // typeset just k
-                ijkString += '\\mathbf{k}';
+                ijkString += k;
             }
             else if (c == -1) { // typeset just -k
-                ijkString += '-\\mathbf{k}';
+                ijkString += '-' + k;
             }
             else {
-                ijkString += c + '\\mathbf{k}';
+                ijkString += c + k;
             }
         }
         else {
             ijkString += "+";
             if (c == 1) { // typeset just k
-                ijkString += '\\mathbf{k}';
+                ijkString += k;
             }
             else {
-                ijkString += c + '\\mathbf{k}';
+                ijkString += c + k;
             }
         }
     }

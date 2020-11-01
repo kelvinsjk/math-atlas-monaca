@@ -16,10 +16,10 @@ let onPageLoad = function () {
     qnVariableArray = [a, b, c, y];
     // symbol based on qn variant:
     let symbol = "z";
-    if (qnVariant == 1) {
+    if (qnVariant == 2) {
         symbol = "iz";
     }
-    else if (qnVariant == 2) {
+    else if (qnVariant == 3) {
         symbol = "z^*";
     }
     let complexString = '';
